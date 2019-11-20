@@ -26,10 +26,7 @@
 
 .product {
   width: 100%;
-  transform: translateX(10%);
-  -webkit-box-shadow: 0 10px 6px -6px #777;
-  -moz-box-shadow: 0 10px 6px -6px #777;
-       box-shadow: 0 10px 6px -6px #777;
+  transform: translateX(15%);
 }
 
 .image img {

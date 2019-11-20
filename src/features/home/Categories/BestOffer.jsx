@@ -62,7 +62,7 @@ class BestOffer extends Component {
     }
     return (
       <div className={styles.container}>
-        <h2>Best Offer</h2>
+        <h2>Hot Deals</h2>
         <div className={styles.inner}>
           {bestOffer &&
             bestOffer.map(product => (
@@ -92,7 +92,8 @@ class BestOffer extends Component {
                       {product.price - (product.price * product.discount) / 100}{" "}
                       KSH
                     </Link>
-                    {product.discount > 0 &&<span style={{paddingLeft: '5px', color :'green'}}>{product.discount}% OFF </span>}
+                    <br />
+                    {product.discount > 0 &&<span className={styles.blink} style={{ color :'green'}}>{product.discount}% OFF </span>}
                   </div>
                 </div>
               </div>

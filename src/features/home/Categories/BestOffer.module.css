@@ -4,6 +4,10 @@
   padding: 25px 0
 }
 
+.container h2 {
+  text-align: center;
+}
+
 .inner {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -39,4 +43,16 @@
 
 .title a{
   color: #6c6c6c;
+}
+
+.price {
+  margin-bottom: 75px;
+}
+
+.blink {
+  animation: blinker 1.4s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
 }

@@ -94,7 +94,8 @@ class TopSellers extends Component {
                       {product.price - (product.price * product.discount) / 100}{" "}
                       KSH
                     </Link>
-                    {product.discount > 0 &&<span style={{paddingLeft: '5px', color :'green'}}>{product.discount}% OFF </span>}
+                    <br />
+                    {product.discount > 0 &&<span style={{ color :'green'}}>{product.discount}% OFF </span>}
                   </div>
                 </div>
               </div>
