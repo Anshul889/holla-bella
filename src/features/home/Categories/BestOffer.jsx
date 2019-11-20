@@ -1,31 +1,28 @@
 import React, { Component } from 'react';
 import styles from './BestOffer.module.css';
 import { Link } from 'react-router-dom';
-import {getbestOfferForHomepage} from './BestOfferActions';
+import { getbestOfferForHomepage } from './BestOfferActions';
 import { connect } from 'react-redux';
 import { Placeholder } from 'semantic-ui-react';
-import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const mapState = state => ({
-  bestOffer : state.BestOffer
-})
+  bestOffer: state.BestOffer
+});
 
 const actions = {
   getbestOfferForHomepage
-}
+};
 
 class BestOffer extends Component {
-  
-
-  async componentDidMount(){
-    if(this.props.bestOffer && this.props.bestOffer.length === 0){
-    this.props.getbestOfferForHomepage();
+  async componentDidMount() {
+    if (this.props.bestOffer && this.props.bestOffer.length === 0) {
+      this.props.getbestOfferForHomepage();
     }
   }
 
   render() {
-    const {bestOffer} = this.props;
+    const { bestOffer } = this.props;
     if (bestOffer.length === 0) {
       return (
         <div className={styles.container}>
@@ -33,7 +30,7 @@ class BestOffer extends Component {
           <div className={styles.inner}>
             <div className={styles.product}>
               <div className={styles.image}>
-                <Placeholder >
+                <Placeholder>
                   <Placeholder.Image />
                 </Placeholder>
               </div>
@@ -67,7 +64,7 @@ class BestOffer extends Component {
       <div className={styles.container}>
         <h2>Best Offer</h2>
         <div className={styles.inner}>
-        {bestOffer &&
+          {bestOffer &&
             bestOffer.map(product => (
               <div className={styles.product} key={product.id}>
                 <div className={styles.image}>
@@ -76,22 +73,27 @@ class BestOffer extends Component {
                     <LazyLoadImage
                       alt={product.description}
                       src={product.photoURL}
-                      width="100%"
-                      effect="blur"
+                      width='100%'
+                      effect='blur'
                     />
                   </Link>
                 </div>
                 <div className={styles.content}>
-                  <h3>
+                  <div className={styles.title}>
                     <Link to={`/product/${product.id}`}>{product.title}</Link>
-                  </h3>
+                  </div>
+                  <div className={styles.price}>
+                    <Link to={`/product/${product.id}`}>
+                      {product.price - product.price / product.discount} KSH
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default connect(mapState, actions) (BestOffer);
+export default connect(mapState, actions)(BestOffer);

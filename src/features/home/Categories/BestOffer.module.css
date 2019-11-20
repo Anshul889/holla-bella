@@ -6,7 +6,7 @@
 
 .inner {
   display: grid;
-  grid-template-columns: repeat(5, 30%);
+  grid-template-columns: repeat(2, 1fr);
   overflow: scroll;
   grid-gap: 20px;
 }
@@ -30,4 +30,13 @@
 
 .content a {
   font-size: 12px;
+}
+
+.price a{
+  font-weight: 700;
+  color: black;
+}
+
+.title a{
+  color: #6c6c6c;
 }

@@ -12,7 +12,8 @@ export const getbestOfferForHomepage = () => async (dispatch, getState) => {
     dispatch(asyncActionStart());
     let bestOfferQuery = await firestore
       .collection('products')
-      .where('discount', '>=', 0)
+      .where('discount', '>=', 10)
+      .orderBy('discount', 'desc')
       .limit(5)
       .get();
     let bestOffer = [];
