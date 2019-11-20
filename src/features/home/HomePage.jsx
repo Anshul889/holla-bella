@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import BookCategory from './Categories/BookCategory';
 import ElectronicsCategory from './Categories/ElectronicsCategory';
+import TopSellers from './Categories/TopSellers';
 
 class HomePage extends Component {
   render() {
     return (
       <div>
-        <BookCategory />
+        <TopSellers />
         <ElectronicsCategory/>
       </div>
     )

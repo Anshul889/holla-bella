@@ -11,7 +11,7 @@
 
 .inner {
   display: grid;
-  grid-template-columns: repeat(5, 26%);
+  grid-template-columns: repeat(5, 36%);
   overflow: scroll;
   grid-gap: 20px;
 }
@@ -26,7 +26,7 @@
 
 .product {
   width: 100%;
-  transform: translateX(5%);
+  transform: translateX(10%);
 }
 
 .image img {

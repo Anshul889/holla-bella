@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './BookCategory.module.css';
+import styles from './TopSellers.module.css';
 import { Link } from 'react-router-dom';
 import {getElectronicsForHomepage} from './electronicsActions';
 import { connect } from 'react-redux';

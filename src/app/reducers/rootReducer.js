@@ -7,7 +7,7 @@ import { reducer as ToastrReducer } from 'react-redux-toastr';
 import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
 import productReducer from '../../features/product/productReducer';
-import booksReducer from '../../features/home/Categories/booksReducer';
+import TopSellersReducer from '../../features/home/Categories/TopSellersReducer';
 import electronicsReducer from '../../features/home/Categories/electronicsReducer'
 import wishlistReducer from '../../features/wishlist/wishlistReducer';
 import relatedItemReducers from '../../features/product/relatedItemsReducer';
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   toastr: ToastrReducer,
   firebase: firebaseReducer,
   firestore: firestoreReducer,
-  books: booksReducer,
+  TopSellers: TopSellersReducer,
   electronics: electronicsReducer,
   relatedItems: relatedItemReducers
 })
