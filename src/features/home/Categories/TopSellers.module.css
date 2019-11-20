@@ -38,8 +38,14 @@
   
 }
 
+.price span {
+  font-weight: 700;
+  color: black;
+  font-size: 12px;
+}
 
-.price a, span{
+
+.price a{
   font-weight: 700;
   color: black;
   font-size: 12px;
