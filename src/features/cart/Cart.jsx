@@ -13,7 +13,7 @@ const mapState = (state, ownProps) => ({
   address: state.firebase.profile.newAddress,
   cart: objectToArray(state.firebase.profile.cart) || [],
   cartob: state.firebase.profile.cart,
-  loading :!state.async.loading
+  loading: !state.async.loading
 });
 
 const actions = {
@@ -32,7 +32,14 @@ class Cart extends Component {
   };
 
   render() {
-    const { removeFromCart, cart, address, confirmOrder, cartob, loading } = this.props;
+    const {
+      removeFromCart,
+      cart,
+      address,
+      confirmOrder,
+      cartob,
+      loading
+    } = this.props;
     let totalCartPrice =
       cart &&
       cart.length !== 0 &&
@@ -43,7 +50,7 @@ class Cart extends Component {
     } else {
       shipping = 0;
     }
-    const totalAmount = cart && cart.length !==0 && (shipping + totalCartPrice);
+    const totalAmount = cart && cart.length !== 0 && shipping + totalCartPrice;
     if (cart && cart.length === 0 && loading) {
       return <div>Your cart is empty!</div>;
     } else if (!cart && loading) {
@@ -52,7 +59,8 @@ class Cart extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.inner}>
-          {cart && cart.length !==0 &&
+          {cart &&
+            cart.length !== 0 &&
             cart.map(product => (
               <div className={styles.product} key={product.id}>
                 <div className={styles.image}>
@@ -65,7 +73,10 @@ class Cart extends Component {
                     <Link to={`/product/${product.id}`}>{product.title}</Link>
                   </h3>
                   <p>Quantity : {product.quantity}</p>
-                  <p>{product.price- (product.price / product.discount)} KSH</p>
+                  <p>
+                    {product.price - (product.price * product.discount) / 100}{' '}
+                     KSH
+                  </p>
                   <Button
                     onClick={() => removeFromCart(product)}
                     content={"Remove"}
@@ -76,9 +87,19 @@ class Cart extends Component {
                 </div>
               </div>
             ))}
-          {cart.length !==0 &&<h3>
-            Shipping : {shipping > 0 ? <div><span>Rs 50</span><p>Get Free shipping on orders above Rs200</p></div> : <span>Free</span>}{" "}
-          </h3>}
+          {cart.length !== 0 && (
+            <h3>
+              Shipping :{" "}
+              {shipping > 0 ? (
+                <div>
+                  <span>Rs 50</span>
+                  <p>Get Free shipping on orders above Rs200</p>
+                </div>
+              ) : (
+                <span>Free</span>
+              )}{" "}
+            </h3>
+          )}
           {cart.length !== 0 && <h2>Total Price = {totalAmount} KSH</h2>}
         </div>
         {cart.length !== 0 && !address && (
@@ -109,9 +130,12 @@ class Cart extends Component {
           <UserAddressForm closeForm={this.closeForm} />
         )}
         {cart && address && (
-          <Button loading={!loading} onClick={() => confirmOrder(totalAmount, cartob, address)} content='Purchase with mpesa'/>
+          <Button
+            loading={!loading}
+            onClick={() => confirmOrder(totalAmount, cartob, address)}
+            content="Purchase with mpesa"
+          />
         )}
-
       </div>
     );
   }

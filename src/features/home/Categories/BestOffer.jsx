@@ -83,9 +83,16 @@ class BestOffer extends Component {
                     <Link to={`/product/${product.id}`}>{product.title}</Link>
                   </div>
                   <div className={styles.price}>
+                  {product.discount > 0 && (
+                      <span style={{ paddingRight: "5px", fontWeight: '100', color: 'gray'}}>
+                        <strike>{product.price} KSH</strike>
+                      </span>
+                    )}
                     <Link to={`/product/${product.id}`}>
-                      {product.price - product.price / product.discount} KSH
+                      {product.price - (product.price * product.discount) / 100}{" "}
+                      KSH
                     </Link>
+                    {product.discount > 0 &&<span style={{paddingLeft: '5px', color :'green'}}>{product.discount}% OFF </span>}
                   </div>
                 </div>
               </div>

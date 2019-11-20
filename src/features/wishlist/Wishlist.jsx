@@ -58,7 +58,7 @@ class Wishlist extends Component {
                     <Link to={`/product/${product.id}`}>{product.title}</Link>
                   </h3>
                   <p>{product.description}</p>
-                  <p>{product.price - (product.price / product.discount)} KSH</p>
+                  <p>{product.price - (product.price * product.discount / 100)} KSH</p>
                   <Button
                     onClick={() => removeFromWishlist(product)}
                     content={"Remove from Wishlist"}

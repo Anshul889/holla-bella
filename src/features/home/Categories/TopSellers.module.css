@@ -38,14 +38,11 @@
   
 }
 
-.content a {
-  font-size: 12px;
-  
-}
 
-.price a{
+.price a, span{
   font-weight: 700;
   color: black;
+  font-size: 12px;
 }
 
 .title a{

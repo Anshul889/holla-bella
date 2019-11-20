@@ -5,7 +5,7 @@ import { getTopSellersForHomepage } from "./TopSellersActions";
 import { connect } from "react-redux";
 import { Placeholder } from "semantic-ui-react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const mapState = state => ({
   TopSellers: state.TopSellers,
@@ -82,10 +82,19 @@ class TopSellers extends Component {
                 </div>
                 <div className={styles.content}>
                   <div className={styles.title}>
-                    <Link to={`/product/${product.id}`}>{product.title}</Link> 
+                    <Link to={`/product/${product.id}`}>{product.title}</Link>
                   </div>
                   <div className={styles.price}>
-                    <Link to={`/product/${product.id}`}>{product.price - (product.price / product.discount)} KSH</Link> 
+                    {product.discount > 0 && (
+                      <span style={{ paddingRight: "5px", fontWeight: '100', color: 'gray'}}>
+                        <strike>{product.price} KSH</strike>
+                      </span>
+                    )}
+                    <Link to={`/product/${product.id}`}>
+                      {product.price - (product.price * product.discount) / 100}{" "}
+                      KSH
+                    </Link>
+                    {product.discount > 0 &&<span style={{paddingLeft: '5px', color :'green'}}>{product.discount}% OFF </span>}
                   </div>
                 </div>
               </div>
@@ -96,7 +105,4 @@ class TopSellers extends Component {
   }
 }
 
-export default connect(
-  mapState,
-  actions
-)(TopSellers);
+export default connect(mapState, actions)(TopSellers);
