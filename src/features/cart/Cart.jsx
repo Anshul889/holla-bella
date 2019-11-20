@@ -8,11 +8,10 @@ import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import { objectToArray } from "../../app/common/util/helpers";
 import UserAddressForm from "../user/UserDetailed/UserAddressForm";
-import CheckoutButton from "./CheckoutButton";
 
 const mapState = (state, ownProps) => ({
   address: state.firebase.profile.newAddress,
-  cart: objectToArray(state.firebase.profile.cart),
+  cart: objectToArray(state.firebase.profile.cart) || [],
   cartob: state.firebase.profile.cart,
   loading :!state.async.loading
 });
@@ -108,9 +107,6 @@ class Cart extends Component {
         )}
         {this.state.isAddressOneOpen && (
           <UserAddressForm closeForm={this.closeForm} />
-        )}
-        {cart && (
-          <CheckoutButton price={totalAmount}/>
         )}
         {cart && address && (
           <Button loading={!loading} onClick={() => confirmOrder(totalAmount, cartob, address)} content='Purchase with mpesa'/>

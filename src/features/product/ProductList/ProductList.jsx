@@ -1,5 +1,4 @@
 import React, { Component} from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
 import ProductListItem from './ProductListItem';
 import styles from './ProductList.module.css';
 
@@ -9,7 +8,7 @@ class ProductList extends Component {
     return (
       <div className={styles.container}>
         {products && products.length !== 0 && (
-          <InfiniteScroll
+          <div
           pageStart={0}
             loadMore={getNextProducts}
             hasMore={!loading && moreProducts}
@@ -19,7 +18,7 @@ class ProductList extends Component {
               products.map(product => (
                 <ProductListItem key={product.id} product={product} />
               ))}
-          </InfiniteScroll>
+          </div>
         )}
       </div>
     );
