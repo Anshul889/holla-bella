@@ -85,7 +85,7 @@ class TopSellers extends Component {
                     <Link to={`/product/${product.id}`}>{product.title}</Link> 
                   </div>
                   <div className={styles.price}>
-                    <Link to={`/product/${product.id}`}>{product.price} KSH</Link> 
+                    <Link to={`/product/${product.id}`}>{product.price - (product.price / product.discount)} KSH</Link> 
                   </div>
                 </div>
               </div>

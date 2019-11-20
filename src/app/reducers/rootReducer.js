@@ -8,7 +8,7 @@ import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
 import productReducer from '../../features/product/productReducer';
 import TopSellersReducer from '../../features/home/Categories/TopSellersReducer';
-import electronicsReducer from '../../features/home/Categories/electronicsReducer'
+import BestOfferReducer from '../../features/home/Categories/BestOfferReducer'
 import wishlistReducer from '../../features/wishlist/wishlistReducer';
 import relatedItemReducers from '../../features/product/relatedItemsReducer';
 
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   TopSellers: TopSellersReducer,
-  electronics: electronicsReducer,
+  BestOffer: BestOfferReducer,
   relatedItems: relatedItemReducers
 })
 

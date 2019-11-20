@@ -1,35 +1,35 @@
 import React, { Component } from 'react';
-import styles from './TopSellers.module.css';
+import styles from './BestOffer.module.css';
 import { Link } from 'react-router-dom';
-import {getElectronicsForHomepage} from './electronicsActions';
+import {getbestOfferForHomepage} from './BestOfferActions';
 import { connect } from 'react-redux';
 import { Placeholder } from 'semantic-ui-react';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 const mapState = state => ({
-  electronics : state.electronics
+  bestOffer : state.BestOffer
 })
 
 const actions = {
-  getElectronicsForHomepage
+  getbestOfferForHomepage
 }
 
-class ElectronicsCategory extends Component {
+class BestOffer extends Component {
   
 
   async componentDidMount(){
-    if(this.props.electronics && this.props.electronics.length === 0){
-    this.props.getElectronicsForHomepage();
+    if(this.props.bestOffer && this.props.bestOffer.length === 0){
+    this.props.getbestOfferForHomepage();
     }
   }
 
   render() {
-    const {electronics} = this.props;
-    if (electronics.length === 0) {
+    const {bestOffer} = this.props;
+    if (bestOffer.length === 0) {
       return (
         <div className={styles.container}>
-          <h2>Electronics</h2>
+          <h2>Best Offer</h2>
           <div className={styles.inner}>
             <div className={styles.product}>
               <div className={styles.image}>
@@ -65,10 +65,10 @@ class ElectronicsCategory extends Component {
     }
     return (
       <div className={styles.container}>
-        <h2>Electronics</h2>
+        <h2>Best Offer</h2>
         <div className={styles.inner}>
-        {electronics &&
-            electronics.map(product => (
+        {bestOffer &&
+            bestOffer.map(product => (
               <div className={styles.product} key={product.id}>
                 <div className={styles.image}>
                   <Link to={`/product/${product.id}`}>
@@ -94,4 +94,4 @@ class ElectronicsCategory extends Component {
   }
 }
 
-export default connect(mapState, actions) (ElectronicsCategory);
+export default connect(mapState, actions) (BestOffer);

@@ -65,7 +65,7 @@ class Cart extends Component {
                     <Link to={`/product/${product.id}`}>{product.title}</Link>
                   </h3>
                   <p>Quantity : {product.quantity}</p>
-                  <p>Rs {product.price}</p>
+                  <p>{product.price- (product.price / product.discount)} KSH</p>
                   <Button
                     onClick={() => removeFromCart(product)}
                     content={"Remove"}
@@ -79,7 +79,7 @@ class Cart extends Component {
           {cart.length !==0 &&<h3>
             Shipping : {shipping > 0 ? <div><span>Rs 50</span><p>Get Free shipping on orders above Rs200</p></div> : <span>Free</span>}{" "}
           </h3>}
-          {cart.length !== 0 && <h2>Total Price = Rs {totalAmount}</h2>}
+          {cart.length !== 0 && <h2>Total Price = {totalAmount} KSH</h2>}
         </div>
         {cart.length !== 0 && !address && (
           <div>

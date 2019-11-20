@@ -19,7 +19,8 @@ export const addToCart = (product, values) => async (
   const newProduct = {
     ...product,
     quantity: values.quantity,
-    totalPrice: values.quantity * product.price,
+    discountedPrice: (product.price - (product.price / product.discount)),
+    totalPrice: values.quantity * (product.price - (product.price / product.discount)),
     addDate: firestore.FieldValue.serverTimestamp()
   }
   try {

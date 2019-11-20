@@ -39,6 +39,7 @@ class ProductDetailedInfo extends React.Component {
     const averageRating = totalReviews && (totalRating / (totalReviews.length));
     const roundAverage = Math.round(averageRating * 10) / 10;
     const starRating = Math.round(roundAverage);
+    const discountedPrice = product.price - ( product.price / product.discount)
     return (
       <React.Fragment>
         <div className={styles.product}>
@@ -53,7 +54,7 @@ class ProductDetailedInfo extends React.Component {
           <div className={styles.content}>
             <h3>{product.title}</h3>
             <p>{product.description}</p>
-            <p>Rs {product.price}</p>
+            <p>Rs {discountedPrice}</p>
             <p>Average Rating : {roundAverage ? roundAverage : 'No Reviews Yet'}</p>
             <Rating icon='star' rating={starRating} maxRating={5}/>
             <Form
