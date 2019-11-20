@@ -6,7 +6,7 @@
 }
 
 .container h2 {
-  padding-left: 5%;
+  text-align: center;
 }
 
 .inner {
@@ -36,4 +36,14 @@
 
 .content a {
   font-size: 12px;
+  
+}
+
+.price a{
+  font-weight: 700;
+  color: black;
+}
+
+.title a{
+  color: #6c6c6c;
 }

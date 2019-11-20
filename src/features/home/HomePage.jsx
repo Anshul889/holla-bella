@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ElectronicsCategory from './Categories/ElectronicsCategory';
 import TopSellers from './Categories/TopSellers';
 
 class HomePage extends Component {
@@ -7,7 +6,6 @@ class HomePage extends Component {
     return (
       <div>
         <TopSellers />
-        <ElectronicsCategory/>
       </div>
     )
   }

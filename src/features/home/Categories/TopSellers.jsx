@@ -81,9 +81,12 @@ class TopSellers extends Component {
                   </Link>
                 </div>
                 <div className={styles.content}>
-                  <h3>
-                    <Link to={`/product/${product.id}`}>{product.title}</Link>
-                  </h3>
+                  <div className={styles.title}>
+                    <Link to={`/product/${product.id}`}>{product.title}</Link> 
+                  </div>
+                  <div className={styles.price}>
+                    <Link to={`/product/${product.id}`}>{product.price} KSH</Link> 
+                  </div>
                 </div>
               </div>
             ))}
