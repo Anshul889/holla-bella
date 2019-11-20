@@ -1,0 +1,126 @@
+.Navigation {
+  z-index: 1050;
+  position: relative;
+  background-color: #0d3244;
+  font-family: 'Source Sans Pro', sans-serif !important;
+
+}
+
+.dnavigation {
+  padding: 0;
+  box-sizing: content-box;
+  margin: 0 auto;
+  max-width: 65rem;
+  width: 90%;
+  align-items: center;
+  display: grid;
+  grid-template-columns: min-content 1fr 1fr;
+  grid-template-rows: 56px;
+  background: 0 0;
+  z-index: 1009;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  background-color: #0d3244;
+  font-size: 15px;
+}
+
+
+.desktop {
+  padding-right: 0.5rem;
+  align-items: center;
+  display: flex;
+}
+
+.dItem {
+  margin-left: 1.2em;
+}
+
+.imglogo{
+  height: 25px;
+}
+
+.dnavigation a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.leftdnav {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  justify-content: center;
+  line-height: 1.9;
+  list-style: none;
+  padding-left: 0;
+}
+
+.rightdnav {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  justify-content: end;
+  line-height: 2;
+  list-style: none;
+  padding-left: 0;
+}
+
+
+@media screen and (max-width: 950px) {
+  .leftdnav {
+    display: none;
+  }
+  .rightdnav {
+    display: none;
+  }
+  .after{
+    display: none;
+  }
+  .dnavigation{
+    grid-template-columns: auto;
+    justify-content: center;
+  }
+}
+
+/*Bottom Nav */
+
+.MobileNav {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #f5f3f7;
+  background-color: white;
+  height: 50px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+}
+
+.mItem {
+  font-size: 0.6rem;
+  letter-spacing: 0.0075rem;
+  text-decoration: none;
+  color: black
+}
+
+.mnavimg {
+  height: 25px;
+  display: block;
+  padding: 0;
+  margin: 0 auto;
+  margin-top: 3px;
+}
+
+.mText {
+  font-size: 12px;
+}
+
+@media screen and (min-width: 950px) {
+  .MobileNav {
+    display: none;
+  }
+}

@@ -1,0 +1,38 @@
+.container{
+  width: 100%;
+  margin: 0 auto;
+  padding: 25px 0;
+}
+
+.container h2 {
+  padding-left: 5%;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(5, 26%);
+  overflow: scroll;
+  grid-gap: 20px;
+}
+
+.inner::-webkit-scrollbar {
+  display: none;
+}
+
+.image {
+  width: 100%;
+}
+
+.product {
+  width: 100%;
+  transform: translateX(5%);
+}
+
+.image img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.content a {
+  font-size: 12px;
+}

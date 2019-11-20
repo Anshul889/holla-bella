@@ -1,0 +1,33 @@
+.container{
+  width: 90%;
+  margin: 0 auto;
+  padding: 50px 0
+}
+
+.inner {
+  display: grid;
+}
+
+.image {
+  width: 100%;
+}
+
+.product {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-gap: 10px;
+}
+
+.image img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.content h3{
+  margin-bottom: 7px;
+}
+
+.content p {
+  margin-bottom: 7px;
+}

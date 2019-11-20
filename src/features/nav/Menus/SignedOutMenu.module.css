@@ -1,0 +1,61 @@
+.authtext {
+  margin-bottom: 0;
+  margin-left: 1.2em;
+}
+
+.mnavimg {
+  height: 25px;
+  display: block;
+  padding: 0;
+  margin: 0 auto;
+  border-radius: 50px;
+}
+
+@media screen and (max-width: 950px) {
+  .authtext {
+    margin-left: 0;
+    letter-spacing: 0.0075rem;
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+  }
+
+  .mnavimgout{
+    height: 25px;
+    display: block;
+    padding: 0;
+    margin: 3px auto 0 auto;
+  }
+  .authOuttext {
+    font-size: 12px;
+  }
+  .mnavimg{
+    margin-top: 3px;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .glogin {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    border-width: 0;
+    color: #737373;
+    border-radius: 50px;
+    box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.05);
+    transition-property: background-color, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
+    margin-left: 15px;
+  }
+  .authtext {
+    margin-left: 0.3rem;
+    font-size: 13px;
+    display: none;
+  }
+  .mnavimg {
+    height: 40px;
+  }
+  .mnavimgout {
+    display: none;
+  }
+}

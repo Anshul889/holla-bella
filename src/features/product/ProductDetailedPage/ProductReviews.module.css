@@ -1,0 +1,19 @@
+.container {
+  margin: 20px auto;
+  width : 90%;
+}
+
+.review {
+  display: grid;
+  grid-template-columns: 1fr 5fr max-content;
+  grid-gap: 5px;
+}
+
+.image img {
+  width: 100%;
+  border-radius: 80px;
+}
+
+.review p {
+  padding-left: 4px;
+}
