@@ -4,14 +4,16 @@ import { Field, reduxForm } from 'redux-form';
 import TextInput from '../../../app/common/form/TextInput';
 import { connect } from 'react-redux';
 import { login, socialLogin } from '../authActions';
-import SocialLogin from '../SocialLogin/SocialLogin'
+import SocialLogin from '../SocialLogin/SocialLogin';
+import {closeModal} from '../../modals/modalActions'
 
 const actions = {
   login,
-  socialLogin
+  socialLogin,
+  closeModal
 };
 
-const LoginForm = ({ login, handleSubmit, error, socialLogin }) => {
+const LoginForm = ({ login, handleSubmit, error, socialLogin, closeModal }) => {
   return (
     <Form size='large' onSubmit={handleSubmit(login)} autoComplete='off'>
       <Segment>
@@ -34,7 +36,7 @@ const LoginForm = ({ login, handleSubmit, error, socialLogin }) => {
         <Divider horizontal>
           Or
         </Divider>
-        <SocialLogin socialLogin={socialLogin}/>
+        <SocialLogin socialLogin={socialLogin} closeModal={closeModal}/>
       </Segment>
     </Form>
   );

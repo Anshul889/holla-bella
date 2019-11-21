@@ -6,7 +6,7 @@ body {
   background-color: #ffffff !important;
 }
 
-h1, h2, h3, h4, h4, h5, h6, .ui.button {
+h1, h2, h3, h4, h4, h5, h6, .button, .modal, .header {
   font-family: 'Lato' !important;
 }
 

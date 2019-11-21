@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal } from 'semantic-ui-react';
+import { Modal, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import LoginForm from '../auth/Login/LoginForm';
@@ -11,7 +11,7 @@ class LoginModal extends Component {
   render() {
     return (
       <Modal size='mini' open={true} onClose={this.props.closeModal}>
-        <Modal.Header>Login to Quandl</Modal.Header>
+        <Modal.Header style={{textAlign: 'center'}}>Login to Hola Bella</Modal.Header>
         <Modal.Content>
           <Modal.Description>
             <LoginForm />
