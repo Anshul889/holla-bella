@@ -77,12 +77,8 @@ class NavBar extends Component {
             <div className={styles.mText}>Wishlist</div>
           </Link>
           <Link className={styles.mItem} to='/cart'>
-            <div>
-            <div>
             <img className={styles.mnavimg} src={shoppingCart} alt='cart' />
-          <div className={styles.mText}>Cart {totalQuantity > 0 &&<span className={styles.badge}>{totalQuantity}</span>}</div>
-            </div>
-            </div>
+            <div className={styles.mText}>Cart {totalQuantity > 0 &&<span className={styles.badge}>{totalQuantity}</span>}</div>
           </Link>
           {authenticated ? (
             <SignedInMenu profile={profile} signOut={this.handleSignOut} auth={auth}/>
