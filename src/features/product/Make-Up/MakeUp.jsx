@@ -18,6 +18,16 @@ class MakeUp extends Component {
     products : []
   };
   
+  // function myFunction() {
+  //   cars.sort(function(a, b){
+  //     var x = a.type.toLowerCase();
+  //     var y = b.type.toLowerCase();
+  //     if (x < y) {return -1;}
+  //     if (x > y) {return 1;}
+  //     return 0;
+  //   });
+  //   displayCars();
+  // }
   
   async componentDidMount() {
     if (this.props.makeUp && this.props.makeUp.length === 0) {
