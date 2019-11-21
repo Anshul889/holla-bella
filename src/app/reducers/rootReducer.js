@@ -11,6 +11,7 @@ import TopSellersReducer from '../../features/home/Categories/TopSellersReducer'
 import BestOfferReducer from '../../features/home/Categories/BestOfferReducer'
 import wishlistReducer from '../../features/wishlist/wishlistReducer';
 import relatedItemReducers from '../../features/product/relatedItemsReducer';
+import MakeUpReducer from '../../features/product/Make-Up/MakeUpReducer';
 
 const rootReducer = combineReducers({
   wishlist: wishlistReducer,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   firestore: firestoreReducer,
   TopSellers: TopSellersReducer,
   BestOffer: BestOfferReducer,
+  makeUp: MakeUpReducer,
   relatedItems: relatedItemReducers
 })
 

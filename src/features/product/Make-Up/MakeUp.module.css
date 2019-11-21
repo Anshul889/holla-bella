@@ -10,7 +10,7 @@
 
 .inner {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1f 1fr;
   overflow: scroll;
   grid-gap: 20px;
 }
@@ -47,12 +47,4 @@
 
 .price {
   margin-bottom: 75px;
-}
-
-.blink {
-  animation: blinker 1.4s linear 15;
-}
-
-@keyframes blinker {  
-  50% { opacity: 0; }
 }

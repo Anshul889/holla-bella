@@ -8,6 +8,7 @@ import ProductDashBoard from '../../features/product/ProductDashBoard/ProductDas
 import ProductDetailedPage from '../../features/product/ProductDetailedPage/ProductDetailedPage';
 import Cart from '../../features/cart/Cart';
 import Wishlist from '../../features/wishlist/Wishlist';
+import MakeUp from '../../features/product/Make-Up/MakeUp';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path='/product/:id' component={ProductDetailedPage} />
           <Route exact path='/cart' component={Cart} />
           <Route exact path='/wishlist' component={Wishlist} />
+          <Route exact path='/make-up' component={MakeUp}/>
         </Switch>
       </Fragment>
       
