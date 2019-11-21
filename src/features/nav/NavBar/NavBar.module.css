@@ -64,7 +64,7 @@
 }
 
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 768px) {
   .leftdnav {
     display: none;
   }
@@ -117,7 +117,18 @@
   font-size: 12px;
 }
 
-@media screen and (min-width: 950px) {
+.badge {
+  position: absolute;
+  bottom: 30px;
+  right: 25%;
+  padding: 1px 6px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  font-size: 9px;
+}
+
+@media screen and (min-width: 768px) {
   .MobileNav {
     display: none;
   }
