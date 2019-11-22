@@ -22,17 +22,19 @@
 
 .image {
   width: 100%;
+  
 }
 
 .product {
+  padding-top: 10px;
   width: 100%;
   transform: translateX(15%);
 }
 
-.image img {
+.product img {
   width: 100%;
-  border-radius: 20px;
-  
+  box-shadow:
+  0.1em 0.2em 0.9em rgba(0.1, 0.1, 0.1, 0.1);
 }
 
 .price span {

@@ -1,7 +1,7 @@
 .container{
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
-  padding: 25px 0
+  padding: 25px 0;
 }
 
 .container h2 {
@@ -11,29 +11,35 @@
 .inner {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  overflow: scroll;
-  grid-gap: 20px;
 }
 
 .inner::-webkit-scrollbar {
   display: none;
 }
 
-.image {
-  width: 100%;
-}
-
 .product {
+  padding-top: 10px;
   width: 100%;
+  margin-bottom: 50px;
 }
 
-.image img {
-  width: 100%;
-  border-radius: 20px;
+.product img {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+  box-shadow:
+  0.1em 0.2em 0.9em rgba(0.1, 0.1, 0.1, 0.1);
 }
 
 .content a {
   font-size: 12px;
+  
+}
+
+.content {
+  padding-top: 10px;
+  padding-left: 20px;
 }
 
 .price a{
@@ -45,9 +51,6 @@
   color: #6c6c6c;
 }
 
-.price {
-  margin-bottom: 75px;
-}
 
 .blink {
   animation: blinker 1.4s linear 15;

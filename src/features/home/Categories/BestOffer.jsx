@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { getbestOfferForHomepage } from './BestOfferActions';
 import { connect } from 'react-redux';
 import { Placeholder } from 'semantic-ui-react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const mapState = state => ({
   bestOffer: state.BestOffer
@@ -26,7 +25,7 @@ class BestOffer extends Component {
     if (bestOffer.length === 0) {
       return (
         <div className={styles.container}>
-          <h2>Best Offer</h2>
+          <h2>Hot Deals</h2>
           <div className={styles.inner}>
             <div className={styles.product}>
               <div className={styles.image}>
@@ -67,17 +66,9 @@ class BestOffer extends Component {
           {bestOffer &&
             bestOffer.map(product => (
               <div className={styles.product} key={product.id}>
-                <div className={styles.image}>
-                  <Link to={`/product/${product.id}`}>
-                    {/* <img src={product.photoURL} alt={product.description} /> */}
-                    <LazyLoadImage
-                      alt={product.description}
-                      src={product.photoURL}
-                      width='100%'
-                      effect='blur'
-                    />
-                  </Link>
-                </div>
+                <Link to={`/product/${product.id}`}>
+                    <img src={product.photoURL} alt={product.title} loading='lazy'/>
+                </Link>
                 <div className={styles.content}>
                   <div className={styles.title}>
                     <Link to={`/product/${product.id}`}>{product.title}</Link>

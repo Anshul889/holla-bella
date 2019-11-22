@@ -3,8 +3,7 @@ import styles from "./TopSellers.module.css";
 import { Link } from "react-router-dom";
 import { getTopSellersForHomepage } from "./TopSellersActions";
 import { connect } from "react-redux";
-import { Placeholder } from "semantic-ui-react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Placeholder} from "semantic-ui-react";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 const mapState = state => ({
@@ -69,17 +68,9 @@ class TopSellers extends Component {
           {TopSellers &&
             TopSellers.map(product => (
               <div className={styles.product} key={product.id}>
-                <div className={styles.image}>
                   <Link to={`/product/${product.id}`}>
-                    {/* <img src={product.photoURL} alt={product.description} /> */}
-                    <LazyLoadImage
-                      alt={product.description}
-                      src={product.photoURL}
-                      width="100%"
-                      effect="blur"
-                    />
+                    <img src={product.photoURL} alt={product.title} loading='lazy'/>
                   </Link>
-                </div>
                 <div className={styles.content}>
                   <div className={styles.title}>
                     <Link to={`/product/${product.id}`}>{product.title}</Link>
