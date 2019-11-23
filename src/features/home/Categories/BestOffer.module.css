@@ -12,28 +12,23 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 15px;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .inner::-webkit-scrollbar {
   display: none;
 }
 
-.product:nth-child(odd) {
+.product{
   padding-top: 10px;
   width: 100%;
   margin-bottom: 30px;
-  margin-left: 10%;
-}
-
-.product:nth-child(even){
-  padding-top: 10px;
-  width: 100%;
-  margin-bottom: 30px;
+  z-index: 500;
 }
 
 .product img {
-  display: block;
-  width: 90%;
+  width: 100%;
   text-align: center;
   box-shadow:
   0.1em 0.2em 0.9em rgba(0.1, 0.1, 0.1, 0.1);
