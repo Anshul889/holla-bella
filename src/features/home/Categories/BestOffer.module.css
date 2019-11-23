@@ -11,22 +11,29 @@
 .inner {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-gap: 15px;
 }
 
 .inner::-webkit-scrollbar {
   display: none;
 }
 
-.product {
+.product:nth-child(odd) {
   padding-top: 10px;
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  margin-left: 10%;
+}
+
+.product:nth-child(even){
+  padding-top: 10px;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 .product img {
   display: block;
-  margin: 0 auto;
-  width: 80%;
+  width: 90%;
   text-align: center;
   box-shadow:
   0.1em 0.2em 0.9em rgba(0.1, 0.1, 0.1, 0.1);
@@ -39,7 +46,6 @@
 
 .content {
   padding-top: 10px;
-  padding-left: 20px;
 }
 
 .price a{
