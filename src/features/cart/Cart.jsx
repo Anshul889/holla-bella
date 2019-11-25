@@ -65,7 +65,7 @@ class Cart extends Component {
               <div className={styles.product} key={product.id}>
                 <div className={styles.image}>
                   <Link to={`/product/${product.id}`}>
-                    <img src={product.photoURL} alt={product.description} />
+                    <img src={product.photoURL} alt={product.title} />
                   </Link>
                 </div>
                 <div className={styles.content}>

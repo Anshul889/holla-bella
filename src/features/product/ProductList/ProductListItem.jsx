@@ -16,7 +16,6 @@ class ProductListItem extends Component {
           <h3>
             <Link to={`/product/${product.id}`}>{product.title}</Link>
           </h3>
-          <p>{product.description}</p>
           <p>Rs {product.price}</p>
         </div>
       </div>
