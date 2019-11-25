@@ -312,3 +312,39 @@ export const confirmOrder = (totalAmount, cartob, address) => async (
       toastr.error("Oops", 'something went wrong');
     }
   }
+
+  export const addQuantity = (product) => async (
+    dispatch, getState, {getFirestore, getFirebase}) => {
+      dispatch(asyncActionStart());
+      const firestore = getFirestore();
+      const firebase = getFirebase();
+      const user = firebase.auth().currentUser;
+      try {
+        await firestore.update(`users/${user.uid}`, {
+          [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(1)
+        });
+        dispatch(asyncActionFinish());
+        toastr.success('', 'Quantity changed');
+      } catch(error) {
+        console.log(error);
+        toastr.error('Oops', 'something went wrong')
+      }
+    }
+
+    export const subtractQuantity = (product) => async (
+      dispatch, getState, {getFirestore, getFirebase}) => {
+        dispatch(asyncActionStart());
+        const firestore = getFirestore();
+        const firebase = getFirebase();
+        const user = firebase.auth().currentUser;
+        try {
+          await firestore.update(`users/${user.uid}`, {
+            [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(-1)
+          });
+          dispatch(asyncActionFinish());
+          toastr.success('', 'Quantity changed');
+        } catch(error) {
+          console.log(error);
+          toastr.error('Oops', 'something went wrong')
+        }
+      }

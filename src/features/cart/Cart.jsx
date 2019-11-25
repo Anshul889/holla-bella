@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { removeFromCart, confirmOrder } from "../../features/user/userActions";
+import { removeFromCart, confirmOrder, addQuantity, subtractQuantity } from "../../features/user/userActions";
 import { compose } from "redux";
 import styles from "./Cart.module.css";
 import { Link } from "react-router-dom";
@@ -18,7 +18,9 @@ const mapState = (state, ownProps) => ({
 
 const actions = {
   removeFromCart,
-  confirmOrder
+  confirmOrder,
+  addQuantity,
+  subtractQuantity
 };
 
 class Cart extends Component {
@@ -38,7 +40,9 @@ class Cart extends Component {
       address,
       confirmOrder,
       cartob,
-      loading
+      loading,
+      addQuantity,
+      subtractQuantity
     } = this.props;
     let totalCartPrice =
       cart &&
@@ -72,7 +76,7 @@ class Cart extends Component {
                   <h3>
                     <Link to={`/product/${product.id}`}>{product.title}</Link>
                   </h3>
-                  <p>Quantity : {product.quantity}</p>
+  <span>Quantity : {product.quantity > 1 &&<span onClick={() => subtractQuantity(product)}>-</span>}{product.quantity} {product.quantity && <span onClick={() => addQuantity(product)}>+</span>}</span>
                   <p>
                     {product.price - (product.price * product.discount) / 100}{' '}
                      KSH
