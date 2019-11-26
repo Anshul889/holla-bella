@@ -34,13 +34,11 @@
   0.1em 0.2em 0.9em rgba(0.1, 0.1, 0.1, 0.1);
 }
 
-.content a {
-  font-size: 12px;
-  
-}
+
 
 .content {
   padding-top: 10px;
+  font-size: 12px;
 }
 
 .price a{
