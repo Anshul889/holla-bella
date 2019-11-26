@@ -321,7 +321,8 @@ export const confirmOrder = (totalAmount, cartob, address) => async (
       const user = firebase.auth().currentUser;
       try {
         await firestore.update(`users/${user.uid}`, {
-          [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(1)
+          [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(1),
+          [`cart.${product.id}.totalPrice`]: (product.quantity + 1) * (product.price - (product.price * product.discount / 100))
         });
         dispatch(asyncActionFinish());
         toastr.success('', 'Quantity changed');
@@ -339,7 +340,8 @@ export const confirmOrder = (totalAmount, cartob, address) => async (
         const user = firebase.auth().currentUser;
         try {
           await firestore.update(`users/${user.uid}`, {
-            [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(-1)
+            [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(-1),
+            [`cart.${product.id}.totalPrice`]: (product.quantity - 1) * (product.price - (product.price * product.discount / 100))
           });
           dispatch(asyncActionFinish());
           toastr.success('', 'Quantity changed');

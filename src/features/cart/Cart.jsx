@@ -53,6 +53,7 @@ class Cart extends Component {
       cart &&
       cart.length !== 0 &&
       cart.map(item => item.totalPrice).reduce((prev, next) => prev + next);
+    
     let shipping;
     if (totalCartPrice < 200) {
       shipping = 50;
