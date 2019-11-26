@@ -52,15 +52,18 @@ class Cart extends Component {
     let totalCartPrice =
       cart &&
       cart.length !== 0 &&
-      cart.map(item => item.totalPrice).reduce((prev, next) => prev + next);
-    
+      Math.round(
+        cart.map(item => item.totalPrice).reduce((prev, next) => prev + next)
+      );
+
     let shipping;
-    if (totalCartPrice < 200) {
+    if (totalCartPrice < 1000) {
       shipping = 50;
     } else {
       shipping = 0;
     }
-    const totalAmount = cart && cart.length !== 0 && shipping + totalCartPrice;
+    const totalAmount =
+      cart && cart.length !== 0 && Math.round(shipping + totalCartPrice);
     if (cart && cart.length === 0 && loading) {
       return <div>Your cart is empty!</div>;
     } else if (!cart && loading) {
@@ -68,98 +71,111 @@ class Cart extends Component {
     }
     return (
       <div>
-       <h1 className={styles.heading}>
-         Shopping Cart
-       </h1>
-      <div className={styles.container}>
-        <div className={styles.inner}> 
-          {cart &&
-            cart.length !== 0 &&
-            cart.map(product => (
-              <div className={styles.product} key={product.id}>
-                <div className={styles.image}>
-                  <Link to={`/product/${product.id}`}>
-                    <img src={product.photoURL} alt={product.title} />
-                  </Link>
-                </div>
-                <div className={styles.content}>
-                  <h4>
+        <h1 className={styles.heading}>Shopping Cart</h1>
+        {cart && cart.length !== 0 && (
+          <div className={styles.categories}>
+            <div>Product</div>
+            <div>Qnt:</div>
+            <div>Price</div>
+          </div>
+        )}
+        <div className={styles.container}>
+          <div className={styles.inner}>
+            {cart &&
+              cart.length !== 0 &&
+              cart.map(product => (
+                <div className={styles.product} key={product.id}>
+                  <div className={styles.image}>
+                    <Link to={`/product/${product.id}`}>
+                      <img src={product.photoURL} alt={product.title} />
+                    </Link>
+                  </div>
+                  <div className={styles.title}>
                     <Link to={`/product/${product.id}`}>{product.title}</Link>
-                  </h4>
-                  <span>
-                    Quantity :{' '}
-                    {product.quantity > 1 && (
-                      <span onClick={() => subtractQuantity(product)}>-</span>
+                  </div>
+                  <div className={styles.quantity}>
+                    {product.quantity > 1 ? (
+                      <button onClick={() => subtractQuantity(product)}>
+                        -
+                      </button>
+                    ) : (
+                      <button>-</button>
                     )}
                     {product.quantity}{' '}
                     {product.quantity < 10 && (
-                      <span onClick={() => addQuantity(product)}>+</span>
+                      <button onClick={() => addQuantity(product)}>+</button>
                     )}
-                  </span>
-                  <p>
-                    {product.price - (product.price * product.discount) / 100}{' '}
+                  </div>
+                  <div className={styles.price}>
+                    {Math.round(
+                      product.quantity *
+                        (product.price -
+                          (product.price * product.discount) / 100)
+                    )}{' '}
                     KSH
-                  </p>
-                  <Button
-                    onClick={() => removeFromCart(product)}
-                    content={'Remove'}
-                  />
-                  <Link to={`/product/${product.id}`}>
-                    <Button>Edit Quantity</Button>
-                  </Link>
+                  </div>
+                  <div
+                    className={styles.delete}
+                    onClick={() => removeFromCart(product)}>
+                    delete
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+          </div>
+          {cart.length !== 0 && { totalAmount } && (
+            <div className={styles.totalcartprice}>
+              <div className={styles.subtotal}>Subtotal: </div>
+              <div className={styles.totalpricenumber}>{totalCartPrice} KSH</div>
+            </div>
+          )}
           {cart.length !== 0 && (
-            <h3>
+            <div className={styles.shippingc}>
               Shipping :{' '}
               {shipping > 0 ? (
-                <div>
-                  <span>Rs 50</span>
-                  <p>Get Free shipping on orders above Rs200</p>
-                </div>
+                <>
+                  <div className={styles.shippingp}>50 KSH</div>
+                  <div className={styles.shippingw}>Free shipping on orders above 1000 KSH</div>
+                </>
               ) : (
-                <span>Free</span>
+                <div className={styles.shippingp}>Free</div>
               )}{' '}
-            </h3>
+            </div>
           )}
-          {cart.length !== 0 && <h2>Total Price = {totalAmount} KSH</h2>}
-        </div>
-        {cart.length !== 0 && !address && (
-          <div>
-            <p>Add Delivery Address To pay with Mpesa</p>
+          {cart.length !== 0 && !address && (
+            <div>
+              <p>Add Delivery Address To pay with Mpesa</p>
+              <Button
+                onClick={() =>
+                  this.setState({
+                    isAddressOneOpen: !this.state.isAddressOneOpen,
+                    isAddressTwoOpen: false
+                  })
+                }
+                color='teal'
+                size='tiny'
+                content={'Add Delivery Address to pay with mpesa'}
+              />
+            </div>
+          )}
+          {cart.length !== 0 && address && (
+            <div>
+              <div>Deliver to this address</div>
+              <span>{address.Name} </span>
+              <span>{address.City} </span>
+              <span>{address.postcode} </span>
+            </div>
+          )}
+          {this.state.isAddressOneOpen && (
+            <UserAddressForm closeForm={this.closeForm} />
+          )}
+          {cart && address && (
             <Button
-              onClick={() =>
-                this.setState({
-                  isAddressOneOpen: !this.state.isAddressOneOpen,
-                  isAddressTwoOpen: false
-                })
-              }
-              color='teal'
-              size='tiny'
-              content={'Add Delivery Address to pay with mpesa'}
+              loading={!loading}
+              onClick={() => confirmOrder(totalAmount, cartob, address)}
+              content='Purchase with mpesa'
             />
-          </div>
-        )}
-        {cart.length !== 0 && address && (
-          <div>
-            <div>Deliver to this address</div>
-            <span>{address.Name} </span>
-            <span>{address.City} </span>
-            <span>{address.postcode} </span>
-          </div>
-        )}
-        {this.state.isAddressOneOpen && (
-          <UserAddressForm closeForm={this.closeForm} />
-        )}
-        {cart && address && (
-          <Button
-            loading={!loading}
-            onClick={() => confirmOrder(totalAmount, cartob, address)}
-            content='Purchase with mpesa'
-          />
-        )}
-      </div>
+          )}
+        </div>
       </div>
     );
   }
