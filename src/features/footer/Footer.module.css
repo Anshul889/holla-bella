@@ -4,8 +4,8 @@
   padding: 50px 5%;
 }
 
-.footer img {
-  width: 50%;
+.sec1 img {
+  width: 33%;
 }
 
 .sec1 {
@@ -38,7 +38,7 @@
     grid-template-columns: 1fr;
   }
   .footer img {
-    width: 50%;
+    width: 40%;
     padding-bottom: 5px;
   }
   .sec1 p{

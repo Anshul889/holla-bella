@@ -125,7 +125,9 @@ class Cart extends Component {
           {cart.length !== 0 && { totalAmount } && (
             <div className={styles.totalcartprice}>
               <div className={styles.subtotal}>Subtotal: </div>
-              <div className={styles.totalpricenumber}>{totalCartPrice} KSH</div>
+              <div className={styles.totalpricenumber}>
+                {totalCartPrice} KSH
+              </div>
             </div>
           )}
           {cart.length !== 0 && (
@@ -134,14 +136,15 @@ class Cart extends Component {
               {shipping > 0 ? (
                 <>
                   <div className={styles.shippingp}>50 KSH</div>
-                  <div className={styles.shippingw}>Free shipping on orders above 1000 KSH</div>
+                  <div className={styles.shippingw}>
+                    Free shipping on orders above 1000 KSH
+                  </div>
                 </>
               ) : (
                 <div className={styles.shippingp}>Free</div>
               )}{' '}
             </div>
           )}
-          
         </div>
         <div className={styles.total}>
           <div className={styles.innertotal}>
@@ -151,39 +154,39 @@ class Cart extends Component {
         </div>
 
         {cart.length !== 0 && !address && (
-            <div>
-              <p>Add Delivery Address To pay with Mpesa</p>
-              <Button
-                onClick={() =>
-                  this.setState({
-                    isAddressOneOpen: !this.state.isAddressOneOpen,
-                    isAddressTwoOpen: false
-                  })
-                }
-                color='teal'
-                size='tiny'
-                content={'Add Delivery Address to pay with mpesa'}
-              />
-            </div>
-          )}
-          {cart.length !== 0 && address && (
-            <div>
-              <div>Deliver to this address</div>
-              <span>{address.Name} </span>
-              <span>{address.City} </span>
-              <span>{address.postcode} </span>
-            </div>
-          )}
-          {this.state.isAddressOneOpen && (
-            <UserAddressForm closeForm={this.closeForm} />
-          )}
-          {cart && address && (
+          <div>
+            <p>Add Delivery Address To pay with Mpesa</p>
             <Button
-              loading={!loading}
-              onClick={() => confirmOrder(totalAmount, cartob, address)}
-              content='Purchase with mpesa'
+              onClick={() =>
+                this.setState({
+                  isAddressOneOpen: !this.state.isAddressOneOpen,
+                  isAddressTwoOpen: false
+                })
+              }
+              color='teal'
+              size='tiny'
+              content={'Add Delivery Address to pay with mpesa'}
             />
-          )}
+          </div>
+        )}
+        {cart.length !== 0 && address && (
+          <div className={styles.addressc}>
+            <div className={styles.addtitle}>Deliver to:</div>
+            <span>{address.Name} </span>
+            <span>{address.City} </span>
+            <span>{address.postcode} </span>
+          </div>
+        )}
+        {this.state.isAddressOneOpen && (
+          <UserAddressForm closeForm={this.closeForm} />
+        )}
+        {cart && address && (
+          <Button
+            loading={!loading}
+            onClick={() => confirmOrder(totalAmount, cartob, address)}
+            content='Purchase with mpesa'
+          />
+        )}
       </div>
     );
   }

@@ -325,7 +325,6 @@ export const confirmOrder = (totalAmount, cartob, address) => async (
           [`cart.${product.id}.totalPrice`]: (product.quantity + 1) * (product.price - (product.price * product.discount / 100))
         });
         dispatch(asyncActionFinish());
-        toastr.success('', 'Quantity changed');
       } catch(error) {
         console.log(error);
         toastr.error('Oops', 'something went wrong')
@@ -344,7 +343,6 @@ export const confirmOrder = (totalAmount, cartob, address) => async (
             [`cart.${product.id}.totalPrice`]: (product.quantity - 1) * (product.price - (product.price * product.discount / 100))
           });
           dispatch(asyncActionFinish());
-          toastr.success('', 'Quantity changed');
         } catch(error) {
           console.log(error);
           toastr.error('Oops', 'something went wrong')
