@@ -10,7 +10,6 @@ import {
 import { compose } from 'redux';
 import styles from './Cart.module.css';
 import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
 import { objectToArray } from '../../app/common/util/helpers';
 import UserAddressForm from '../user/UserDetailed/UserAddressForm';
 
@@ -116,7 +115,7 @@ class Cart extends Component {
                     ) : (
                       <button>-</button>
                     )}
-                    {product.quantity}{' '}
+                    {' '}{product.quantity}{' '}
                     {product.quantity < 10 && (
                       <button onClick={() => addQuantity(product)}>+</button>
                     )}
