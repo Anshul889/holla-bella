@@ -69,6 +69,21 @@ class Cart extends Component {
     } else if (!cart && loading) {
       return <div>Your cart is empty!</div>;
     }
+
+    let payButton;
+    if (cart && address && loading){
+      payButton = <div className={styles.pay}>
+      <button
+        className={styles.addbutton}
+        disabled={loading}
+        onClick={() => confirmOrder(totalAmount, cartob, address)}
+      >Pay with Mpesa</button>
+      </div>
+    } else if (cart&& !address && loading ) {
+       payButton = null;
+    } else if (cart && address && !loading) {
+      payButton = <div className={styles.pay}><button className={styles.loadbutton} disabled><span>Loading</span></button></div>
+    }
     return (
       <div>
         <h1 className={styles.heading}>Shopping Cart</h1>
@@ -154,19 +169,15 @@ class Cart extends Component {
         </div>
 
         {cart.length !== 0 && !address && (
-          <div>
+          <div className={styles.addaddress}>
             <p>Add Delivery Address To pay with Mpesa</p>
-            <Button
+            <button className={styles.addbutton}
               onClick={() =>
                 this.setState({
                   isAddressOneOpen: !this.state.isAddressOneOpen,
                   isAddressTwoOpen: false
                 })
-              }
-              color='teal'
-              size='tiny'
-              content={'Add Delivery Address to pay with mpesa'}
-            />
+              }>Add Address</button>
           </div>
         )}
         {cart.length !== 0 && address && (
@@ -180,13 +191,7 @@ class Cart extends Component {
         {this.state.isAddressOneOpen && (
           <UserAddressForm closeForm={this.closeForm} />
         )}
-        {cart && address && (
-          <Button
-            loading={!loading}
-            onClick={() => confirmOrder(totalAmount, cartob, address)}
-            content='Purchase with mpesa'
-          />
-        )}
+        {payButton}
       </div>
     );
   }
