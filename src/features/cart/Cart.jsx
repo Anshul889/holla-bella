@@ -70,19 +70,28 @@ class Cart extends Component {
     }
 
     let payButton;
-    if (cart && address && loading){
-      payButton = <div className={styles.pay}>
-      <button
-        className={styles.addbutton}
-        disabled={loading}
-        onClick={() => confirmOrder(totalAmount, cartob, address)}
-      >Pay with Mpesa</button>
-      </div>
-    } else if (cart&& !address && loading ) {
-       payButton = null;
+    if (cart && address && loading) {
+      payButton =
+        <div className={styles.pay}>
+          <button
+            className={styles.addbutton}
+            onClick={() => confirmOrder(totalAmount, cartob, address)}>
+            Pay with Mpesa
+          </button>
+        </div>
+    } else if (cart && !address && loading) {
+      payButton = null;
     } else if (cart && address && !loading) {
-      payButton = <div className={styles.pay}><button className={styles.loadbutton} disabled><span>Loading</span></button></div>
+      payButton = (
+        <div className={styles.pay}>
+          <button className={styles.loadbutton} disabled>
+            <span>Loading</span>
+          </button>
+        </div>
+      );
     }
+
+
     return (
       <div>
         <h1 className={styles.heading}>Shopping Cart</h1>
@@ -114,8 +123,8 @@ class Cart extends Component {
                       </button>
                     ) : (
                       <button>-</button>
-                    )}
-                    {' '}{product.quantity}{' '}
+                    )}{' '}
+                    {product.quantity}{' '}
                     {product.quantity < 10 && (
                       <button onClick={() => addQuantity(product)}>+</button>
                     )}
@@ -170,13 +179,16 @@ class Cart extends Component {
         {cart.length !== 0 && !address && (
           <div className={styles.addaddress}>
             <p>Add Delivery Address To pay with Mpesa</p>
-            <button className={styles.addbutton}
+            <button
+              className={styles.addbutton}
               onClick={() =>
                 this.setState({
                   isAddressOneOpen: !this.state.isAddressOneOpen,
                   isAddressTwoOpen: false
                 })
-              }>Add Address</button>
+              }>
+              Add Address
+            </button>
           </div>
         )}
         {cart.length !== 0 && address && (
