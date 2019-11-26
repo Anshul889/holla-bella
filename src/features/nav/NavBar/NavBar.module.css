@@ -1,7 +1,7 @@
 .Navigation {
   z-index: 1050;
   position: relative;
-  background-color: #0d3244;
+  background-color: white;
 }
 
 .dnavigation {
@@ -19,7 +19,7 @@
   color: white;
   text-transform: uppercase;
   font-weight: 600;
-  background-color: #0d3244;
+  background-color: white;
   font-size: 15px;
 }
 

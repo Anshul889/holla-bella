@@ -9,7 +9,7 @@ import wishlisticon from '../../../assets/icons/list-alt.svg';
 import shoppingCart from '../../../assets/icons/shopping-cart.svg';
 import about from '../../../assets/icons/about.svg';
 import styles from './NavBar.module.css';
-import logo from '../../../assets/icons/logo.svg';
+import logo from '../../../assets/logotype.svg';
 import SignedOutMenu from '../Menus/SignedOutMenu';
 import SignedInMenu from '../Menus/SignedInMenu';
 import { objectToArray } from '../../../app/common/util/helpers';
