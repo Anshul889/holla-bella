@@ -141,7 +141,16 @@ class Cart extends Component {
               )}{' '}
             </div>
           )}
-          {cart.length !== 0 && !address && (
+          
+        </div>
+        <div className={styles.total}>
+          <div className={styles.innertotal}>
+            <div>Total:</div>
+            <div>{totalAmount} KSH</div>
+          </div>
+        </div>
+
+        {cart.length !== 0 && !address && (
             <div>
               <p>Add Delivery Address To pay with Mpesa</p>
               <Button
@@ -175,7 +184,6 @@ class Cart extends Component {
               content='Purchase with mpesa'
             />
           )}
-        </div>
       </div>
     );
   }
