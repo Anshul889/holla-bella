@@ -67,8 +67,12 @@ class Cart extends Component {
       return <div>Your cart is empty!</div>;
     }
     return (
+      <div>
+       <h1 className={styles.heading}>
+         Shopping Cart
+       </h1>
       <div className={styles.container}>
-        <div className={styles.inner}>
+        <div className={styles.inner}> 
           {cart &&
             cart.length !== 0 &&
             cart.map(product => (
@@ -79,9 +83,9 @@ class Cart extends Component {
                   </Link>
                 </div>
                 <div className={styles.content}>
-                  <h3>
+                  <h4>
                     <Link to={`/product/${product.id}`}>{product.title}</Link>
-                  </h3>
+                  </h4>
                   <span>
                     Quantity :{' '}
                     {product.quantity > 1 && (
@@ -155,6 +159,7 @@ class Cart extends Component {
             content='Purchase with mpesa'
           />
         )}
+      </div>
       </div>
     );
   }
