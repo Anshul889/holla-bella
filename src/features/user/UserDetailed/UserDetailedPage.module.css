@@ -5,11 +5,12 @@
   justify-items: center;
   display: grid;
   grid-gap: 10px;
-  margin-top: 10px;
+  border-bottom: 1px solid #dddddd;
+  padding: 20px 0;
 }
 
 .profileimage img {
-  width: 60%;
+  width: 25%;
   border-radius: 135px;
 }
 
@@ -18,4 +19,46 @@
   justify-items: center;
   display: grid;
   grid-gap: 10px;
+}
+
+.heading {
+  text-align: center;
+  background-color: #c29957;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 100;
+  margin : 0;
+}
+
+.displayname {
+  font-weight: 800;
+}
+
+.membersince{
+  color: #6c6c6c
+}
+
+.membersince strong{
+  color: black
+}
+
+.address1{
+  width: 90%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 11fr 1fr;
+}
+
+.addressshow {
+  font-size: 12px;
+}
+
+.editbutton  {
+  color: #c29957;
+  text-decoration: underline;
+}
+
+.deletebutton {
+  color:red;
+  text-decoration: underline;
 }
