@@ -1,13 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { removeFromCart, confirmOrder, addQuantity, subtractQuantity } from "../../features/user/userActions";
-import { compose } from "redux";
-import styles from "./Cart.module.css";
-import { Link } from "react-router-dom";
-import { Button } from "semantic-ui-react";
-import { objectToArray } from "../../app/common/util/helpers";
-import UserAddressForm from "../user/UserDetailed/UserAddressForm";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import {
+  removeFromCart,
+  confirmOrder,
+  addQuantity,
+  subtractQuantity
+} from '../../features/user/userActions';
+import { compose } from 'redux';
+import styles from './Cart.module.css';
+import { Link } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
+import { objectToArray } from '../../app/common/util/helpers';
+import UserAddressForm from '../user/UserDetailed/UserAddressForm';
 
 const mapState = (state, ownProps) => ({
   address: state.firebase.profile.newAddress,
@@ -76,14 +81,23 @@ class Cart extends Component {
                   <h3>
                     <Link to={`/product/${product.id}`}>{product.title}</Link>
                   </h3>
-  <span>Quantity : {product.quantity > 1 &&<span onClick={() => subtractQuantity(product)}>-</span>}{product.quantity} {product.quantity && <span onClick={() => addQuantity(product)}>+</span>}</span>
+                  <span>
+                    Quantity :{' '}
+                    {product.quantity > 1 && (
+                      <span onClick={() => subtractQuantity(product)}>-</span>
+                    )}
+                    {product.quantity}{' '}
+                    {product.quantity < 10 && (
+                      <span onClick={() => addQuantity(product)}>+</span>
+                    )}
+                  </span>
                   <p>
                     {product.price - (product.price * product.discount) / 100}{' '}
-                     KSH
+                    KSH
                   </p>
                   <Button
                     onClick={() => removeFromCart(product)}
-                    content={"Remove"}
+                    content={'Remove'}
                   />
                   <Link to={`/product/${product.id}`}>
                     <Button>Edit Quantity</Button>
@@ -93,7 +107,7 @@ class Cart extends Component {
             ))}
           {cart.length !== 0 && (
             <h3>
-              Shipping :{" "}
+              Shipping :{' '}
               {shipping > 0 ? (
                 <div>
                   <span>Rs 50</span>
@@ -101,7 +115,7 @@ class Cart extends Component {
                 </div>
               ) : (
                 <span>Free</span>
-              )}{" "}
+              )}{' '}
             </h3>
           )}
           {cart.length !== 0 && <h2>Total Price = {totalAmount} KSH</h2>}
@@ -116,9 +130,9 @@ class Cart extends Component {
                   isAddressTwoOpen: false
                 })
               }
-              color="teal"
-              size="tiny"
-              content={"Add Delivery Address to pay with mpesa"}
+              color='teal'
+              size='tiny'
+              content={'Add Delivery Address to pay with mpesa'}
             />
           </div>
         )}
@@ -137,7 +151,7 @@ class Cart extends Component {
           <Button
             loading={!loading}
             onClick={() => confirmOrder(totalAmount, cartob, address)}
-            content="Purchase with mpesa"
+            content='Purchase with mpesa'
           />
         )}
       </div>
