@@ -26,6 +26,11 @@
   padding: 20px 0;
 }
 
+.infodiv {
+  font-weight: 100;
+  font-size: 14px;
+}
+
 .copyright {
   font-size: 10px;
   color: #7e7c7c;

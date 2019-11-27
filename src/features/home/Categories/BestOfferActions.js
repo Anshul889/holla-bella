@@ -14,7 +14,7 @@ export const getbestOfferForHomepage = () => async (dispatch, getState) => {
       .collection('products')
       .where('discount', '>=', 10)
       .orderBy('discount', 'desc')
-      .limit(5)
+      .limit(4)
       .get();
     let bestOffer = [];
 

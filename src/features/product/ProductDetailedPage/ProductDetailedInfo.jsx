@@ -1,11 +1,13 @@
-import React from "react";
-import styles from "./ProductDetailedInfo.module.css";
-import { Button, Form, Rating } from "semantic-ui-react";
-import { reduxForm, Field } from "redux-form";
-import SelectInput from "../../../app/common/form/SelectInput";
-import { objectToArray } from "../../../app/common/util/helpers";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import React from 'react';
+import styles from './ProductDetailedInfo.module.css';
+import { Form, Rating, Button } from 'semantic-ui-react';
+import { reduxForm, Field } from 'redux-form';
+import SelectInput from '../../../app/common/form/SelectInput';
+import { objectToArray } from '../../../app/common/util/helpers';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link } from 'react-router-dom';
+import heart from '../../../assets/heart.svg';
+import heartlight from '../../../assets/heartlight.svg';
 
 const quantity = [
   { key: 1, text: 1, value: 1 },
@@ -20,9 +22,11 @@ const quantity = [
   { key: 10, text: 10, value: 10 }
 ];
 
+
+
 class ProductDetailedInfo extends React.Component {
   onCartSubmit = async values => {
-    const { addToCart, product} = this.props;
+    const { addToCart, product } = this.props;
     addToCart(product, values);
   };
 
@@ -35,54 +39,98 @@ class ProductDetailedInfo extends React.Component {
       removeFromWishlist
     } = this.props;
     const totalReviews = product.reviews && objectToArray(product.reviews);
-    const totalRating = totalReviews && totalReviews.length !==0 && totalReviews.map(review => review.rating).reduce((prev, next) => prev + next);
-    const averageRating = totalReviews && (totalRating / (totalReviews.length));
+    const totalRating =
+      totalReviews &&
+      totalReviews.length !== 0 &&
+      totalReviews
+        .map(review => review.rating)
+        .reduce((prev, next) => prev + next);
+    const averageRating = totalReviews && totalRating / totalReviews.length;
     const roundAverage = Math.round(averageRating * 10) / 10;
     const starRating = Math.round(roundAverage);
-    const discountedPrice = product.price - ( product.price * product.discount / 100)
+    const discountedPrice =
+      product.price - (product.price * product.discount) / 100;
     return (
       <React.Fragment>
+        <h1 className={styles.heading}>{product.title}</h1>
+        <div className={styles.menu}>
+          <div>
+            <Link to='/'>Main Page </Link> >{' '}
+          </div>
+          <div>
+            <Link to='/'>{product.category}</Link> {` >`}
+          </div>
+          <div>{product.title}</div>
+        </div>
         <div className={styles.product}>
           <div className={styles.image}>
             {/* <img src={product.photoURL} alt={product.description} />{" "} */}
             <LazyLoadImage
-            effect="blur"
-                      src={product.photoURL}
-                      width={'100%'}
-                    />
+              effect='blur'
+              src={product.photoURL}
+              width={'100%'}
+            />
           </div>
           <div className={styles.content}>
-            <h3>{product.title}</h3>
-            <p>{product.description}</p>
-            <p>{discountedPrice} KSH</p>
-            <p>Average Rating : {roundAverage ? roundAverage : 'No Reviews Yet'}</p>
-            <Rating icon='star' rating={starRating} maxRating={5}/>
-            <Form
-              onSubmit={this.props.handleSubmit(this.onCartSubmit)}
-              style={{ width: "40%", paddingBottom: "10px" }}
-            >
-              <Field
-                name="quantity"
-                type="text"
-                component={SelectInput}
-                options={quantity}
-                placeholder="Quantity"
-              />
-              {isCarter ? (
-                <Button type="submit">Update Cart</Button>
+            <h3 className={styles.title}>{product.title}</h3>
+            <div className={styles.pricing}>
+              <strike style={{ fontWeight: '100' }}>
+                {product.price} KSH{' '}
+              </strike>
+              <span>{discountedPrice} KSH </span>
+              <span className={styles.blink} style={{ color: 'green' }}>
+                {product.discount}% OFF
+              </span>
+            </div>
+            {/* <p>
+              Average Rating : {roundAverage ? roundAverage : 'No Reviews Yet'}
+            </p> */}
+            {/* <Rating icon='star' rating={starRating} maxRating={5} /> */}
+            <div className={styles.cartwish}>
+              <Form
+                onSubmit={this.props.handleSubmit(this.onCartSubmit)}
+                style={{
+                  width: '100%',
+                  display: 'grid',
+                  'grid-template-columns': '100px max-content',
+                  'grid-template-rows': '38px',
+                  'grid-gap': '10px'
+                }}>
+                <Field
+                  name='quantity'
+                  type='text'
+                  component={SelectInput}
+                  options={quantity}
+                  placeholder='Quantity'
+                />
+                {isCarter ? (
+                  <Button className={styles.cartbutton} type='submit'>Update Cart</Button>
+                ) : (
+                  <Button className={styles.cartbutton} type='submit'>Add To Cart</Button>
+                )}
+              </Form>
+              {isWishLister ? (
+                <div>
+                  <img
+                    alt='dislike'
+                    src={heart}
+                    onClick={() => removeFromWishlist(product)}
+                  />
+                </div>
               ) : (
-                <Button type="submit">Add To Cart</Button>
+                <div>
+                  <img
+                    alt='like '
+                    src={heartlight}
+                    onClick={() => addToWishlist(product)}
+                  />
+                </div>
               )}
-            </Form>
-            {isWishLister ? (
-              <Button onClick={() => removeFromWishlist(product)}>
-                Remove from WishList
-              </Button>
-            ) : (
-              <Button onClick={() => addToWishlist(product)}>
-                Add To WishList
-              </Button>
-            )}
+            </div>
+            <div>
+              <div className={styles.shippingdetails}>Free shipping for orders over 1000 ksh</div>
+              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolorim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex e</div>
+            </div>
           </div>
         </div>
       </React.Fragment>
@@ -90,4 +138,6 @@ class ProductDetailedInfo extends React.Component {
   }
 }
 
-export default reduxForm({ form: "cartForm", initalValues:  {quantity: 1}  })(ProductDetailedInfo);
+export default reduxForm({ form: 'cartForm', initalValues: { quantity: 1 } })(
+  ProductDetailedInfo
+);

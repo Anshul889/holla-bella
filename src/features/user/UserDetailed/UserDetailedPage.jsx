@@ -94,7 +94,6 @@ class UserDetailedPage extends Component {
                   isAddressTwoOpen: false
                 })
               }
-              color='teal'
               size='tiny'
               content={'Add Address 1'}
             />
@@ -120,7 +119,6 @@ class UserDetailedPage extends Component {
                   isAddressOneOpen: false
                 })
               }
-              color='teal'
               size='tiny'
               content={'Add Address 2'}
             />

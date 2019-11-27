@@ -13,7 +13,7 @@ export const getTopSellersForHomepage = () => async (dispatch, getState) => {
     let TopSellersQuery = await firestore
       .collection('products')
       .orderBy("sold", "desc")
-      .limit(5)
+      .limit(6)
       .get();
     let TopSellers = [];
 
