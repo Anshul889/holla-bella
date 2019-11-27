@@ -4,8 +4,10 @@
   padding: 25px 0;
 }
 
-.container h2 {
-  padding-left: 5%;
+.container h3 {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 17px;
 }
 
 .inner {

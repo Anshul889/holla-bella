@@ -70,7 +70,9 @@ class ProductDetailedInfo extends React.Component {
             />
           </div>
           <div className={styles.content}>
-            <h3 className={styles.title}>{product.title}</h3>
+            <div className={styles.title}>
+              <h3>{product.title}</h3>
+            </div>
             <div className={styles.pricing}>
               <strike style={{ fontWeight: '100', paddingRight: '5px' }}>
                 {product.price} KSH{'  '}
@@ -79,15 +81,34 @@ class ProductDetailedInfo extends React.Component {
                 {discountedPrice} KSH{' '}
               </span>
               {product.discount > 0 && (
-                <span className={styles.blink} style={{ color: 'green' }}>
+                <span
+                  className={styles.blink}
+                  style={{ color: 'green', fontWeight: 'bold' }}>
                   {product.discount}% OFF
                 </span>
               )}
             </div>
-            {/* <p>
-              Average Rating : {roundAverage ? roundAverage : 'No Reviews Yet'}
-            </p> */}
-            {/* <Rating icon='star' rating={starRating} maxRating={5} /> */}
+            <Rating
+              style={{ transform: 'translateY(2px)' }}
+              icon='star'
+              rating={starRating}
+              maxRating={5}
+            />
+            {totalReviews && totalReviews.length === 1 && (
+              <span style={{ paddingLeft: '10px' }}>
+                {totalReviews.length} Review
+              </span>
+            )}
+            {totalReviews && totalReviews.length > 1 && (
+              <span style={{ paddingLeft: '10px' }}>
+                {totalReviews.length} Reviews
+              </span>
+            )}
+            {!totalReviews && (
+              <span style={{ paddingLeft: '10px' }}>
+              No Reviews
+            </span>
+            )}
             <div className={styles.cartwish}>
               <Form
                 onSubmit={this.props.handleSubmit(this.onCartSubmit)}
@@ -142,6 +163,10 @@ class ProductDetailedInfo extends React.Component {
                 eiusmod tempor incididunt ut labore et dolorim veniam, quis
                 nostrud exercitation ullamco laboris nisi ut aliquip ex e
               </div>
+            </div>
+            <div className={styles.description}>
+              <h4 className={styles.descriptionhead}>Description</h4>
+              <p>{product.description}</p>
             </div>
           </div>
         </div>

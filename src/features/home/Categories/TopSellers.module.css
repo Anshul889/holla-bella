@@ -11,7 +11,7 @@
 
 .inner {
   display: grid;
-  grid-template-columns: repeat(5, 36%);
+  grid-template-columns: repeat(6, 36%);
   overflow: scroll;
   grid-gap: 20px;
 }

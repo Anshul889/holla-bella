@@ -25,7 +25,7 @@ class ProductRelatedItems extends Component {
     const { relatedItems } = this.props;
     return (
       <div className={styles.container}>
-        <h2>Recommended items</h2>
+        <h3>Recommended items</h3>
         <div className={styles.inner}>
           {relatedItems &&
             relatedItems.map(product => (

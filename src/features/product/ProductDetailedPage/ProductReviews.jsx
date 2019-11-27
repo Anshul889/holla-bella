@@ -1,21 +1,26 @@
 import React from 'react'
 import styles from './ProductReviews.module.css'
-import { Rating, Button } from 'semantic-ui-react'
+import { Rating } from 'semantic-ui-react'
+import format from 'date-fns/format'
 
 const ProductReviews = ({reviews, removeReview, isReviewer, product}) => {
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
         {reviews && reviews.map(review => 
+
           <div className={styles.review} key={review.id}>
             <div className={styles.image}>
               <img src={review.photoURL} alt=''/>
             </div>
-            <p>{review.comment}</p>
+            <div>{review.comment}</div>
+            <div>
+            <Rating size='tiny' disabled icon='star' rating={review.rating} maxRating={5}/>
             {isReviewer && <div>
-              <Button icon="trash" onClick={() =>removeReview(product)}></Button>
+              {review.addDate && <div style={{fontSize: '10px', paddingLeft: '2px'}}>{format(review.addDate.toDate(), 'do LLL yyyy')}</div>}
+              <div style={{ fontSize: '10px', color: 'red', textTransform: 'underline', paddingLeft: '2px'}} onClick={() =>removeReview(product)}>delete</div>
             </div>}
-            <Rating disabled icon='star' rating={review.rating} maxRating={5}/>
+            </div>
           </div>     
           )}
       </div>
