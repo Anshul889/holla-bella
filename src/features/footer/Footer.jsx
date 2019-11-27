@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Footer.module.css'
 import logo from '../../assets/logotypedark.svg'
+import mpesalogo from '../../assets/mpesalogo.png'
 
 export const Footer = () => {
   return (
@@ -19,6 +20,7 @@ export const Footer = () => {
         <p>FAQ's</p>
       </div>
       <div className={styles.copyright}>
+        <img src={mpesalogo} alt="mpesa logo"/>
         <p>© 2019 hola-bella.com</p>
         <p>All rights reserved.</p>
       </div>

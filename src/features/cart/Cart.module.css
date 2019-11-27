@@ -14,7 +14,7 @@
 
 .categories {
   display: grid;
-  grid-template-columns: 2.2fr 1fr 1fr;
+  grid-template-columns: 2.33fr 1fr 1fr;
   width: 90%;
   margin: 0 auto;
   text-transform: uppercase;
@@ -22,7 +22,6 @@
   border-bottom: 1px solid #e9e9e9;
   padding: 10px 0;
   font-weight: 700;
-  grid-gap: 7px
 }
 
 .inner {
@@ -51,6 +50,10 @@
 
 .title {
   line-height: 13px;
+}
+
+.quantity{
+  padding-left: 5%;
 }
 
 
@@ -111,6 +114,7 @@
 .shippingw{
   color: black;
   width: 60%;
+  padding-top: 10px;
 }
 
 .total {

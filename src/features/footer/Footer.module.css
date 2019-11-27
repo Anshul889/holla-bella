@@ -5,7 +5,7 @@
 }
 
 .sec1 img {
-  width: 33%;
+  width: 25%;
 }
 
 .sec1 {
@@ -27,7 +27,7 @@
 }
 
 .copyright {
-  font-size: 9px;
+  font-size: 10px;
   color: #7e7c7c;
   text-align: center;
 }
@@ -37,7 +37,7 @@
     display: grid;
     grid-template-columns: 1fr;
   }
-  .footer img {
+  .sec1 img {
     width: 40%;
     padding-bottom: 5px;
   }

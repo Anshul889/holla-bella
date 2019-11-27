@@ -155,7 +155,7 @@ class Cart extends Component {
           )}
           {cart.length !== 0 && (
             <div className={styles.shippingc}>
-              Shipping :{' '}
+              Shipping :
               {shipping > 0 ? (
                 <>
                   <div className={styles.shippingp}>50 KSH</div>
@@ -165,7 +165,7 @@ class Cart extends Component {
                 </>
               ) : (
                 <div className={styles.shippingp}>Free</div>
-              )}{' '}
+              )}
             </div>
           )}
         </div>
