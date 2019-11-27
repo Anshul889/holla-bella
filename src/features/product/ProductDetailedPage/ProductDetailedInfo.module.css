@@ -46,6 +46,10 @@
   font-size: 18px;
 }
 
+.rating{
+  display: block;
+}
+
 .blink {
   animation: blinker 1.4s linear 5;
 }

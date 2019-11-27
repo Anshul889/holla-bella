@@ -88,8 +88,9 @@ class ProductDetailedInfo extends React.Component {
                 </span>
               )}
             </div>
+            <div className={styles.rating}>
             <Rating
-              style={{ transform: 'translateY(2px)' }}
+              style={{ transform: 'translateY(1px)' }}
               icon='star'
               rating={starRating}
               maxRating={5}
@@ -109,6 +110,7 @@ class ProductDetailedInfo extends React.Component {
               No Reviews
             </span>
             )}
+            </div>
             <div className={styles.cartwish}>
               <Form
                 onSubmit={this.props.handleSubmit(this.onCartSubmit)}
