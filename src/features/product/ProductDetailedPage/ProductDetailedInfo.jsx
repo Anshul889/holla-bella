@@ -22,8 +22,6 @@ const quantity = [
   { key: 10, text: 10, value: 10 }
 ];
 
-
-
 class ProductDetailedInfo extends React.Component {
   onCartSubmit = async values => {
     const { addToCart, product } = this.props;
@@ -55,12 +53,12 @@ class ProductDetailedInfo extends React.Component {
         <h1 className={styles.heading}>{product.title}</h1>
         <div className={styles.menu}>
           <div>
-            <Link to='/'>Main Page </Link> >{' '}
+            <Link to='/'>Main Page </Link> >
           </div>
-          <div>
-            <Link to='/'>{product.category}</Link> {` >`}
+          <div style={{ paddingLeft: '2px' }}>
+            <Link to='/'> {product.category} </Link>>
           </div>
-          <div>{product.title}</div>
+          <div style={{ paddingLeft: '2px' }}>{product.title}</div>
         </div>
         <div className={styles.product}>
           <div className={styles.image}>
@@ -74,13 +72,17 @@ class ProductDetailedInfo extends React.Component {
           <div className={styles.content}>
             <h3 className={styles.title}>{product.title}</h3>
             <div className={styles.pricing}>
-              <strike style={{ fontWeight: '100' }}>
-                {product.price} KSH{' '}
+              <strike style={{ fontWeight: '100', paddingRight: '5px' }}>
+                {product.price} KSH{'  '}
               </strike>
-              <span>{discountedPrice} KSH </span>
-              <span className={styles.blink} style={{ color: 'green' }}>
-                {product.discount}% OFF
+              <span style={{ fontWeight: '800', paddingRight: '5px' }}>
+                {discountedPrice} KSH{' '}
               </span>
+              {product.discount > 0 && (
+                <span className={styles.blink} style={{ color: 'green' }}>
+                  {product.discount}% OFF
+                </span>
+              )}
             </div>
             {/* <p>
               Average Rating : {roundAverage ? roundAverage : 'No Reviews Yet'}
@@ -104,9 +106,13 @@ class ProductDetailedInfo extends React.Component {
                   placeholder='Quantity'
                 />
                 {isCarter ? (
-                  <Button className={styles.cartbutton} type='submit'>Update Cart</Button>
+                  <Button className={styles.cartbutton} type='submit'>
+                    Update Cart
+                  </Button>
                 ) : (
-                  <Button className={styles.cartbutton} type='submit'>Add To Cart</Button>
+                  <Button className={styles.cartbutton} type='submit'>
+                    Add To Cart
+                  </Button>
                 )}
               </Form>
               {isWishLister ? (
@@ -128,8 +134,14 @@ class ProductDetailedInfo extends React.Component {
               )}
             </div>
             <div>
-              <div className={styles.shippingdetails}>Free shipping for orders over 1000 ksh</div>
-              <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolorim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex e</div>
+              <div className={styles.shippingdetails}>
+                Free shipping for orders over 1000 ksh
+              </div>
+              <div>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolorim veniam, quis
+                nostrud exercitation ullamco laboris nisi ut aliquip ex e
+              </div>
             </div>
           </div>
         </div>

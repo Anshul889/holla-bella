@@ -34,7 +34,7 @@ class ProductRelatedItems extends Component {
                   <Link to={`/product/${product.id}`}>
                     {/* <img src={product.photoURL} alt={product.description} /> */}
                     <LazyLoadImage
-                      alt={product.description}
+                      alt={product.title}
                       src={product.photoURL}
                       width="100%"
                       effect="blur"

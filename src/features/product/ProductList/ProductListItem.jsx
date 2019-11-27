@@ -9,7 +9,7 @@ class ProductListItem extends Component {
       <div className={styles.product}>
         <div className={styles.image}>
           <Link to={`/product/${product.id}`}>
-            <img src={product.photoURL} alt={product.description} />
+            <img src={product.photoURL} alt={product.title} />
           </Link>
         </div>
         <div className={styles.content}>
