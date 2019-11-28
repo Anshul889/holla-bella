@@ -1,12 +1,12 @@
 import { createReducer } from '../../../app/common/util/reducerUtils';
-import { FETCH_MAKEUP } from './MakeUpConstants';
+import { FETCH_BEAUTY } from './BeautyConstants';
 
 const initialState = [];
 
-const fetchMakeUp = (state, payload) => {
-  return payload.makeUp;
+const fetchBeauty = (state, payload) => {
+  return payload.beauty;
 };
 
 export default createReducer(initialState, {
-  [FETCH_MAKEUP]: fetchMakeUp,
+  [FETCH_BEAUTY]: fetchBeauty,
 });

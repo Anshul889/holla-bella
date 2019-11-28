@@ -1,1 +1,0 @@
-export const FETCH_MAKEUP = 'FETCH_MAKEUP'

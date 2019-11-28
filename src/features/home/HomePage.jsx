@@ -11,6 +11,7 @@ import { Button } from 'semantic-ui-react';
 import bags from '../../assets/bags2.jpg';
 import beauty from '../../assets/makeup2.jpg';
 import jewellery from '../../assets/Layer9.png';
+import { Link } from 'react-router-dom';
 
 class HomePage extends Component {
   render() {
@@ -60,7 +61,7 @@ class HomePage extends Component {
           <div style={{backgroundImage: `url(${beauty})`}} className={styles.category}>
             <h5 >Beauty</h5>
             <div></div>
-            <Button>SHOP NOW</Button>
+            <Link to='/beauty'><Button>SHOP NOW</Button></Link>
           </div>
           <div style={{backgroundImage: `url(${jewellery})`}} className={styles.category}>
             <h5>Jewellery</h5>

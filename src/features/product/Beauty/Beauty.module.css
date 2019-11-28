@@ -1,3 +1,14 @@
+.beauty .heading {
+  text-align: center;
+  background-color: #c29957;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 100;
+  margin-top: 0;
+  margin-bottom: 22px;
+  transform: translateY(-4px);
+}
+
 .container{
   width: 90%;
   margin: 0 auto;
@@ -10,8 +21,7 @@
 
 .inner {
   display: grid;
-  grid-template-columns: 1f 1fr;
-  overflow: scroll;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
 }
 
@@ -29,7 +39,8 @@
 
 .image img {
   width: 100%;
-  border-radius: 20px;
+  box-shadow:
+  0.1em 0.2em 0.9em rgba(0.1, 0.1, 0.1, 0.1);
 }
 
 .content a {

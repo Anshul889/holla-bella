@@ -1,4 +1,4 @@
-import {FETCH_MAKEUP} from './MakeUpConstants';
+import {FETCH_BEAUTY} from './BeautyConstants';
 import firebase from '../../../app/config/firebase';
 import {
   asyncActionStart,
@@ -6,21 +6,21 @@ import {
   asyncActionError
 } from '../../async/asyncActions';
 
-export const getMakeUp = () => async (dispatch, getState) => {
+export const getBeauty = () => async (dispatch, getState) => {
   const firestore = firebase.firestore();
   try {
     dispatch(asyncActionStart());
     let makeUpQuery = await firestore
       .collection('products')
-      .where('category', '==', 'earrings')
+      .where('category', '==', 'beauty')
       .get();
-    let makeUp = [];
+    let beauty = [];
 
     for (let i = 0; i < makeUpQuery.docs.length; i++){
-      let make = { ...makeUpQuery.docs[i].data(), id: makeUpQuery.docs[i].id };
-      makeUp.push(make);
+      let beaut = { ...makeUpQuery.docs[i].data(), id: makeUpQuery.docs[i].id };
+      beauty.push(beaut);
     }
-    dispatch({type : FETCH_MAKEUP, payload: {makeUp}}) ;
+    dispatch({type : FETCH_BEAUTY, payload: {beauty}}) ;
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
