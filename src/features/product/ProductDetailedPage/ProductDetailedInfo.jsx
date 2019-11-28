@@ -34,7 +34,9 @@ class ProductDetailedInfo extends React.Component {
       addToWishlist,
       isWishLister,
       isCarter,
-      removeFromWishlist
+      authenticated,
+      removeFromWishlist,
+      openModal
     } = this.props;
     const totalReviews = product.reviews && objectToArray(product.reviews);
     const totalRating =
@@ -128,33 +130,47 @@ class ProductDetailedInfo extends React.Component {
                   options={quantity}
                   placeholder='Quantity'
                 />
-                {isCarter ? (
-                  <Button className={styles.cartbutton} type='submit'>
+                {authenticated && isCarter && 
+                <Button className={styles.cartbutton} type='submit'>
                     Update Cart
-                  </Button>
-                ) : (
-                  <Button className={styles.cartbutton} type='submit'>
-                    Add To Cart
-                  </Button>
-                )}
+                  </Button> }
+                {authenticated && !isCarter &&
+                   <Button className={styles.cartbutton} type='submit'>
+                   Add To Cart
+                 </Button>
+                 }
+                 {!authenticated && 
+                <Button className={styles.cartbutton} onClick={() => openModal('LoginModal')}>
+                Add To Cart
+              </Button>
+                }  
               </Form>
-              {isWishLister ? (
+              {authenticated && isWishLister && 
                 <div>
-                  <img
-                    alt='dislike'
-                    src={heart}
-                    onClick={() => removeFromWishlist(product)}
-                  />
-                </div>
-              ) : (
-                <div>
+                <img
+                  alt='dislike'
+                  src={heart}
+                  onClick={() => removeFromWishlist(product)}
+                />
+              </div>}
+              {authenticated && !isWishLister && 
+                  <div>
                   <img
                     alt='like '
                     src={heartlight}
                     onClick={() => addToWishlist(product)}
                   />
                 </div>
-              )}
+              }
+              {!authenticated && 
+                  <div>
+                  <img
+                    alt='like '
+                    src={heartlight}
+                    onClick={() => openModal('LoginModal')}
+                  />
+                </div>
+              }
             </div>
             <div>
               <div className={styles.shippingdetails}>

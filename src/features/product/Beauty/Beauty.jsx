@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getBeauty } from './BeautyActions';
-import styles from './Beauty.module.css';
-import { Link } from 'react-router-dom';
-import beauty from '../../../assets/Beauty.png'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getBeauty } from "./BeautyActions";
+import styles from "./Beauty.module.css";
+import { Link } from "react-router-dom";
+import beautyimg from "../../../assets/Beauty.png";
+import { Placeholder } from "semantic-ui-react";
 
 const mapState = state => ({
   beauty: state.beauty
@@ -30,17 +31,69 @@ class Beauty extends Component {
   // }
 
   async componentDidMount() {
-    if (this.props.beauty && this.props.beauty.length === 0) {
-      await this.props.getBeauty();
-      this.setState({ products: this.props.beauty });
-    }
+    await this.props.getBeauty();
+    this.setState({ products: this.props.beauty });
   }
 
   render() {
     const { products } = this.state;
+    if (products.length === 0) {
+      return (
+        <div className={styles.beauty}>
+          <img style={{ width: "100%" }} src={beautyimg} alt="beauty" />
+          <h1 className={styles.heading}>Beauty</h1>
+          <div className={styles.container}>
+            <div className={styles.inner}>
+              <div className={styles.product}>
+                <div className={styles.image}>
+                  <Placeholder>
+                    <Placeholder.Image />
+                  </Placeholder>
+                </div>
+              </div>
+              <div className={styles.product}>
+                <div className={styles.image}>
+                  <Placeholder>
+                    <Placeholder.Image />
+                  </Placeholder>
+                </div>
+              </div>
+              <div className={styles.product}>
+                <div className={styles.image}>
+                  <Placeholder>
+                    <Placeholder.Image />
+                  </Placeholder>
+                </div>
+              </div>
+              <div className={styles.product}>
+                <div className={styles.image}>
+                  <Placeholder>
+                    <Placeholder.Image />
+                  </Placeholder>
+                </div>
+              </div>
+              <div className={styles.product}>
+                <div className={styles.image}>
+                  <Placeholder>
+                    <Placeholder.Image />
+                  </Placeholder>
+                </div>
+              </div>
+              <div className={styles.product}>
+                <div className={styles.image}>
+                  <Placeholder>
+                    <Placeholder.Image />
+                  </Placeholder>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className={styles.beauty}>
-        <img style={{width: '100%'}}src={beauty} alt="beauty"/>
+        <img style={{ width: "100%" }} src={beautyimg} alt="beauty" />
         <h1 className={styles.heading}>Beauty</h1>
         <div className={styles.container}>
           <div className={styles.inner}>
@@ -52,7 +105,7 @@ class Beauty extends Component {
                       <img
                         src={product.photoURL}
                         alt={product.title}
-                        loading={'lazy'}
+                        loading={"lazy"}
                       />
                     </Link>
                   </div>
@@ -64,24 +117,26 @@ class Beauty extends Component {
                       {product.discount > 0 && (
                         <span
                           style={{
-                            paddingRight: '5px',
-                            fontWeight: '100',
-                            color: 'gray'
-                          }}>
+                            paddingRight: "5px",
+                            fontWeight: "100",
+                            color: "gray"
+                          }}
+                        >
                           <strike>{product.price} KSH</strike>
                         </span>
                       )}
                       <Link to={`/product/${product.id}`}>
                         {product.price -
-                          (product.price * product.discount) / 100}{' '}
+                          (product.price * product.discount) / 100}{" "}
                         KSH
                       </Link>
                       <br />
                       {product.discount > 0 && (
                         <span
                           className={styles.blink}
-                          style={{ color: 'green' }}>
-                          {product.discount}% OFF{' '}
+                          style={{ color: "green" }}
+                        >
+                          {product.discount}% OFF{" "}
                         </span>
                       )}
                     </div>

@@ -9,6 +9,7 @@ import styles from './ProductDetailedPage.module.css';
 import ProductReviews from './ProductReviews';
 import ProductReviewForm from './ProductReviewForm';
 import ProductRelatedItems from './ProductRelatedItems';
+import {openModal} from '../../modals/modalActions.js'
 
 const mapState = (state, ownProps) => {
   const productId = ownProps.match.params.id;
@@ -39,7 +40,8 @@ const actions = {
   addToWishlist,
   removeFromWishlist,
   addReview,
-  removeReview
+  removeReview,
+  openModal
 };
 
 class ProductDetailedPage extends Component {
@@ -62,7 +64,8 @@ class ProductDetailedPage extends Component {
       removeReview,
       removeFromWishlist,
       profile,
-      initialValues
+      initialValues,
+      openModal
     } = this.props;
     const wishlisters = product && product.wishlistAdders && objectToArray(product.wishlistAdders);
     const carters= profile.cart && objectToArray(profile.cart)
@@ -70,11 +73,12 @@ class ProductDetailedPage extends Component {
     const isWishLister = wishlisters && wishlisters.some(a => a.id === auth.uid);
     const reviews = product && product.reviews && objectToArray(product.reviews);
     const isReviewer = reviews && reviews.some(a => a.id === auth.uid);
+    const authenticated = auth.isLoaded && !auth.isEmpty;
     return (
       <div>
       {product.title &&
         <div className={styles.container}>
-        <ProductDetailedInfo initialValues={initialValues} product={product} isCarter={isCarter} isWishLister={isWishLister} addToCart={addToCart} addToWishlist={addToWishlist} removeFromWishlist={removeFromWishlist}/>
+        <ProductDetailedInfo initialValues={initialValues} product={product} isCarter={isCarter} isWishLister={isWishLister} addToCart={addToCart} addToWishlist={addToWishlist} openModal={openModal} authenticated={authenticated} removeFromWishlist={removeFromWishlist}/>
         <ProductRelatedItems product={product}/>
         <h1>Reviews</h1>
         <ProductReviews reviews={reviews} removeReview={removeReview} isReviewer={isReviewer} product={product}/>

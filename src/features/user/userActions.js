@@ -32,7 +32,6 @@ export const addToCart = (product, values) => async (
   } catch (error) {
     console.log(error);
     dispatch(asyncActionError());
-    toastr.error("Oops", "Problem adding item to the cart");
   }
 };
 
