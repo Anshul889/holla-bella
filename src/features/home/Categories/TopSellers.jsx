@@ -27,7 +27,7 @@ class TopSellers extends Component {
     if (TopSellers.length === 0) {
       return (
         <div className={styles.container}>
-          <h2>TopSellers</h2>
+          <h3>TopSellers</h3>
           <div className={styles.inner}>
             <div className={styles.product}>
               <div className={styles.image}>
