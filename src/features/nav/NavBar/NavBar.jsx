@@ -5,7 +5,7 @@ import { openModal } from '../../modals/modalActions';
 import { connect } from 'react-redux';
 
 import home from '../../../assets/icons/home.svg';
-import wishlisticon from '../../../assets/icons/list-alt.svg';
+import wishlisticon from '../../../assets/icons/heart.svg';
 import shoppingCart from '../../../assets/icons/shopping-cart.svg';
 import about from '../../../assets/icons/about.svg';
 import styles from './NavBar.module.css';

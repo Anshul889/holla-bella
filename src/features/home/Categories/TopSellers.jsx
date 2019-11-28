@@ -63,7 +63,7 @@ class TopSellers extends Component {
     }
     return (
       <div className={styles.container}>
-        <h2>TopSellers</h2>
+        <h3>Top Sellers</h3>
         <div className={styles.inner}>
           {TopSellers &&
             TopSellers.map(product => (
