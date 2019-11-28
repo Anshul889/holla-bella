@@ -119,9 +119,9 @@ class ProductDetailedInfo extends React.Component {
                 style={{
                   width: '100%',
                   display: 'grid',
-                  'grid-template-columns': '100px max-content',
-                  'grid-template-rows': '38px',
-                  'grid-gap': '10px'
+                  'gridTemplateColumns': '100px max-content',
+                  'gridTemplateRows': '38px',
+                  'gridGap': '10px'
                 }}>
                 <Field
                   name='quantity'
