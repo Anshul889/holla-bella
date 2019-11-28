@@ -62,6 +62,7 @@
 
 .benefits h4 {
   margin: 10px 0;
+  text-transform: uppercase;
 }
 
 .icond {
@@ -80,5 +81,24 @@
 .icon img{
   margin: 0 auto;
   transform: translateY(-2px);
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.category {
+  padding: 42px 0;
+  margin: 10px 0;
+}
+
+.category h5 {
+  color: white;
+  text-transform: uppercase;
+  font-size: large;
 }
 
