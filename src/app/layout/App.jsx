@@ -10,6 +10,7 @@ import Cart from '../../features/cart/Cart';
 import Wishlist from '../../features/wishlist/Wishlist';
 import { Footer } from '../../features/footer/Footer';
 import Beauty from '../../features/product/Beauty/Beauty';
+import Jewellery from '../../features/product/Jewellery/Jewellery';
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
           <Route exact path='/cart' component={Cart} />
           <Route exact path='/wishlist' component={Wishlist} />
           <Route exact path='/beauty' component={Beauty}/>
+          <Route exact path='/jewellery' component={Jewellery}/>
         </Switch>
         <Footer />
       </Fragment>

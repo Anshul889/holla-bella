@@ -66,7 +66,7 @@ class HomePage extends Component {
           <div style={{backgroundImage: `url(${jewellery})`}} className={styles.category}>
             <h5>Jewellery</h5>
             <div></div>
-            <Button>SHOP NOW</Button>
+            <Link to='/jewellery'><Button>SHOP NOW</Button></Link>
           </div>
           <div style={{backgroundImage: `url(${bags})`}} className={styles.category}>
             <h5>Bags</h5>
