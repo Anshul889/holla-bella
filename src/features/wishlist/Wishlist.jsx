@@ -15,7 +15,8 @@ import LoadingComponent from "../../app/layout/LoadingComponent";
 const mapState = (state, ownProps) => ({
   profile: state.firebase.profile,
   userUid: state.firebase.auth.uid,
-  wishlist: state.wishlist
+  wishlist: state.wishlist,
+  auth : state.firebase.auth
 });
 
 const actions = {
@@ -29,14 +30,15 @@ class Wishlist extends Component {
     loadingInitial: true
   };
   async componentDidMount() {
-    if (this.props.wishlist && this.props.wishlist.length === 0) {
+    if (this.props.wishlist && this.props.wishlist.length === 0 && this.props.auth.isLoaded) {
       await this.props.getUserWishlist(this.props.userUid);
     }
     this.setState({ loadingInitial: false });
   }
 
   render() {
-    const { wishlist, removeFromWishlist, addToCart } = this.props;
+    const { wishlist, removeFromWishlist, addToCart , auth } = this.props;
+    const authenticated = auth.isLoaded && !auth.isEmpty;
     let values = { quantity: 1 };
     if (this.state.loadingInitial) return <LoadingComponent />;
     if (wishlist && wishlist.length === 0) {
@@ -47,6 +49,16 @@ class Wishlist extends Component {
         </div>
       );
     }
+
+    if (!authenticated) {
+      return (
+        <div>
+          <h1 className={styles.heading}>Wishlist</h1>
+          <div className={styles.wishempty}>Sign </div>
+        </div>
+      );
+    }
+
     return (
       <div>
         <h1 className={styles.heading}>Wishlist</h1>
