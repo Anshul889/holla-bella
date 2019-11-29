@@ -18,7 +18,7 @@ const ProductReviews = ({reviews, removeReview, isReviewer, product}) => {
             <Rating size='tiny' disabled icon='star' rating={review.rating} maxRating={5}/>
               {review.addDate && <div style={{fontSize: '10px', paddingLeft: '2px'}}>{format(review.addDate.toDate(), 'do LLL yyyy')}</div>}
             {isReviewer && 
-              <div style={{ fontSize: '10px', color: 'red', textTransform: 'underline', paddingLeft: '2px'}} onClick={() =>removeReview(product)}>delete</div>
+              <div style={{ fontSize: '10px', color: 'red', textTransform: 'underline', paddingLeft: '2px', cursor: 'pointer'}} onClick={() =>removeReview(product)}>delete</div>
             }
             </div>
           </div>     

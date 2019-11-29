@@ -28,7 +28,6 @@ export const addToCart = (product, values) => async (
       [`cart.${product.id}`]: newProduct
     });
     dispatch(asyncActionFinish());
-    toastr.success(' ',`${product.title} has been added to the cart`);
   } catch (error) {
     console.log(error);
     dispatch(asyncActionError());
@@ -48,8 +47,6 @@ export const removeFromCart = product => async (
     await firestore.update(`users/${user.uid}`, {
       [`cart.${product.id}`]: firestore.FieldValue.delete()
     });
-    toastr.success(' ',`${product.title} has been removed to the cart`);
-
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
@@ -83,11 +80,9 @@ export const addToWishlist = product => async (
     });
     dispatch({type: ADD_TO_WISHLIST, payload: product})
     dispatch(asyncActionFinish());
-    toastr.success(' ',`${product.title} has been added to the cart`);
   } catch (error) {
     console.log(error);
     dispatch(asyncActionError());
-    toastr.error("Oops", "Problem adding item to the wishlist");
   }
 };
 
@@ -131,11 +126,9 @@ export const removeFromWishlist = product => async (
       [`wishlistAdders.${user.uid}`]: firestore.FieldValue.delete()
     });
     await firestore.delete(`wishlist/${product.id}_${user.uid}`);
-    toastr.success(' ',`${product.title} has been removed from the wishlist`);
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
-    toastr.error("Oops", "something went wrong");
   }
 };
 
@@ -162,10 +155,8 @@ export const addReview = (product, values) => {
         userUid: user.uid
       });
       dispatch(asyncActionFinish());
-      toastr.success("Success!", "Review has been added");
     } catch (error) {
       dispatch(asyncActionError());
-      toastr.error("Oops", "Something went wrong");
     }
   };
 };
@@ -182,7 +173,6 @@ export const addAddress = values => {
         email: newAddress.email
       });
       dispatch(asyncActionError());
-      toastr.success("Success!", "Address has been added")
     } catch(error){
       console.log(error);
       dispatch(asyncActionError());
@@ -201,7 +191,6 @@ export const addAddressTwo = values => {
         newAddressTwo
       });
       dispatch(asyncActionError());
-      toastr.success("Success!", "Address Two has been added")
     } catch(error){
       console.log(error);
       dispatch(asyncActionError());
@@ -222,12 +211,9 @@ export const removeNewAddress = () => async (
     await firestore.update(`users/${user.uid}`, {
       [`newAddress`]: firestore.FieldValue.delete()
     });
-    toastr.success(' ',`Your address has been removed`);
-
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
-    toastr.error("Oops", "something went wrong");
   }
 };
 
@@ -244,12 +230,9 @@ export const removeNewAddressTwo = () => async (
     await firestore.update(`users/${user.uid}`, {
       [`newAddressTwo`]: firestore.FieldValue.delete()
     });
-    toastr.success(' ',`Your address has been removed`);
-
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
-    toastr.error("Oops", "something went wrong");
   }
 };
 
@@ -267,11 +250,9 @@ export const removeReview = product => async (
       [`reviews.${user.uid}`]: firestore.FieldValue.delete()
     });
     await firestore.delete(`review/${product.id}_${user.uid}`);
-    toastr.success(' ',`Your review of ${product.title} has been removed`);
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
-    toastr.error("Oops", "something went wrong");
   }
 };
 
@@ -308,7 +289,6 @@ export const confirmOrder = (totalAmount, cartob, address) => async (
       toastr.success('', 'Your order is complete!');
       } catch (error){
       console.log(error);
-      toastr.error("Oops", 'something went wrong');
     }
   }
 
@@ -326,7 +306,6 @@ export const confirmOrder = (totalAmount, cartob, address) => async (
         dispatch(asyncActionFinish());
       } catch(error) {
         console.log(error);
-        toastr.error('Oops', 'something went wrong')
       }
     }
 
@@ -344,6 +323,5 @@ export const confirmOrder = (totalAmount, cartob, address) => async (
           dispatch(asyncActionFinish());
         } catch(error) {
           console.log(error);
-          toastr.error('Oops', 'something went wrong')
         }
       }

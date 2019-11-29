@@ -37,7 +37,7 @@ const validate = combineValidators({
         <span>Please select a rating</span>
         <Field name='rating' type='text' component={StarRating} />
         <Field placeholder="Review" name='comment' type='text' component={TextArea} rows={2} />
-        <Button disabled={invalid || submitting || pristine} content={isReviewer ? 'Edit Review' : 'Add Review'} labelPosition='left' icon='edit' primary />
+        <Button disabled={invalid || submitting || pristine} content={isReviewer ? 'Edit Review' : 'Add Review'} labelPosition='left' icon='edit' />
       </Form>
       </div>
     );
