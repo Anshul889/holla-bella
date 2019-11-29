@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
 import {
   removeFromCart,
   confirmOrder,
   addQuantity,
   subtractQuantity
-} from '../../features/user/userActions';
-import { compose } from 'redux';
-import styles from './Cart.module.css';
-import { Link } from 'react-router-dom';
-import { objectToArray } from '../../app/common/util/helpers';
-import UserAddressForm from '../user/UserDetailed/UserAddressForm';
+} from "../../features/user/userActions";
+import { compose } from "redux";
+import styles from "./Cart.module.css";
+import { Link } from "react-router-dom";
+import { objectToArray } from "../../app/common/util/helpers";
+import UserAddressForm from "../user/UserDetailed/UserAddressForm";
+import { Loader } from "semantic-ui-react";
 
 const mapState = (state, ownProps) => ({
   address: state.firebase.profile.newAddress,
@@ -63,22 +64,19 @@ class Cart extends Component {
     }
     const totalAmount =
       cart && cart.length !== 0 && Math.round(shipping + totalCartPrice);
-    if (cart && cart.length === 0 && loading) {
-      return <div>Your cart is empty!</div>;
-    } else if (!cart && loading) {
-      return <div>Your cart is empty!</div>;
-    }
 
     let payButton;
     if (cart && address && loading) {
-      payButton =
+      payButton = (
         <div className={styles.pay}>
           <button
             className={styles.addbutton}
-            onClick={() => confirmOrder(totalAmount, cartob, address)}>
+            onClick={() => confirmOrder(totalAmount, cartob, address)}
+          >
             Pay with Mpesa
           </button>
         </div>
+      );
     } else if (cart && !address && loading) {
       payButton = null;
     } else if (cart && address && !loading) {
@@ -91,6 +89,61 @@ class Cart extends Component {
       );
     }
 
+    if (cart && cart.length === 0 && loading) {
+      return (
+        <div>
+          <h1 className={styles.heading}>Shopping Cart</h1>
+          <div className={styles.categories}>
+            <div>Product</div>
+            <div>Qnt:</div>
+            <div>Price</div>
+          </div>
+          <div className={styles.cartempty}>Your Cart is empty</div>
+          <div className={styles.container}>
+            <div className={styles.totalcartprice}>
+              <div className={styles.subtotal}>Subtotal: </div>
+              <div className={styles.totalpricenumber}>0 KSH</div>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (!cart && loading) {
+      return (
+        <div>
+          <h1 className={styles.heading}>Shopping Cart</h1>
+          <div className={styles.categories}>
+            <div>Product</div>
+            <div>Qnt:</div>
+            <div>Price</div>
+          </div>
+          <div className={styles.cartempty}>Your Cart is empty</div>
+          <div className={styles.container}>
+            <div className={styles.totalcartprice}>
+              <div className={styles.subtotal}>Subtotal: </div>
+              <div className={styles.totalpricenumber}>0 KSH</div>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (cart && cart.length === 0 && !loading){
+      return (
+        <div>
+          <h1 className={styles.heading}>Shopping Cart</h1>
+          <div className={styles.categories}>
+            <div>Product</div>
+            <div>Qnt:</div>
+            <div>Price</div>
+          </div>
+          <div className={styles.cartempty}><Loader active={true} /></div>
+          <div className={styles.container}>
+            <div className={styles.totalcartprice}>
+              <div className={styles.subtotal}>Subtotal: </div>
+              <div className={styles.totalpricenumber}>0 KSH</div>
+            </div>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div>
@@ -123,8 +176,8 @@ class Cart extends Component {
                       </button>
                     ) : (
                       <button>-</button>
-                    )}{' '}
-                    {product.quantity}{' '}
+                    )}{" "}
+                    {product.quantity}{" "}
                     {product.quantity < 10 && (
                       <button onClick={() => addQuantity(product)}>+</button>
                     )}
@@ -134,12 +187,13 @@ class Cart extends Component {
                       product.quantity *
                         (product.price -
                           (product.price * product.discount) / 100)
-                    )}{' '}
+                    )}{" "}
                     KSH
                   </div>
                   <div
                     className={styles.delete}
-                    onClick={() => removeFromCart(product)}>
+                    onClick={() => removeFromCart(product)}
+                  >
                     delete
                   </div>
                 </div>
@@ -186,7 +240,8 @@ class Cart extends Component {
                   isAddressOneOpen: !this.state.isAddressOneOpen,
                   isAddressTwoOpen: false
                 })
-              }>
+              }
+            >
               Add Address
             </button>
           </div>

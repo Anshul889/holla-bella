@@ -12,6 +12,11 @@
   margin-bottom: 22px;
 }
 
+.cartempty {
+  padding: 175px 0;
+  text-align: center;
+}
+
 .categories {
   display: grid;
   grid-template-columns: 2.33fr 1fr 1fr;
