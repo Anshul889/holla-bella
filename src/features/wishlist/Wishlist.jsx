@@ -9,14 +9,15 @@ import {
 import { compose } from "redux";
 import styles from "./Wishlist.module.css";
 import { Link } from "react-router-dom";
-import { Button } from "semantic-ui-react";
+import { Button, Loader } from "semantic-ui-react";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 
 const mapState = (state, ownProps) => ({
   profile: state.firebase.profile,
   userUid: state.firebase.auth.uid,
   wishlist: state.wishlist,
-  auth : state.firebase.auth
+  auth : state.firebase.auth,
+  loading: !state.async.loading
 });
 
 const actions = {
@@ -33,14 +34,23 @@ class Wishlist extends Component {
   }
 
   render() {
-    const { wishlist, removeFromWishlist, addToCart , auth } = this.props;
+    const { wishlist, removeFromWishlist, addToCart , auth, loading } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     let values = { quantity: 1 };
-    if (wishlist && wishlist.length === 0) {
+    if (wishlist && wishlist.length === 0 && loading) {
       return (
         <div>
           <h1 className={styles.heading}>Wishlist</h1>
           <div className={styles.wishempty}>Your wishlist is empty!</div>
+        </div>
+      );
+    }
+
+    if (!loading){
+      return (
+        <div>
+          <h1 className={styles.heading}>Wishlist</h1>
+          <div className={styles.wishempty}><Loader active={true} /></div>
         </div>
       );
     }
