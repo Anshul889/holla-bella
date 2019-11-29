@@ -134,7 +134,7 @@ class Cart extends Component {
             <div>Qnt:</div>
             <div>Price</div>
           </div>
-          <div className={styles.cartempty}><Loader active={true} /></div>
+          <div className={styles.cartempty}><Loader active={true} content="Loading" /></div>
           <div className={styles.container}>
             <div className={styles.totalcartprice}>
               <div className={styles.subtotal}>Subtotal: </div>
@@ -143,7 +143,7 @@ class Cart extends Component {
           </div>
         </div>
       );
-    }
+      }
 
     return (
       <div>

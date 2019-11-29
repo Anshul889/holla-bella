@@ -26,21 +26,16 @@ const actions = {
 };
 
 class Wishlist extends Component {
-  state = {
-    loadingInitial: true
-  };
   async componentDidMount() {
     if (this.props.wishlist && this.props.wishlist.length === 0 && this.props.auth.isLoaded) {
       await this.props.getUserWishlist(this.props.userUid);
     }
-    this.setState({ loadingInitial: false });
   }
 
   render() {
     const { wishlist, removeFromWishlist, addToCart , auth } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     let values = { quantity: 1 };
-    if (this.state.loadingInitial) return <LoadingComponent />;
     if (wishlist && wishlist.length === 0) {
       return (
         <div>
@@ -54,7 +49,7 @@ class Wishlist extends Component {
       return (
         <div>
           <h1 className={styles.heading}>Wishlist</h1>
-          <div className={styles.wishempty}>Sign </div>
+          <div className={styles.wishempty}>Your wislist is empty!</div>
         </div>
       );
     }
