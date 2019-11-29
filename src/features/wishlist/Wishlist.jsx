@@ -28,7 +28,7 @@ const actions = {
 
 class Wishlist extends Component {
   async componentDidMount() {
-    if (this.props.wishlist && this.props.wishlist.length === 0 && this.props.auth.isLoaded) {
+    if (this.props.wishlist && this.props.wishlist.length === 0 && this.props.auth.isLoaded && !this.props.auth.isEmpty) {
       await this.props.getUserWishlist(this.props.userUid);
     }
   }
@@ -50,7 +50,7 @@ class Wishlist extends Component {
       return (
         <div>
           <h1 className={styles.heading}>Wishlist</h1>
-          <div className={styles.wishempty}><Loader active={true} /></div>
+          <div className={styles.wishempty}><Loader active={true} content="Loading" /></div>
         </div>
       );
     }
