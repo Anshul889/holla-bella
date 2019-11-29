@@ -73,7 +73,7 @@ class UserAddressForm extends Component {
           <Field placeholder={'postcode'}name="postcode" type="text" component={TextInput} rows={1} />
           <Field placeholder={'email'} name='email' type='text' component={TextInput} rows={1} />
           <Field placeholder={'phone number'} name='phone' type='text' component={TextInput} rows={1} />
-          <Button disabled={invalid || submitting || pristine} content="Add Address" primary />
+          <Button disabled={invalid || submitting || pristine} content="Add Address"/>
         </Form>
       </div>
     );

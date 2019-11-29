@@ -29,47 +29,57 @@ class Wishlist extends Component {
     loadingInitial: true
   };
   async componentDidMount() {
-    if (this.props.wishlist && this.props.wishlist.length === 0){
-    await this.props.getUserWishlist(this.props.userUid);
+    if (this.props.wishlist && this.props.wishlist.length === 0) {
+      await this.props.getUserWishlist(this.props.userUid);
     }
     this.setState({ loadingInitial: false });
   }
 
   render() {
     const { wishlist, removeFromWishlist, addToCart } = this.props;
-    let values = {quantity: 1};
+    let values = { quantity: 1 };
     if (this.state.loadingInitial) return <LoadingComponent />;
     if (wishlist && wishlist.length === 0) {
-      return <div>Your wishlist is empty!</div>;
+      return (
+        <div>
+          <h1 className={styles.heading}>Wishlist</h1>
+          <div className={styles.wishempty}>Your wishlist is empty!</div>
+        </div>
+      );
     }
     return (
-      <div className={styles.container}>
-        <div className={styles.inner}>
-          {wishlist &&
-            wishlist.map(product => (
-              <div className={styles.product} key={product.id}>
-                <div className={styles.image}>
-                  <Link to={`/product/${product.id}`}>
-                    <img src={product.photoURL} alt={product.description} />
-                  </Link>
+      <div>
+        <h1 className={styles.heading}>Wishlist</h1>
+        <div className={styles.container}>
+          <div className={styles.inner}>
+            {wishlist &&
+              wishlist.map(product => (
+                <div className={styles.product} key={product.id}>
+                  <div className={styles.image}>
+                    <Link to={`/product/${product.id}`}>
+                      <img src={product.photoURL} alt={product.description} />
+                    </Link>
+                  </div>
+                  <div className={styles.content}>
+                    <h3>
+                      <Link to={`/product/${product.id}`}>{product.title}</Link>
+                    </h3>
+                    <p>
+                      {product.price - (product.price * product.discount) / 100}{" "}
+                      KSH
+                    </p>
+                    <Button
+                      onClick={() => removeFromWishlist(product)}
+                      content={"Remove from Wishlist"}
+                    />
+                    <Button
+                      onClick={() => addToCart(product, values)}
+                      content={"Add to cart"}
+                    />
+                  </div>
                 </div>
-                <div className={styles.content}>
-                  <h3>
-                    <Link to={`/product/${product.id}`}>{product.title}</Link>
-                  </h3>
-                  <p>{product.description}</p>
-                  <p>{product.price - (product.price * product.discount / 100)} KSH</p>
-                  <Button
-                    onClick={() => removeFromWishlist(product)}
-                    content={"Remove from Wishlist"}
-                  />
-                  <Button
-                    onClick={() => addToCart(product, values)}
-                    content={"Add to cart"}
-                  />
-                </div>
-              </div>
-            ))}
+              ))}
+          </div>
         </div>
       </div>
     );
@@ -77,9 +87,6 @@ class Wishlist extends Component {
 }
 
 export default compose(
-  connect(
-    mapState,
-    actions
-  ),
+  connect(mapState, actions),
   firestoreConnect()
 )(Wishlist);
