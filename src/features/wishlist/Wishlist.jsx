@@ -10,7 +10,7 @@ import { compose } from "redux";
 import styles from "./Wishlist.module.css";
 import { Link } from "react-router-dom";
 import { Button, Loader } from "semantic-ui-react";
-import LoadingComponent from "../../app/layout/LoadingComponent";
+
 
 const mapState = (state, ownProps) => ({
   profile: state.firebase.profile,
