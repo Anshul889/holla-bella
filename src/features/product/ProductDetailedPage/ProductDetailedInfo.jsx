@@ -58,7 +58,7 @@ class ProductDetailedInfo extends React.Component {
             <Link to='/'>Main Page </Link> >
           </div>
           <div style={{ paddingLeft: '2px' }}>
-            <Link to='/'> {product.category} </Link>>
+            <Link to={`/${product.category}`}> {product.category} </Link>>
           </div>
           <div style={{ paddingLeft: '2px' }}>{product.title}</div>
         </div>

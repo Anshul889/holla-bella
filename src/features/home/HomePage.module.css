@@ -94,6 +94,8 @@
 .category {
   padding: 42px 0;
   margin: 10px 0;
+  background-size: cover;
+  background-position: center;
 }
 
 .category h5 {
