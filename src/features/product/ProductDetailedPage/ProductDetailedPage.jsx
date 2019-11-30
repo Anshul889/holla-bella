@@ -47,13 +47,9 @@ const actions = {
 class ProductDetailedPage extends Component {
   async componentDidMount() {
     const { firestore, match } = this.props;
-    await firestore.setListener(`products/${match.params.id}`);
+    await firestore.get(`products/${match.params.id}`);
   }
-
-  async componentWillUnmount(){
-    const { firestore, match } = this.props;
-    await firestore.unsetListener(`products/${match.params.id}`);
-  }
+  
   render() {
     const {
       product,

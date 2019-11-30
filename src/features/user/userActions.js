@@ -116,7 +116,6 @@ export const removeFromWishlist = product => async (
   getState,
   { getFirestore, getFirebase }
 ) => {
-  dispatch(asyncActionStart());
   const firestore = getFirestore();
   const firebase = getFirebase();
   const user = firebase.auth().currentUser;
@@ -126,7 +125,6 @@ export const removeFromWishlist = product => async (
       [`wishlistAdders.${user.uid}`]: firestore.FieldValue.delete()
     });
     await firestore.delete(`wishlist/${product.id}_${user.uid}`);
-    dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
   }
