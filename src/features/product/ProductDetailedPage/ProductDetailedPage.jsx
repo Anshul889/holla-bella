@@ -47,7 +47,19 @@ const actions = {
 class ProductDetailedPage extends Component {
   async componentDidMount() {
     const { firestore, match } = this.props;
-    await firestore.get(`products/${match.params.id}`);
+    await firestore.setListener(`products/${match.params.id}`);
+  }
+
+  componentWillReceiveProps = (nextProps)=> {
+        if (nextProps.location.key !== this.props.location.key) {
+          this.forceUpdate(this.componentWillMount);
+          this.forceUpdate(this.componentDidMount);
+        }
+    };
+
+  async componentWillUnmount() {
+    const { firestore, match } = this.props;
+    await firestore.unsetListener(`products/${match.params.id}`);
   }
   
   render() {
@@ -75,7 +87,7 @@ class ProductDetailedPage extends Component {
       {product.title &&
         <div className={styles.container}>
         <ProductDetailedInfo initialValues={initialValues} product={product} isCarter={isCarter} isWishLister={isWishLister} addToCart={addToCart} addToWishlist={addToWishlist} openModal={openModal} authenticated={authenticated} removeFromWishlist={removeFromWishlist}/>
-        <ProductRelatedItems product={product}/>
+        <ProductRelatedItems product={product} />
         <h1>Reviews</h1>
         <ProductReviews reviews={reviews} removeReview={removeReview} isReviewer={isReviewer} product={product}/>
         <ProductReviewForm addReview={addReview} product={product} isReviewer={isReviewer}/>
