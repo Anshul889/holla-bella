@@ -4,6 +4,7 @@ import { getBags } from "./BagsActions";
 import styles from "./Bags.module.css";
 import { Link } from "react-router-dom";
 import { Placeholder } from "semantic-ui-react";
+import bagsimg from '../../../assets/Bags.png'
 
 const mapState = state => ({
   bags: state.bags
@@ -39,7 +40,7 @@ class Bags extends Component {
     if (products.length === 0) {
       return (
         <div className={styles.bags}>
-          <img style={{ width: "100%" }} src={''} alt="bags" />
+          <img style={{ width: "100%" }} src={bagsimg} alt="bags" />
           <h1 className={styles.heading}>Bags</h1>
           <div className={styles.container}>
             <div className={styles.inner}>
@@ -92,7 +93,7 @@ class Bags extends Component {
     }
     return (
       <div className={styles.bags}>
-        <img style={{ width: "100%" }} src={''} alt="bags" />
+        <img style={{ width: "100%" }} src={bagsimg} alt="bags" />
         <h1 className={styles.heading}>Bags</h1>
         <div className={styles.container}>
           <div className={styles.inner}>
