@@ -9,15 +9,41 @@ class ProductListItem extends Component {
       <div className={styles.product}>
         <div className={styles.image}>
           <Link to={`/product/${product.id}`}>
-            <img src={product.photoURL} alt={product.title} />
+            <img src={product.photoURL} alt={product.title} loading='lazy' />
           </Link>
         </div>
         <div className={styles.content}>
-          <h3>
-            <Link to={`/product/${product.id}`}>{product.title}</Link>
-          </h3>
-          <p>Rs {product.price}</p>
-        </div>
+                    <div className={styles.title}>
+                      <Link to={`/product/${product.id}`}>{product.title}</Link>
+                    </div>
+                    <div className={styles.price}>
+                      {product.discount > 0 && (
+                        <span
+                          style={{
+                            paddingRight: "5px",
+                            fontWeight: "100",
+                            color: "gray"
+                          }}
+                        >
+                          <strike>{product.price} KSH</strike>
+                        </span>
+                      )}
+                      <Link to={`/product/${product.id}`}>
+                        {product.price -
+                          (product.price * product.discount) / 100}{" "}
+                        KSH
+                      </Link>
+                      <br />
+                      {product.discount > 0 && (
+                        <span
+                          className={styles.blink}
+                          style={{ color: "green" }}
+                        >
+                          {product.discount}% OFF{" "}
+                        </span>
+                      )}
+                    </div>
+                  </div>
       </div>
     );
   }
