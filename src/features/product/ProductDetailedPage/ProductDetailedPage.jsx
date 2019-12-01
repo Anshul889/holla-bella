@@ -90,7 +90,7 @@ class ProductDetailedPage extends Component {
         <ProductRelatedItems product={product} />
         <h3>Reviews</h3>
         <ProductReviews reviews={reviews} removeReview={removeReview} isReviewer={isReviewer} product={product} auth={auth}/>
-        <ProductReviewForm addReview={addReview} product={product} isReviewer={isReviewer}/>
+        <ProductReviewForm addReview={addReview} product={product} isReviewer={isReviewer} authenticated={authenticated}/>
         
       </div>}
       </div>
