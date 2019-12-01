@@ -232,7 +232,7 @@ class Cart extends Component {
 
         {cart.length !== 0 && !address && (
           <div className={styles.addaddress}>
-            <p>Add Delivery Address To pay with Mpesa</p>
+            <p>Add Delivery Address</p>
             <button
               className={styles.addbutton}
               onClick={() =>

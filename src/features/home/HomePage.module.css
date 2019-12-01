@@ -96,6 +96,8 @@
   margin: 10px 0;
   background-size: cover;
   background-position: center;
+  outline: 1px solid #b9b9b9;
+  outline-offset: -4px;
 }
 
 .category h5 {
