@@ -10,7 +10,6 @@ import ProductReviews from './ProductReviews';
 import ProductReviewForm from './ProductReviewForm';
 import ProductRelatedItems from './ProductRelatedItems';
 import {openModal} from '../../modals/modalActions.js'
-import CustomDotGroup from "./CustomDotGroup.jsx";
 
 const mapState = (state, ownProps) => {
   const productId = ownProps.match.params.id;

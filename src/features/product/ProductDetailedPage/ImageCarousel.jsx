@@ -1,6 +1,5 @@
 import { CarouselProvider, Image, Slide, Slider } from "pure-react-carousel";
 import React from "react";
-import { Divider } from "semantic-ui-react";
 
 import CustomDotGroup from './CustomDotGroup.jsx';
 
@@ -21,7 +20,6 @@ const ImageCarousel = ({photoURL, photoURL2, photoURL3}) => (
         <Image src={photoURL3} />
       </Slide>
     </Slider>
-    <br></br>
     <br></br>
     <CustomDotGroup slides={3} />
   </CarouselProvider>

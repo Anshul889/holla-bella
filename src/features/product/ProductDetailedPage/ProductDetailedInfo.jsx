@@ -46,7 +46,7 @@ class ProductDetailedInfo extends React.Component {
       totalReviews
         .map(review => review.rating)
         .reduce((prev, next) => prev + next);
-    const averageRating = totalReviews && totalRating / totalReviews.length;
+    const averageRating = totalReviews && totalReviews.length > 0 && totalRating / totalReviews.length;
     const roundAverage = Math.round(averageRating * 10) / 10;
     const starRating = Math.round(roundAverage);
     const discountedPrice =
@@ -78,9 +78,10 @@ class ProductDetailedInfo extends React.Component {
               <div>{product.title}</div>
             </div>
             <div className={styles.pricing}>
+            {product.discount > 0 && (
               <strike style={{ fontWeight: '100', paddingRight: '5px' }}>
                 {product.price} KSH{'  '}
-              </strike>
+              </strike>)}
               <span style={{ fontWeight: '800', paddingRight: '5px' }}>
                 {discountedPrice} KSH{' '}
               </span>
@@ -93,9 +94,9 @@ class ProductDetailedInfo extends React.Component {
               )}
             </div>
             <div className={styles.rating}>
-            <span style={{paddingRight: '3px'}}>
+            {averageRating && (<span style={{paddingRight: '3px'}}>
                 ({averageRating})
-            </span>
+            </span>)}
             <Rating
               style={{ transform: 'translateY(1px) translateX(-2px)' }}
               icon='star'
