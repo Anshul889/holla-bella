@@ -88,7 +88,7 @@ class ProductDetailedPage extends Component {
         <div className={styles.container}>
         <ProductDetailedInfo initialValues={initialValues} product={product} isCarter={isCarter} isWishLister={isWishLister} addToCart={addToCart} addToWishlist={addToWishlist} openModal={openModal} authenticated={authenticated} removeFromWishlist={removeFromWishlist}/>
         <ProductRelatedItems product={product} />
-        <h1>Reviews</h1>
+        <h3>Reviews</h3>
         <ProductReviews reviews={reviews} removeReview={removeReview} isReviewer={isReviewer} product={product} auth={auth}/>
         <ProductReviewForm addReview={addReview} product={product} isReviewer={isReviewer}/>
         

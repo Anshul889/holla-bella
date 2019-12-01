@@ -32,8 +32,8 @@ const validate = combineValidators({
   render() {
     const { invalid, submitting, pristine, isReviewer} = this.props;
     return (
-      <div>{isReviewer ? <h1>Edit your Review</h1> : <h1>Add a review</h1>}
-      <Form onSubmit={this.props.handleSubmit(this.handleReviewSubmit)}>
+      <div>{isReviewer ? <h3>Edit your Review</h3> : <h3>Add a review</h3>}
+      <Form style={{width: '90%', margin: '0 auto'}} onSubmit={this.props.handleSubmit(this.handleReviewSubmit)}>
         <span>Please select a rating</span>
         <Field name='rating' type='text' component={StarRating} />
         <Field placeholder="Review" name='comment' type='text' component={TextArea} rows={2} />

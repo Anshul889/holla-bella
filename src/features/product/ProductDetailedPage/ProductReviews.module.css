@@ -5,8 +5,9 @@
 
 .review {
   display: grid;
-  grid-template-columns: 50px 5fr max-content;
+  grid-template-columns: 50px 1fr;
   grid-gap: 5px;
+  padding-bottom: 20px;
 }
 
 .image img {
