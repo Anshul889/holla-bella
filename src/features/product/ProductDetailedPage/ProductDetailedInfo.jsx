@@ -91,6 +91,9 @@ class ProductDetailedInfo extends React.Component {
               )}
             </div>
             <div className={styles.rating}>
+            <span style={{paddingRight: '3px'}}>
+                ({averageRating})
+            </span>
             <Rating
               style={{ transform: 'translateY(1px)' }}
               icon='star'
