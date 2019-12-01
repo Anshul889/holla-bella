@@ -95,7 +95,7 @@ class ProductDetailedInfo extends React.Component {
                 ({averageRating})
             </span>
             <Rating
-              style={{ transform: 'translateY(1px)' }}
+              style={{ transform: 'translateY(1px) translateX(-2px)' }}
               icon='star'
               rating={starRating}
               maxRating={5}

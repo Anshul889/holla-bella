@@ -15,7 +15,7 @@ const ProductReviews = ({reviews, removeReview, isReviewer, product, auth}) => {
             </div>
             <div>
               <div>{review.displayName}</div>
-            <Rating size='tiny' disabled icon='star' rating={review.rating} maxRating={5} style={{ transform: 'translateY(1px)' }}/>
+            <Rating size='tiny' disabled icon='star' rating={review.rating} maxRating={5} style={{ transform: 'translateY(1px) translateX(-2px)' }}/>
               {review.addDate && <span style={{fontSize: '10px', paddingLeft: '5px'}}>{format(review.addDate.toDate(), 'do LLL yyyy')}</span>}
             {isReviewer && review.id === auth.uid && 
               <span style={{ fontSize: '10px', color: 'red', textTransform: 'underline', paddingLeft: '5px', cursor: 'pointer'}} onClick={() =>removeReview(product)}>delete</span>
