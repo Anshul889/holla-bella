@@ -32,8 +32,8 @@
   margin: 0 auto;
 }
 
-.image img {
-  width: 100%;
+.content {
+  padding-top: 25px;
 }
 
 .title {

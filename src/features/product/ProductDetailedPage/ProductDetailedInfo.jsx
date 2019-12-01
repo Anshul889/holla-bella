@@ -4,10 +4,11 @@ import { Form, Rating, Button } from 'semantic-ui-react';
 import { reduxForm, Field } from 'redux-form';
 import SelectInput from '../../../app/common/form/SelectInput';
 import { objectToArray } from '../../../app/common/util/helpers';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import heart from '../../../assets/heart.svg';
 import heartlight from '../../../assets/heartlight.svg';
+import ImageCarousel from './ImageCarousel';
+import "pure-react-carousel/dist/react-carousel.es.css";
 
 const quantity = [
   { key: 1, text: 1, value: 1 },
@@ -63,17 +64,18 @@ class ProductDetailedInfo extends React.Component {
           <div style={{ paddingLeft: '2px' }}>{product.title}</div>
         </div>
         <div className={styles.product}>
-          <div className={styles.image}>
-            {/* <img src={product.photoURL} alt={product.description} />{" "} */}
+         {/* <div className={styles.image}>
+             <img src={product.photoURL} alt={product.description} />{" "} 
             <LazyLoadImage
               effect='blur'
               src={product.photoURL}
               width={'100%'}
             />
-          </div>
+          </div>*/}
+          <ImageCarousel photoURL={product.photoURL} photoURL2={product.photoURL2} photoURL3={product.photoURL3}/>
           <div className={styles.content}>
             <div className={styles.title}>
-              <h3>{product.title}</h3>
+              <div>{product.title}</div>
             </div>
             <div className={styles.pricing}>
               <strike style={{ fontWeight: '100', paddingRight: '5px' }}>
