@@ -1,14 +1,14 @@
-import { CarouselProvider, Image, Slide, Slider } from "pure-react-carousel";
+import { CarouselProvider, Image, Slide, Slider, ButtonNext, ButtonBack, DotGroup} from "pure-react-carousel";
 import React from "react";
-
-import CustomDotGroup from './CustomDotGroup.jsx';
 
 const ImageCarousel = ({photoURL, photoURL2, photoURL3}) => (
   <CarouselProvider
     naturalSlideWidth={1}
     naturalSlideHeight={1}
     totalSlides={3}
-  >
+    hasMasterSpinner
+    lockOnWindowScroll={true}
+  ><div style={{position: 'relative'}}>
     <Slider>
       <Slide tag="a" index={0}>
         <Image src={photoURL} />
@@ -21,7 +21,9 @@ const ImageCarousel = ({photoURL, photoURL2, photoURL3}) => (
       </Slide>
     </Slider>
     <br></br>
-    <CustomDotGroup slides={3} />
+    <ButtonBack style={{position: 'absolute', top: '45%', left: '-20px', background: 'transparent', border: 'none'}} children='<'/>
+    <ButtonNext style={{position: 'absolute',  top: '45%', right: '-20px', background: 'transparent', border: 'none'}} children='>'/>
+    </div>
   </CarouselProvider>
 );
 

@@ -12,7 +12,7 @@ export const Footer = () => {
       </div>
       <div className={styles.sec2}>
         <h3>Contact Us</h3>
-        <p>info@hollabella.com</p>
+        <p>info@hola-bella.com</p>
       </div>
       <div className={styles.info}>
         <h3>Information</h3>
