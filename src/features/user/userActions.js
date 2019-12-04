@@ -260,7 +260,7 @@ export const removeReview = product => async (
   }
 };
 
-export const confirmOrder = (totalAmount, cartob, address) => async (
+export const confirmOrder = (totalAmount, cartob, address, mpesanumber) => async (
   dispatch,
   getState,
   { getFirestore, getFirebase }
@@ -286,6 +286,7 @@ export const confirmOrder = (totalAmount, cartob, address) => async (
         postcode: address.postcode,
         phone: address.phone,
         email: address.email,
+        mpesanumber: mpesanumber,
         date: firestore.FieldValue.serverTimestamp()
       }
     );
@@ -359,3 +360,18 @@ export const addMpesaNumber = values => {
     }
   };
 };
+
+export const removeMpesaNumber = () => {
+  return async (dispatch, getState, { getFirestore, getFirebase }) => {
+    const firestore = getFirestore();
+    const firebase = getFirebase();
+    const user = firebase.auth().currentUser;
+    try {
+      await firestore.update(`users/${user.uid}`, {
+        [`mpesanumber`]: firestore.FieldValue.delete()
+      });
+    } catch (error){
+      console.log(error)
+    }
+}
+}

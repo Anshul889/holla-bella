@@ -5,7 +5,8 @@ import {
   removeFromCart,
   confirmOrder,
   addQuantity,
-  subtractQuantity
+  subtractQuantity,
+  removeMpesaNumber
 } from "../../features/user/userActions";
 import { compose } from "redux";
 import styles from "./Cart.module.css";
@@ -27,7 +28,8 @@ const actions = {
   removeFromCart,
   confirmOrder,
   addQuantity,
-  subtractQuantity
+  subtractQuantity,
+  removeMpesaNumber
 };
 
 class Cart extends Component {
@@ -55,7 +57,8 @@ class Cart extends Component {
       loading,
       addQuantity,
       subtractQuantity,
-      mpesanumber
+      mpesanumber,
+      removeMpesaNumber
     } = this.props;
     let totalCartPrice =
       cart &&
@@ -79,7 +82,7 @@ class Cart extends Component {
         <div className={styles.pay}>
           <button
             className={styles.addbutton}
-            onClick={() => confirmOrder(totalAmount, cartob, address)}
+            onClick={() => confirmOrder(totalAmount, cartob, address, mpesanumber)}
           >
             Pay with Mpesa
           </button>
@@ -279,10 +282,15 @@ class Cart extends Component {
           </button>
         </div>
         )}
-        {cart.length !==0 && mpesanumber && (
-          <div>
-          <span>{mpesanumber}</span><span>edit</span>
-          </div>
+        {cart.length !==0 && mpesanumber && address && (
+          <div className={styles.addressc}>
+          <div className={styles.addtitle}>Mpesa Number</div>
+          <span>+{mpesanumber} </span>
+          <span style={{color: 'blue', fontWeight: '100', cursor: 'pointer'}} onClick={() => this.setState({
+            isMpesaFormOpen: !this.state.isMpesaFormOpen
+          })}> edit </span>
+          <span onClick={() => {removeMpesaNumber()}} style={{color: 'red', fontWeight: '100', cursor: 'pointer'}}> delete </span>
+        </div>
         )}
         {this.state.isMpesaFormOpen && (
           <MpesaForm closeMpesaForm={this.closeMpesaForm} />

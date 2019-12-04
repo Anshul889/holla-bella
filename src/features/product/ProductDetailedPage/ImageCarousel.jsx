@@ -1,4 +1,4 @@
-import { CarouselProvider, Image, Slide, Slider, ButtonNext, ButtonBack, DotGroup} from "pure-react-carousel";
+import { CarouselProvider, Image, Slide, Slider, ButtonNext, ButtonBack} from "pure-react-carousel";
 import React from "react";
 
 const ImageCarousel = ({photoURL, photoURL2, photoURL3}) => (

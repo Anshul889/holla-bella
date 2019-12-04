@@ -10,7 +10,7 @@ import {
   combineValidators,
   isRequired,
   isNumeric,
-  hasLengthGreaterThan
+  hasLengthBetween
 } from 'revalidate';
 
 const actions = {
@@ -21,9 +21,9 @@ const validate = combineValidators({
   mpesa: composeValidators(
     isRequired({ message: 'Please enter your phone number' }),
     isNumeric({ message: 'enter a valid phone' }),
-    hasLengthGreaterThan(7)({ message: 'enter a valid phone number' })
-  )()
-});
+    hasLengthBetween(10, 10)({ message: 'enter a valid phone number' })
+  )(),
+  });
 
 class MpesaForm extends Component {
   handleMpesaSubmit = async values => {
