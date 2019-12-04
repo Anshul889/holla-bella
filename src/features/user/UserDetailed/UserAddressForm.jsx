@@ -62,7 +62,7 @@ class UserAddressForm extends Component {
   }
 
   render() {
-    const { invalid, submitting, pristine,} = this.props;
+    const { invalid, submitting, pristine} = this.props;
     return (
       <div style={{width: '90%', margin: '50px auto', marginTop: '10px'}}>
         <h2>Delivery Address 1</h2>

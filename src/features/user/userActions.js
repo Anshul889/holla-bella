@@ -1,11 +1,15 @@
-import { toastr } from "react-redux-toastr";
+import { toastr } from 'react-redux-toastr';
 import {
   asyncActionStart,
   asyncActionFinish,
   asyncActionError
-} from "../async/asyncActions";
-import firebase from "../../app/config/firebase";
-import { ADD_TO_WISHLIST, FETCH_WISHLIST, DELETE_TO_WISHLIST } from "../wishlist/wishlistConstants";
+} from '../async/asyncActions';
+import firebase from '../../app/config/firebase';
+import {
+  ADD_TO_WISHLIST,
+  FETCH_WISHLIST,
+  DELETE_TO_WISHLIST
+} from '../wishlist/wishlistConstants';
 
 export const addToCart = (product, values) => async (
   dispatch,
@@ -19,10 +23,12 @@ export const addToCart = (product, values) => async (
   const newProduct = {
     ...product,
     quantity: values.quantity,
-    discountedPrice: (product.price - (product.price * product.discount / 100)),
-    totalPrice: values.quantity * (product.price - (product.price * product.discount / 100)),
+    discountedPrice: product.price - (product.price * product.discount) / 100,
+    totalPrice:
+      values.quantity *
+      (product.price - (product.price * product.discount) / 100),
     addDate: firestore.FieldValue.serverTimestamp()
-  }
+  };
   try {
     await firestore.update(`users/${user.uid}`, {
       [`cart.${product.id}`]: newProduct
@@ -50,7 +56,7 @@ export const removeFromCart = product => async (
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
-    toastr.error("Oops", "something went wrong");
+    toastr.error('Oops', 'something went wrong');
   }
 };
 
@@ -67,7 +73,7 @@ export const addToWishlist = product => async (
   const wishlistAdder = {
     isWishList: true,
     addDate: firestore.FieldValue.serverTimestamp(),
-    photoURL: profile.photoURL || "/assets/user.png",
+    photoURL: profile.photoURL || '/assets/user.png',
     displayName: profile.displayName
   };
   try {
@@ -78,7 +84,7 @@ export const addToWishlist = product => async (
       productId: product.id,
       userUid: user.uid
     });
-    dispatch({type: ADD_TO_WISHLIST, payload: product})
+    dispatch({ type: ADD_TO_WISHLIST, payload: product });
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
@@ -89,14 +95,14 @@ export const addToWishlist = product => async (
 export const getUserWishlist = userUid => async (dispatch, getState) => {
   dispatch(asyncActionStart());
   const firestore = firebase.firestore();
-  let cartRef = firestore.collection("wishlist");
-  let query = cartRef.where("userUid", "==", userUid);
+  let cartRef = firestore.collection('wishlist');
+  let query = cartRef.where('userUid', '==', userUid);
   try {
     let querySnap = await query.get();
     let products = [];
     for (let i = 0; i < querySnap.docs.length; i++) {
       let pro = await firestore
-        .collection("products")
+        .collection('products')
         .doc(querySnap.docs[i].data().productId)
         .get();
       products.push({ ...pro.data(), id: pro.id });
@@ -141,7 +147,7 @@ export const addReview = (product, values) => {
       rating: values.rating,
       comment: values.comment,
       addDate: firestore.FieldValue.serverTimestamp(),
-      photoURL: profile.photoURL || "assests/user.png",
+      photoURL: profile.photoURL || 'assests/user.png',
       displayName: profile.displayName
     };
     try {
@@ -164,14 +170,14 @@ export const addAddress = values => {
     const firestore = getFirestore();
     const firebase = getFirebase();
     const user = firebase.auth().currentUser;
-    const newAddress = values
+    const newAddress = values;
     try {
       await firestore.update(`users/${user.uid}`, {
         newAddress,
         email: newAddress.email
       });
       dispatch(asyncActionError());
-    } catch(error){
+    } catch (error) {
       console.log(error);
       dispatch(asyncActionError());
     }
@@ -183,13 +189,13 @@ export const addAddressTwo = values => {
     const firestore = getFirestore();
     const firebase = getFirebase();
     const user = firebase.auth().currentUser;
-    const newAddressTwo = values
+    const newAddressTwo = values;
     try {
       await firestore.update(`users/${user.uid}`, {
         newAddressTwo
       });
       dispatch(asyncActionError());
-    } catch(error){
+    } catch (error) {
       console.log(error);
       dispatch(asyncActionError());
     }
@@ -255,71 +261,101 @@ export const removeReview = product => async (
 };
 
 export const confirmOrder = (totalAmount, cartob, address) => async (
-  dispatch, getState, { getFirestore, getFirebase}) => {
-    dispatch(asyncActionStart());
+  dispatch,
+  getState,
+  { getFirestore, getFirebase }
+) => {
+  dispatch(asyncActionStart());
+  const firestore = getFirestore();
+  const firebase = getFirebase();
+  const user = firebase.auth().currentUser;
+  const products = cartob;
+  try {
+    await firestore.add(
+      {
+        collection: 'users',
+        doc: user.uid,
+        subcollections: [{ collection: 'confirmed_orders' }]
+      },
+      {
+        products,
+        amount: totalAmount,
+        street: address.Address,
+        city: address.City,
+        name: address.Name,
+        postcode: address.postcode,
+        phone: address.phone,
+        email: address.email,
+        date: firestore.FieldValue.serverTimestamp()
+      }
+    );
+    await firestore.update(`users/${user.uid}`, {
+      [`cart`]: {}
+    });
+    dispatch(asyncActionFinish());
+    toastr.success('', 'Your order is complete!');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addQuantity = product => async (
+  dispatch,
+  getState,
+  { getFirestore, getFirebase }
+) => {
+  dispatch(asyncActionStart());
+  const firestore = getFirestore();
+  const firebase = getFirebase();
+  const user = firebase.auth().currentUser;
+  try {
+    await firestore.update(`users/${user.uid}`, {
+      [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(1),
+      [`cart.${product.id}.totalPrice`]:
+        (product.quantity + 1) *
+        (product.price - (product.price * product.discount) / 100)
+    });
+    dispatch(asyncActionFinish());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const subtractQuantity = product => async (
+  dispatch,
+  getState,
+  { getFirestore, getFirebase }
+) => {
+  dispatch(asyncActionStart());
+  const firestore = getFirestore();
+  const firebase = getFirebase();
+  const user = firebase.auth().currentUser;
+  try {
+    await firestore.update(`users/${user.uid}`, {
+      [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(-1),
+      [`cart.${product.id}.totalPrice`]:
+        (product.quantity - 1) *
+        (product.price - (product.price * product.discount) / 100)
+    });
+    dispatch(asyncActionFinish());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addMpesaNumber = values => {
+  return async (dispatch, getState, { getFirestore, getFirebase }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
     const user = firebase.auth().currentUser;
-    const products = cartob
     try {
-      await firestore.add(
-        {
-          collection: 'users',
-          doc: user.uid,
-          subcollections: [{ collection: 'confirmed_orders' }]
-        },
-        {
-          products,
-          amount : totalAmount,
-          street: address.Address,
-          city: address.City,
-          name: address.Name,
-          postcode: address.postcode,
-          phone: address.phone,
-          email: address.email,
-          date: firestore.FieldValue.serverTimestamp()
-        }
-      );
       await firestore.update(`users/${user.uid}`, {
-        [`cart`]: {}
+        [`mpesanumber`]: values.mpesa
       });
-      dispatch(asyncActionFinish());
-      toastr.success('', 'Your order is complete!');
-      } catch (error){
+      dispatch(asyncActionError());
+    } catch(error){
       console.log(error);
+      dispatch(asyncActionError());
     }
-  }
-
-  export const addQuantity = (product) => async (
-    dispatch, getState, {getFirestore, getFirebase}) => {
-      dispatch(asyncActionStart());
-      const firestore = getFirestore();
-      const firebase = getFirebase();
-      const user = firebase.auth().currentUser;
-      try {
-        await firestore.update(`users/${user.uid}`, {
-          [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(1),
-          [`cart.${product.id}.totalPrice`]: (product.quantity + 1) * (product.price - (product.price * product.discount / 100))
-        });
-        dispatch(asyncActionFinish());
-      } catch(error) {
-        console.log(error);
-      }
-    }
-
-    export const subtractQuantity = (product) => async (
-      dispatch, getState, {getFirestore, getFirebase}) => {
-        dispatch(asyncActionStart());
-        const firestore = getFirestore();
-        const firebase = getFirebase();
-        const user = firebase.auth().currentUser;
-        try {
-          await firestore.update(`users/${user.uid}`, {
-            [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(-1),
-            [`cart.${product.id}.totalPrice`]: (product.quantity - 1) * (product.price - (product.price * product.discount / 100))
-          });
-          dispatch(asyncActionFinish());
-        } catch(error) {
-          console.log(error);
-        }
-      }
+  };
+};

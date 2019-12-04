@@ -13,12 +13,14 @@ import { Link } from "react-router-dom";
 import { objectToArray } from "../../app/common/util/helpers";
 import UserAddressForm from "../user/UserDetailed/UserAddressForm";
 import { Loader } from "semantic-ui-react";
+import MpesaForm from "./MpesaForm";
 
 const mapState = (state, ownProps) => ({
   address: state.firebase.profile.newAddress,
   cart: objectToArray(state.firebase.profile.cart) || [],
   cartob: state.firebase.profile.cart,
-  loading: !state.async.loading
+  loading: !state.async.loading,
+  mpesanumber: state.firebase.profile.mpesanumber
 });
 
 const actions = {
@@ -31,12 +33,17 @@ const actions = {
 class Cart extends Component {
   state = {
     isAddressOneOpen: false,
-    isAddressTwoOpen: false
+    isAddressTwoOpen: false,
+    isMpesaFormOpen: false
   };
 
   closeForm = () => {
     this.setState({ isAddressOneOpen: false });
   };
+
+  closeMpesaForm = () => {
+    this.setState({isMpesaFormOpen: false})
+  }
 
   render() {
     const {
@@ -47,7 +54,8 @@ class Cart extends Component {
       cartob,
       loading,
       addQuantity,
-      subtractQuantity
+      subtractQuantity,
+      mpesanumber
     } = this.props;
     let totalCartPrice =
       cart &&
@@ -66,7 +74,7 @@ class Cart extends Component {
       cart && cart.length !== 0 && Math.round(shipping + totalCartPrice);
 
     let payButton;
-    if (cart && address && loading) {
+    if (cart && address && mpesanumber && loading) {
       payButton = (
         <div className={styles.pay}>
           <button
@@ -256,6 +264,28 @@ class Cart extends Component {
         )}
         {this.state.isAddressOneOpen && (
           <UserAddressForm closeForm={this.closeForm} />
+        )}
+        {cart.length !== 0 && !mpesanumber && address && (
+          <div className={styles.addaddress}>
+          <button
+            className={styles.addbutton}
+            onClick={() =>
+              this.setState({
+                isMpesaFormOpen: !this.state.isMpesaFormOpen
+              })
+            }
+          >
+            Add Mpesa Number
+          </button>
+        </div>
+        )}
+        {cart.length !==0 && mpesanumber && (
+          <div>
+          <span>{mpesanumber}</span><span>edit</span>
+          </div>
+        )}
+        {this.state.isMpesaFormOpen && (
+          <MpesaForm closeMpesaForm={this.closeMpesaForm} />
         )}
         {payButton}
       </div>
