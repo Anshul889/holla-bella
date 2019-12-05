@@ -35,8 +35,8 @@ const validate = combineValidators({
   )(),
   postcode: composeValidators(
     isRequired({ message: 'Please enter a postcode' }),
-    hasLengthBetween(6, 6)({
-      message: 'Postcode needs to be at least 6 characters'
+    hasLengthBetween(5, 5)({
+      message: 'Postcode needs to be 5 characters'
     }),
     isNumeric({message: 'Please enter a valid postcode'})
   )(),
@@ -74,6 +74,7 @@ class UserAddressForm extends Component {
           <Field placeholder={'email'} name='email' type='text' component={TextInput} rows={1} />
           <Field placeholder={'phone number'} name='phone' type='text' component={TextInput} rows={1} />
           <Button disabled={invalid || submitting || pristine} content="Submit"/>
+          <Button color='red' onClick={() => this.props.closeForm()} content="Cancel"/>
         </Form>
       </div>
     );

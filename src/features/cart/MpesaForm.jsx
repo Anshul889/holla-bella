@@ -34,6 +34,7 @@ class MpesaForm extends Component {
   render() {
     const { invalid, submitting } = this.props;
     return (
+      <div style={{width: '90%', margin: '50px auto', marginTop: '10px'}}>
       <Form onSubmit={this.props.handleSubmit(this.handleMpesaSubmit)}>
         <Field
           placeholder={'Mpesa Number'}
@@ -43,7 +44,9 @@ class MpesaForm extends Component {
           rows={1}
         />
         <Button disabled={invalid || submitting} content='Submit' />
+        <Button color='red' onClick={() => this.props.closeMpesaForm()} content="Cancel"/>
       </Form>
+      </div>
     );
   }
 }
@@ -53,7 +56,7 @@ export default withFirestore(
     null,
     actions
   )(
-    reduxForm({ form: 'addAddress', destroyOnUnmount: false, validate })(
+    reduxForm({ form: 'addAddress', validate })(
       MpesaForm
     )
   )

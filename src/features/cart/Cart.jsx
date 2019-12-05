@@ -84,7 +84,7 @@ class Cart extends Component {
             className={styles.addbutton}
             onClick={() => confirmOrder(totalAmount, cartob, address, mpesanumber)}
           >
-            Pay with Mpesa
+            Place Order
           </button>
         </div>
       );
@@ -263,6 +263,11 @@ class Cart extends Component {
             <span>{address.Name} </span>
             <span>{address.City} </span>
             <span>{address.postcode} </span>
+            <span  onClick={() =>
+              this.setState({
+                isAddressOneOpen: !this.state.isAddressOneOpen
+              })
+            } style={{color: '#c29957', fontWeight: '100', cursor: 'pointer', textDecoration: 'underline'}}>edit</span>
           </div>
         )}
         {this.state.isAddressOneOpen && (
@@ -286,10 +291,10 @@ class Cart extends Component {
           <div className={styles.addressc}>
           <div className={styles.addtitle}>Mpesa Number</div>
           <span>+{mpesanumber} </span>
-          <span style={{color: 'blue', fontWeight: '100', cursor: 'pointer'}} onClick={() => this.setState({
+          <span style={{color: '#c29957', fontWeight: '100', cursor: 'pointer', textDecoration: 'underline'}} onClick={() => this.setState({
             isMpesaFormOpen: !this.state.isMpesaFormOpen
           })}> edit </span>
-          <span onClick={() => {removeMpesaNumber()}} style={{color: 'red', fontWeight: '100', cursor: 'pointer'}}> delete </span>
+          <span onClick={() => {removeMpesaNumber()}} style={{color: 'red', fontWeight: '100', cursor: 'pointer',  textDecoration: 'underline'}}> delete </span>
         </div>
         )}
         {this.state.isMpesaFormOpen && (

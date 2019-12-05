@@ -286,7 +286,7 @@ export const confirmOrder = (totalAmount, cartob, address, mpesanumber) => async
         postcode: address.postcode,
         phone: address.phone,
         email: address.email,
-        mpesanumber: mpesanumber,
+        mpesanumber: parseInt(mpesanumber),
         date: firestore.FieldValue.serverTimestamp()
       }
     );
@@ -351,7 +351,7 @@ export const addMpesaNumber = values => {
     const user = firebase.auth().currentUser;
     try {
       await firestore.update(`users/${user.uid}`, {
-        [`mpesanumber`]: values.mpesa
+        [`mpesanumber`]: parseInt(values.mpesa)
       });
       dispatch(asyncActionError());
     } catch(error){
