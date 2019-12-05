@@ -4,7 +4,7 @@ import { getJewellery } from "./JewelleryActions";
 import styles from "./Jewellery.module.css";
 import { Link } from "react-router-dom";
 import { Placeholder } from "semantic-ui-react";
-import jewelleryimg from '../../../assets/Jewellery.png'
+import jewelleryimg from '../../../assets/Jewellery.jpg'
 
 const mapState = state => ({
   jewellery: state.jewellery
@@ -40,7 +40,7 @@ class Jewellery extends Component {
     if (products.length === 0) {
       return (
         <div className={styles.jewellery}>
-          <img style={{ width: "100%" }} src={jewelleryimg} alt="jewellery" />
+          <img src={jewelleryimg} alt="jewellery" />
           <h1 className={styles.heading}>Jewellery</h1>
           <div className={styles.container}>
             <div className={styles.inner}>

@@ -59,3 +59,16 @@
 .price {
   margin-bottom: 5px;
 }
+
+@media screen and (min-width: 960px) {
+  .jewellery img{
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .inner {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+}
