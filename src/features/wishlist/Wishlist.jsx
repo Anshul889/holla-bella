@@ -10,6 +10,8 @@ import { compose } from "redux";
 import styles from "./Wishlist.module.css";
 import { Link } from "react-router-dom";
 import { Button, Loader } from "semantic-ui-react";
+import heart from '../../assets/heart.svg';
+import { objectToArray } from '../../app/common/util/helpers';
 
 
 const mapState = (state, ownProps) => ({
@@ -34,9 +36,10 @@ class Wishlist extends Component {
   }
 
   render() {
-    const { wishlist, removeFromWishlist, addToCart , auth, loading } = this.props;
+    const { wishlist, removeFromWishlist, addToCart , auth, loading, profile } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     let values = { quantity: 1 };
+    const carters= profile.cart && objectToArray(profile.cart);
     if (wishlist && wishlist.length === 0 && loading) {
       return (
         <div>
@@ -78,21 +81,27 @@ class Wishlist extends Component {
                     </Link>
                   </div>
                   <div className={styles.content}>
-                    <h3>
+                    <div className={styles.title}>
                       <Link to={`/product/${product.id}`}>{product.title}</Link>
-                    </h3>
-                    <p>
+                    </div>
+                    <div className={styles.price}>
                       {product.price - (product.price * product.discount) / 100}{" "}
                       KSH
-                    </p>
-                    <Button
-                      onClick={() => removeFromWishlist(product)}
-                      content={"Remove from Wishlist"}
-                    />
-                    <Button
+                    </div>
+                  <img
+                    alt='dislike'
+                    src={heart}
+                    onClick={() => removeFromWishlist(product)
+                    }
+                    
+                  />
+                
+                  {carters && !carters.some(a => a.id === product.id) &&
+                    (<div><Button
                       onClick={() => addToCart(product, values)}
                       content={"Add to cart"}
                     />
+                    </div>)}
                   </div>
                 </div>
               ))}

@@ -1,7 +1,8 @@
 .container{
   width: 90%;
   margin: 0 auto;
-  padding: 25px 0
+  padding: 25px 0;
+  margin-bottom: 42px;
 }
 
 .inner {
@@ -14,12 +15,19 @@
 }
 
 .product {
+  padding-top: 15px;
   width: 100%;
+  z-index: 500;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-column-gap: 10px;
 }
 
 .image img {
   width: 100%;
-  border-radius: 20px;
+  text-align: center;
+  box-shadow:
+  0.1em 0.2em 0.9em rgba(0.1, 0.1, 0.1, 0.1);
 }
 
 .wishempty {
@@ -34,4 +42,25 @@
   text-transform: uppercase;
   font-weight: 100;
   margin-bottom: 22px;
+}
+
+.title a{
+  color: #6c6c6c;
+}
+
+.title {
+  grid-column: 1 /span 2;
+}
+
+.price {
+  font-weight: 700;
+  color: black;
+  grid-column: 1 /span 2;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  align-items: center;
+  grid-column-gap: 10px;
 }
