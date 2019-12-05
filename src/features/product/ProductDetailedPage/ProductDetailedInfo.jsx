@@ -201,6 +201,9 @@ class ProductDetailedInfo extends React.Component {
               <div className={styles.shippingdetails}>
                 Free shipping for orders over 1000 ksh
               </div>
+              <div className={styles.shippingdetails}>
+                Same day delivery for orders before 12pm
+              </div>
             </div>
             <div className={styles.description}>
               <h4 className={styles.descriptionhead}>Description</h4>

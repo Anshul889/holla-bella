@@ -126,6 +126,15 @@ function checkValidServiceWorker(swUrl, config) {
     });
 }
 
+window.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(names) {
+      for (let name of names) caches.delete(name);
+    })
+  );
+  window.location.href = './';
+});
+
 export function unregister() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready.then(registration => {
