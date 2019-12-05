@@ -1,7 +1,11 @@
 .banner {
+  background-color: #e9e4e4;
+}
+
+.inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background-color: #e9e4e4;
+  margin: 0 auto;
   padding: 25px 0;
   align-items: center;
   justify-items: center;
@@ -104,5 +108,24 @@
   color: white;
   text-transform: uppercase;
   font-size: large;
+}
+
+@media screen and (min-width: 960px) {
+  .inner {
+    max-width: 800px;
+  }
+  .inner img {
+    width: 200px;
+  }
+  .benefits {
+    grid-template-columns: repeat(4, 1fr);
+    padding-bottom: 20px;
+    max-width: 1024px;
+  }
+  .categories{
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 15px;
+    max-width: 1024px;
+  }
 }
 

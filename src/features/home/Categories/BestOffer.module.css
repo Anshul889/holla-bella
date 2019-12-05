@@ -57,3 +57,10 @@
 @keyframes blinker {  
   50% { opacity: 0; }
 }
+
+@media screen and (min-width: 960px) {
+  .inner{
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1024px;
+  }
+}

@@ -18,6 +18,7 @@ class HomePage extends Component {
     return (
       <div>
         <div className={styles.banner}>
+          <div className={styles.inner}>
           <div>
             <h2>
               Special
@@ -27,6 +28,7 @@ class HomePage extends Component {
           </div>
           <div>
             <img src={bag} alt='' />
+          </div>
           </div>
         </div>
         <TopSellers />

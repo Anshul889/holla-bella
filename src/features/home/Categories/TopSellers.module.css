@@ -54,3 +54,22 @@
 .title a{
   color: #6c6c6c;
 }
+
+@media screen and (min-width: 960px) {
+  .inner {
+    width: calc(90% + 40px);
+    max-width: 1024px;
+    grid-template-columns: repeat(6, 1fr);
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .product {
+    transform: translateY(0px)
+  }
+  .container {
+    padding: 50px 0;
+  }
+  .container h3 {
+    padding-bottom: 10px;
+  }
+}
