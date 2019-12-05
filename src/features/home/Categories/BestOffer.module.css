@@ -6,6 +6,8 @@
 
 .container h2 {
   text-align: center;
+  text-transform: uppercase;
+  font-size: 18px;
 }
 
 .inner {
@@ -59,6 +61,13 @@
 }
 
 @media screen and (min-width: 960px) {
+  .container{
+    padding: 50px 0;
+  }
+
+  .container h2 {
+    margin-bottom: 25px;
+  }
   .inner{
     grid-template-columns: repeat(4, 1fr);
     max-width: 1024px;

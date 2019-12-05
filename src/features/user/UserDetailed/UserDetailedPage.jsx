@@ -83,7 +83,7 @@ class UserDetailedPage extends Component {
             <Button icon='trash' onClick={removeNewAddressTwo}></Button>
           </div>
         )}
-        <div style={{ width: '90%', margin: '20px auto' }}>
+        <div style={{ width: '90%', margin: '20px auto', maxWidth: '1080px' }}>
           {profile.newAddress ? (
             null
           ) : (

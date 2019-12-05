@@ -1,6 +1,7 @@
 .container{
   width: 90%;
   margin: 0 auto;
+  max-width: 1080px;
 }
 
 .heading {
@@ -27,6 +28,7 @@
   border-bottom: 1px solid #e9e9e9;
   padding: 10px 0;
   font-weight: 700;
+  max-width: 1080px;
 }
 
 .inner {
@@ -135,12 +137,14 @@
   width: 90%;
   margin: 0 auto;
   text-transform: uppercase;
+  max-width: 1080px;
 }
 
 .addressc{
   width: 90%;
   margin: 0 auto;
   margin-bottom: 20px;
+  max-width: 1080px;
 }
 
 .addtitle {
@@ -230,4 +234,9 @@
   width: 90%;
   margin: 0 auto;
   margin-bottom: 20px;
+  max-width: 1080px;
+}
+
+@media screen and (min-width: 960px) {
+
 }

@@ -62,3 +62,15 @@
   color:red;
   text-decoration: underline;
 }
+
+@media screen and (min-width: 960px) {
+  .container{
+    max-width: 1080px;
+  }
+  .address1 {
+    max-width: 1080px;
+  }
+  .addressshow {
+    font-size: 14px;
+  }
+}
