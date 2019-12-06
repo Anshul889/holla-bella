@@ -15,10 +15,10 @@ const {
   transactionStatus
 } = mpesaApi
 
-exports.completePayment = functions.firestore.document('users/{userId}/confirmed_orders/{confirmedId}').onCreate(confirmedOrder => {
-  let newConfirmedOrder = confirmedOrder.data();
+exports.completePayment = functions.firestore.document('users/{userId}/confirmed_orders/{autoId}').onCreate(async (snap, context) => {
+  let newConfirmedOrder = snap.data();
 
-  console.log(newConfirmedOrder);
+  alert('Payment succesful');
 
   const testMSISDN = 254708374149
 })
