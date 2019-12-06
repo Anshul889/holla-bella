@@ -3,10 +3,10 @@ import TopSellers from './Categories/TopSellers';
 import BestOffer from './Categories/BestOffer';
 import styles from './HomePage.module.css';
 import bag from '../../assets/Layer5.png';
-import bell from '../../assets/Vector Smart Object.png';
-import gift from '../../assets/Vector Smart Object-2.png';
-import quality from '../../assets/Vector Smart Object-3.png';
-import delivery from '../../assets/Vector Smart Object-4.png';
+import bell from '../../assets/icons-hb-notification.svg';
+import gift from '../../assets/icons-hb-gift.svg';
+import quality from '../../assets/icons-hb-quality.svg';
+import delivery from '../../assets/icons-hb-delivery.svg';
 import { Button } from 'semantic-ui-react';
 import bags from '../../assets/bags2.jpg';
 import beauty from '../../assets/makeup2.jpg';
@@ -33,7 +33,7 @@ class HomePage extends Component {
         </div>
         <TopSellers />
         <div className={styles.benefits}>
-          <div className={styles.icond}>
+          <div className={styles.icon}>
             <div className={styles.outer}>
               <img src={delivery} alt='free delivery' />
             </div>

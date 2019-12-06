@@ -61,7 +61,6 @@ class ProductDetailedInfo extends React.Component {
       }
       quantity.push({ key: i, text: i, value: i });
     }
-    console.log(quantity);
     return (
       <React.Fragment>
         <h1 className={styles.heading}>{product.title}</h1>

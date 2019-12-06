@@ -16,9 +16,19 @@ const {
 } = mpesaApi
 
 exports.completePayment = functions.firestore.document('users/{userId}/confirmed_orders/{autoId}').onCreate(async (snap, context) => {
+  try {
   let newConfirmedOrder = snap.data();
-
-  alert('Payment succesful');
-
-  const testMSISDN = 254708374149
+  const amount = newConfirmedOrder.amount;
+  const testMSISDN = 254708374149;
+  let url = 'hola-bella-adbba.web.app';
+  const response = await mpesaApi.c2bRegister(URL + '/cart', URL + '/c2b/success');
+  return snap.ref.set(response, {merge: true});
+  } catch(error){
+    await snap.ref.set({error: userFacingMessage(error)},
+    {merge: true});
+  }
 })
+
+function userFacingMessage(error) {
+  return error.type ? error.message : 'An error occurred, developers have been alerted';
+}

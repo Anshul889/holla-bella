@@ -55,14 +55,6 @@
   text-align: center;
 }
 
-.outer {
-  border: 2px solid #c29957;
-  border-radius: 50%;
-  padding: 20px;
-  width: 80px;
-  height: 80px;
-  margin: 0 auto;
-}
 
 .benefits h4 {
   margin: 10px 0;
@@ -77,9 +69,10 @@
   padding: 20px 0;
 }
 
-.icond img{
+.icon img{
   margin: 0 auto;
   transform: translateX(-3px);
+  width: 30%;
 }
 
 .icon img{
