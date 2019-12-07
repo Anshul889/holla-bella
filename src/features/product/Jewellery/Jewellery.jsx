@@ -40,7 +40,7 @@ class Jewellery extends Component {
     if (products.length === 0) {
       return (
         <div className={styles.jewellery}>
-          <img src={jewelleryimg} alt="jewellery" />
+          <img className={styles.jewelimg} src={jewelleryimg} alt="jewellery" />
           <h1 className={styles.heading}>Jewellery</h1>
           <div className={styles.container}>
             <div className={styles.inner}>
@@ -93,7 +93,7 @@ class Jewellery extends Component {
     }
     return (
       <div className={styles.jewellery}>
-        <img style={{ width: "100%" }} src={jewelleryimg} alt="jewellery" loading='lazy'/>
+        <img className={styles.jewelimg} src={jewelleryimg} alt="jewellery"/>
         <h1 className={styles.heading}>Jewellery</h1>
         <div className={styles.container}>
           <div className={styles.inner}>
@@ -105,7 +105,7 @@ class Jewellery extends Component {
                       <img
                         src={product.photoURL}
                         alt={product.title}
-                        loading={"lazy"}
+                        loading="lazy"
                       />
                     </Link>
                   </div>

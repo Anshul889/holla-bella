@@ -9,14 +9,17 @@
   transform: translateY(-5px);
 }
 
-.jewellery img {
+.jewelimg{
+  width: 100%;
+  height: 150px;
   object-fit: cover;
+  display: block;
 }
 
-.container{
+.container {
   width: 90%;
   margin: 0 auto;
-  padding: 25px 0
+  padding: 25px 0;
 }
 
 .container h2 {
@@ -43,20 +46,19 @@
 
 .image img {
   width: 100%;
-  box-shadow:
-  0.1em 0.2em 0.9em rgba(0.1, 0.1, 0.1, 0.1);
+  box-shadow: 0.1em 0.2em 0.9em rgba(0.1, 0.1, 0.1, 0.1);
 }
 
 .content a {
   font-size: 12px;
 }
 
-.price a{
+.price a {
   font-weight: 700;
   color: black;
 }
 
-.title a{
+.title a {
   color: #6c6c6c;
 }
 
@@ -65,11 +67,9 @@
 }
 
 @media screen and (min-width: 960px) {
-  .jewellery img{
+  .jewelimg{
     height: 250px;
-    object-fit: cover;
   }
-
   .inner {
     grid-template-columns: repeat(4, 1fr);
     max-width: 1080px;

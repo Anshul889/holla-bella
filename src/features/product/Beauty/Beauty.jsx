@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getBeauty } from "./BeautyActions";
 import styles from "./Beauty.module.css";
 import { Link } from "react-router-dom";
-import beautyimg from "../../../assets/Beauty.png";
+import beautyimg from "../../../assets/beauty.jpg";
 import { Placeholder } from "semantic-ui-react";
 
 const mapState = state => ({
@@ -40,7 +40,7 @@ class Beauty extends Component {
     if (products.length === 0) {
       return (
         <div className={styles.beauty}>
-          <img style={{ width: "100%" }} src={beautyimg} alt="beauty" />
+          <img className={styles.beautimg} src={beautyimg} alt="beauty" />
           <h1 className={styles.heading}>Beauty</h1>
           <div className={styles.container}>
             <div className={styles.inner}>
@@ -93,7 +93,7 @@ class Beauty extends Component {
     }
     return (
       <div className={styles.beauty}>
-        <img style={{ width: "100%" }} src={beautyimg} alt="beauty" />
+        <img className={styles.beautimg} src={beautyimg} alt="beauty" />
         <h1 className={styles.heading}>Beauty</h1>
         <div className={styles.container}>
           <div className={styles.inner}>
