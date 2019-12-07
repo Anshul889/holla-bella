@@ -74,7 +74,7 @@ class Cart extends Component {
       shipping = 0;
     }
     const totalAmount =
-      cart && cart.length !== 0 && Math.round(shipping + totalCartPrice);
+      cart && cart.length !== 0 && Math.round(shipping + totalCartPrice + 16*totalCartPrice/100);
 
     let payButton;
     if (cart && address && mpesanumber && loading) {
@@ -231,6 +231,12 @@ class Cart extends Component {
               ) : (
                 <div className={styles.shippingp}>Free</div>
               )}
+            </div>
+          )}
+          {cart.length !== 0 && (
+            <div className={styles.shippingc} style={{paddingTop: '0px'}}>
+              Vat(16%) :
+                <div className={styles.shippingp}>{Math.round(16* totalCartPrice/100)} KSH</div>
             </div>
           )}
         </div>
