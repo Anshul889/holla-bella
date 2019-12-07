@@ -37,14 +37,8 @@
 @media screen and (min-width: 950px) {
   .glogin {
     display: grid;
-    grid-template-columns: max-content max-content;
-    border-width: 0;
-    color: #737373;
+    grid-template-columns: max-content;
     border-radius: 50px;
-    box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.05);
-    transition-property: background-color, box-shadow;
-    transition-duration: 150ms;
-    transition-timing-function: ease-in-out;
     margin-left: 15px;
   }
   .authtext {

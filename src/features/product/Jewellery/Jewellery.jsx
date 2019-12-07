@@ -93,7 +93,7 @@ class Jewellery extends Component {
     }
     return (
       <div className={styles.jewellery}>
-        <img style={{ width: "100%" }} src={jewelleryimg} alt="jewellery" />
+        <img style={{ width: "100%" }} src={jewelleryimg} alt="jewellery" loading='lazy'/>
         <h1 className={styles.heading}>Jewellery</h1>
         <div className={styles.container}>
           <div className={styles.inner}>

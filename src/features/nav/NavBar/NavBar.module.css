@@ -16,8 +16,7 @@
   grid-template-rows: 56px;
   background: 0 0;
   z-index: 1009;
-  color: white;
-  text-transform: uppercase;
+  color: #c29957;
   font-weight: 600;
   background-color: white;
   font-size: 15px;
@@ -39,7 +38,7 @@
 }
 
 .dnavigation a {
-  color: #ffffff;
+  color: #c29957;
   text-decoration: none;
 }
 
