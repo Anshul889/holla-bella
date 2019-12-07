@@ -69,7 +69,7 @@ class Cart extends Component {
 
     let shipping;
     if (totalCartPrice < 1000) {
-      shipping = 50;
+      shipping = 300;
     } else {
       shipping = 0;
     }
@@ -223,7 +223,7 @@ class Cart extends Component {
               Shipping :
               {shipping > 0 ? (
                 <>
-                  <div className={styles.shippingp}>50 KSH</div>
+                  <div className={styles.shippingp}>300 KSH</div>
                   <div className={styles.shippingw}>
                     Free shipping on orders above 1000 KSH
                   </div>

@@ -103,7 +103,7 @@
   font-size: large;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 800px) {
   .inner {
     max-width: 800px;
   }

@@ -237,7 +237,7 @@
   max-width: 1080px;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 800px) {
   .quantity{
     padding-left: 8%;
   }

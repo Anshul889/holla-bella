@@ -55,7 +55,7 @@
   color: #6c6c6c;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 800px) {
   .inner {
     width: calc(90% + 40px);
     max-width: 1024px;

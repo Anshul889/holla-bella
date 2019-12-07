@@ -63,7 +63,7 @@
   text-decoration: underline;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 800px) {
   .container{
     max-width: 1080px;
   }

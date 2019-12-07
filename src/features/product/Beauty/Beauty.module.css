@@ -67,7 +67,7 @@
   margin-bottom: 5px;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 800px) {
   .beautimg{
     height: 250px;
   }

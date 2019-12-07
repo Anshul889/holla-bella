@@ -31,7 +31,23 @@ class HomePage extends Component {
           </div>
           </div>
         </div>
-        <TopSellers />
+        <div className={styles.categories}>
+        <div style={{backgroundImage: `url(${jewellery})`}} className={styles.category}>
+            <h5>Jewellery</h5>
+            <div></div>
+            <Link to='/jewellery'><Button>SHOP NOW</Button></Link>
+          </div>
+          <div style={{backgroundImage: `url(${beauty})`}} className={styles.category}>
+            <h5 >Beauty</h5>
+            <div></div>
+            <Link to='/beauty'><Button>SHOP NOW</Button></Link>
+          </div>
+          <div style={{backgroundImage: `url(${bags})`}} className={styles.category}>
+            <h5>Bags</h5>
+            <div></div>
+            <Link to='/bags'><Button>SHOP NOW</Button></Link>
+          </div>
+        </div>
         <div className={styles.benefits}>
           <div className={styles.icon}>
             <div className={styles.outer}>
@@ -44,7 +60,6 @@ class HomePage extends Component {
             <img src={gift} alt='gift voucher' />
             </div>
             <h4>Gift<br /> Voucher</h4>
-
           </div>
           <div className={styles.icon}>
           <div className={styles.outer}>
@@ -58,24 +73,8 @@ class HomePage extends Component {
             </div>
             <h4>Delivery Notifications</h4>
           </div>
-        </div>
-        <div className={styles.categories}>
-          <div style={{backgroundImage: `url(${beauty})`}} className={styles.category}>
-            <h5 >Beauty</h5>
-            <div></div>
-            <Link to='/beauty'><Button>SHOP NOW</Button></Link>
-          </div>
-          <div style={{backgroundImage: `url(${jewellery})`}} className={styles.category}>
-            <h5>Jewellery</h5>
-            <div></div>
-            <Link to='/jewellery'><Button>SHOP NOW</Button></Link>
-          </div>
-          <div style={{backgroundImage: `url(${bags})`}} className={styles.category}>
-            <h5>Bags</h5>
-            <div></div>
-            <Link to='/bags'><Button>SHOP NOW</Button></Link>
-          </div>
-        </div>
+        </div> 
+        <TopSellers />
         <BestOffer />
       </div>
     );
