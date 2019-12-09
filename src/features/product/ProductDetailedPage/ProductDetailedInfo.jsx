@@ -138,21 +138,22 @@ class ProductDetailedInfo extends React.Component {
                 style={{
                   width: '100%',
                   display: 'grid',
-                  gridTemplateColumns: '100px max-content',
+                  gridTemplateColumns: '110px max-content',
                   gridTemplateRows: '38px',
                   gridGap: '10px'
                 }}>
-                <Field
+                {!isCarter &&
+                (<Field
                   name='quantity'
                   type='text'
                   component={SelectInput}
                   options={quantity}
                   placeholder='Quantity'
-                />
+                />)}
                 {authenticated && isCarter && (
-                  <Button className={styles.cartbutton} type='submit'>
-                    Update Cart
-                  </Button>
+                  <div style={{color: 'green', alignSelf: 'center'}}>
+                   ✔ Added to Cart
+                  </div>
                 )}
                 {authenticated && !isCarter && (
                   <Button className={styles.cartbutton} type='submit'>

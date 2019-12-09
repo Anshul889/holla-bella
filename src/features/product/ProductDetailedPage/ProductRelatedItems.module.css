@@ -23,6 +23,9 @@
 
 .image {
   width: 100%;
+  box-shadow:
+  0.1em 0.2em 0.9em rgba(0.1, 0.1, 0.1, 0.1);
+  -webkit-box-shadow: 0.1em 0.2em 0.9em rgba(0.1, 0.1, 0.1, 0.1);
 }
 
 .product {
@@ -30,11 +33,21 @@
   transform: translateX(5%);
 }
 
-.image img {
-  width: 100%;
-  border-radius: 20px;
-}
 
 .content a {
   font-size: 12px;
+}
+
+@media screen and (min-width: 800px) {
+  .inner{
+    grid-template-columns: repeat(5, 1fr);
+    margin: 0 auto;
+    max-width: 1080px;
+    width: 90%;
+    padding: 0 2%;
+  }
+  .product{
+    transform: translateX(0%);
+    padding: 10px 0;
+  }
 }

@@ -1,9 +1,13 @@
 import React from 'react'
 import { Button, Icon } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
-const SocialLogin = ({socialLogin, closeModal}) => {
+const SocialLogin = ({socialLogin, closeModal, registerUser}) => {
   return (
         <div>
+          <Link to='/register'><Button onClick={closeModal} type="button" style={{ marginBottom: '10px' }} fluid>
+           Register
+          </Button></Link>
           <Button onClick={() => socialLogin('facebook')} type="button" style={{ marginBottom: '10px' }} fluid color="facebook">
             <Icon name="facebook" /> Login with Facebook
           </Button>

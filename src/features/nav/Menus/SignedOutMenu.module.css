@@ -11,7 +11,7 @@
   border-radius: 50px;
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 800px) {
   .authtext {
     margin-left: 0;
     letter-spacing: 0.0075rem;
@@ -28,13 +28,14 @@
   }
   .authOuttext {
     font-size: 12px;
+    color: black;
   }
   .mnavimg{
     margin-top: 3px;
   }
 }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 800px) {
   .glogin {
     display: grid;
     grid-template-columns: max-content;
