@@ -6,7 +6,7 @@ const SocialLogin = ({socialLogin, closeModal, registerUser}) => {
   return (
         <div>
           <Link to='/register'><Button onClick={closeModal} type="button" style={{ marginBottom: '10px' }} fluid>
-           Register
+           Register with Email
           </Button></Link>
           <Button onClick={() => socialLogin('facebook')} type="button" style={{ marginBottom: '10px' }} fluid color="facebook">
             <Icon name="facebook" /> Login with Facebook

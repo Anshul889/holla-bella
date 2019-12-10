@@ -20,10 +20,19 @@
   width: 90%;
   margin: 0 auto;
   padding: 25px 0;
+  max-width: 1080px;
 }
 
 .container h2 {
   text-align: center;
+}
+
+.filter {
+  max-width: 1080px;
+  padding-bottom: 20px;
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  align-items: center;
 }
 
 .inner {

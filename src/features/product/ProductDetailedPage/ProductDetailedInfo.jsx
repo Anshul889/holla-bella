@@ -152,7 +152,7 @@ class ProductDetailedInfo extends React.Component {
                 />)}
                 {authenticated && isCarter && (
                   <div style={{color: 'green', alignSelf: 'center'}}>
-                   ✔ Added to Cart
+                   &#10003; Added to Cart
                   </div>
                 )}
                 {authenticated && !isCarter && (

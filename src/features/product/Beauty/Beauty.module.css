@@ -4,8 +4,7 @@
   color: white;
   text-transform: uppercase;
   font-weight: 100;
-  margin-top: 0;
-  margin-bottom: 22px;
+  margin: 0;
   transform: translateY(-5px);
 }
 
@@ -24,6 +23,14 @@
 
 .container h2 {
   text-align: center;
+}
+
+.filter {
+  max-width: 1080px;
+  padding-bottom: 20px;
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  align-items: center;
 }
 
 .inner {
@@ -70,6 +77,10 @@
 @media screen and (min-width: 800px) {
   .beautimg{
     height: 250px;
+  }
+
+  .filter{
+    max-width: 1080px;
   }
   .inner {
     grid-template-columns: repeat(4, 1fr);

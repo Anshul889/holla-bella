@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 import TextInput from '../../../app/common/form/TextInput';
 import { Form, Segment, Button, Label } from 'semantic-ui-react';
+import {useHistory} from 'react-router-dom';
 
 const actions ={
   registerUser
@@ -18,6 +19,7 @@ const validate = combineValidators({
 })
 
 const Register =({handleSubmit, registerUser, error, invalid, submitting}) => {
+  let history= useHistory()
   return (
     <div>
       <Form size='large' onSubmit={handleSubmit(registerUser)}>
@@ -26,7 +28,7 @@ const Register =({handleSubmit, registerUser, error, invalid, submitting}) => {
           <Field name='email' type='text' component={TextInput} placeholder="Email"/>
           <Field name='password' type='password' component={TextInput} placeholder="Password"/>
           {error && <Label basic color='red'>{error}</Label>}
-          <Button disabled={invalid || submitting}>
+          <Button onClick={() => history.goBack()} disabled={invalid || submitting}>
             Register
           </Button>
         </Segment>

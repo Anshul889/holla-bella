@@ -4,7 +4,7 @@ import { getBeauty } from "./BeautyActions";
 import styles from "./Beauty.module.css";
 import { Link } from "react-router-dom";
 import beautyimg from "../../../assets/beauty.jpg";
-import { Placeholder } from "semantic-ui-react";
+import { Placeholder, Button } from "semantic-ui-react";
 
 const mapState = state => ({
   beauty: state.beauty
@@ -16,19 +16,54 @@ const actions = {
 
 class Beauty extends Component {
   state = {
-    products: []
+    products: [],
+    sortedByPrice: '',
+    sortedByName: ''
   };
 
-  // function myFunction() {
-  //   cars.sort(function(a, b){
-  //     var x = a.type.toLowerCase();
-  //     var y = b.type.toLowerCase();
-  //     if (x < y) {return -1;}
-  //     if (x > y) {return 1;}
-  //     return 0;
-  //   });
-  //   displayCars();
-  // }
+  filterAsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b){
+      var x = a.price;
+      var y = b.price;
+      if (x < y) {return -1;}
+      if (x > y) {return 1;}
+      return 0;
+    });
+    this.setState({products: filteredProducts, sortedByPrice: 'priceLow'})
+  }
+
+  filterDsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b){
+      var x = a.price;
+      var y = b.price;
+      if (x < y) {return 1;}
+      if (x > y) {return -1;}
+      return 0;
+    });
+    this.setState({products: filteredProducts, sortedByPrice: 'priceHigh'})
+  }
+
+  filterNameAsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b){
+      var x = a.title.toLowerCase();
+      var y = b.title.toLowerCase();
+      if (x < y) {return -1;}
+      if (x > y) {return 1;}
+      return 0;
+    });
+    this.setState({products: filteredProducts, sortedByName: 'ZtoA'})
+  }
+
+  filterNameDsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b){
+      var x = a.title.toLowerCase();
+      var y = b.title.toLowerCase();
+      if (x < y) {return 1;}
+      if (x > y) {return -1;}
+      return 0;
+    });
+    this.setState({products: filteredProducts, sortedByName: 'AtoZ'})
+  }
 
   async componentDidMount() {
     await this.props.getBeauty();
@@ -36,7 +71,7 @@ class Beauty extends Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products, sortedByPrice, sortedByName } = this.state;
     if (products.length === 0) {
       return (
         <div className={styles.beauty}>
@@ -96,6 +131,13 @@ class Beauty extends Component {
         <img className={styles.beautimg} src={beautyimg} alt="beauty" />
         <h1 className={styles.heading}>Beauty</h1>
         <div className={styles.container}>
+          <div className={styles.filter}>
+            <div style={{color: 'black', fontWeight: '700', paddingRight: '5px'}}>Sort By</div>
+            {(sortedByPrice === '' || sortedByPrice ==='priceHigh') && <Button onClick={this.filterAsc}>Lowest Price</Button>}
+            {(sortedByPrice ==='priceLow') && <Button onClick={this.filterDsc}>Highest Price</Button>}
+            {(sortedByName === '' || sortedByName ==='ZtoA') && <Button onClick={this.filterNameDsc}>Name</Button>}
+            {(sortedByName ==='AtoZ') && <Button onClick={this.filterNameAsc}>Name</Button>}
+          </div>
           <div className={styles.inner}>
             {products &&
               products.map(product => (

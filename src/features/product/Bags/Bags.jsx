@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { getBags } from "./BagsActions";
 import styles from "./Bags.module.css";
 import { Link } from "react-router-dom";
-import { Placeholder } from "semantic-ui-react";
-import bagsimg from '../../../assets/Bags.png'
+import { Placeholder, Button } from "semantic-ui-react";
+import bagsimg from "../../../assets/Bags.png";
 
 const mapState = state => ({
   bags: state.bags
@@ -16,19 +16,70 @@ const actions = {
 
 class Bags extends Component {
   state = {
-    products: []
+    products: [],
+    sortedByPrice: "",
+    sortedByName: ""
   };
 
-  // function myFunction() {
-  //   cars.sort(function(a, b){
-  //     var x = a.type.toLowerCase();
-  //     var y = b.type.toLowerCase();
-  //     if (x < y) {return -1;}
-  //     if (x > y) {return 1;}
-  //     return 0;
-  //   });
-  //   displayCars();
-  // }
+  filterAsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b) {
+      var x = a.price;
+      var y = b.price;
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
+    });
+    this.setState({ products: filteredProducts, sortedByPrice: "priceLow" });
+  };
+
+  filterDsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b) {
+      var x = a.price;
+      var y = b.price;
+      if (x < y) {
+        return 1;
+      }
+      if (x > y) {
+        return -1;
+      }
+      return 0;
+    });
+    this.setState({ products: filteredProducts, sortedByPrice: "priceHigh" });
+  };
+
+  filterNameAsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b) {
+      var x = a.title.toLowerCase();
+      var y = b.title.toLowerCase();
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
+    });
+    this.setState({ products: filteredProducts, sortedByName: "ZtoA" });
+  };
+
+  filterNameDsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b) {
+      var x = a.title.toLowerCase();
+      var y = b.title.toLowerCase();
+      if (x < y) {
+        return 1;
+      }
+      if (x > y) {
+        return -1;
+      }
+      return 0;
+    });
+    this.setState({ products: filteredProducts, sortedByName: "AtoZ" });
+  };
 
   async componentDidMount() {
     await this.props.getBags();
@@ -36,7 +87,7 @@ class Bags extends Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products, sortedByPrice, sortedByName } = this.state;
     if (products.length === 0) {
       return (
         <div className={styles.bags}>
@@ -96,6 +147,25 @@ class Bags extends Component {
         <img style={{ width: "100%" }} src={bagsimg} alt="bags" />
         <h1 className={styles.heading}>Bags</h1>
         <div className={styles.container}>
+          <div className={styles.filter}>
+            <div
+              style={{ color: "black", fontWeight: "700", paddingRight: "5px" }}
+            >
+              Sort By
+            </div>
+            {(sortedByPrice === "" || sortedByPrice === "priceHigh") && (
+              <Button onClick={this.filterAsc}>Lowest Price</Button>
+            )}
+            {sortedByPrice === "priceLow" && (
+              <Button onClick={this.filterDsc}>Highest Price</Button>
+            )}
+            {(sortedByName === "" || sortedByName === "ZtoA") && (
+              <Button onClick={this.filterNameDsc}>Name</Button>
+            )}
+            {sortedByName === "AtoZ" && (
+              <Button onClick={this.filterNameAsc}>Name</Button>
+            )}
+          </div>
           <div className={styles.inner}>
             {products &&
               products.map(product => (
@@ -126,8 +196,10 @@ class Bags extends Component {
                         </span>
                       )}
                       <Link to={`/product/${product.id}`}>
-                        {Math.round(product.price -
-                          (product.price * product.discount) / 100)}{" "}
+                        {Math.round(
+                          product.price -
+                            (product.price * product.discount) / 100
+                        )}{" "}
                         KSH
                       </Link>
                       <br />

@@ -39,7 +39,6 @@ export const registerUser = user => async (
       createdAt: firestore.FieldValue.serverTimestamp()
     };
     await firestore.set(`users/${createdUser.user.uid}`, { ...newUser });
-    
   } catch (error) {
     console.log(error);
     throw new SubmissionError({
