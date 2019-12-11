@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getJewellery } from "./JewelleryActions";
 import styles from "./Jewellery.module.css";
 import { Link } from "react-router-dom";
-import { Placeholder } from "semantic-ui-react";
+import { Placeholder, Button } from "semantic-ui-react";
 import jewelleryimg from '../../../assets/Jewellery.jpg'
 
 const mapState = state => ({
@@ -16,19 +16,54 @@ const actions = {
 
 class Jewellery extends Component {
   state = {
-    products: []
+    products: [],
+    sortedByPrice: '',
+    sortedByName: ''
   };
 
-  // function myFunction() {
-  //   cars.sort(function(a, b){
-  //     var x = a.type.toLowerCase();
-  //     var y = b.type.toLowerCase();
-  //     if (x < y) {return -1;}
-  //     if (x > y) {return 1;}
-  //     return 0;
-  //   });
-  //   displayCars();
-  // }
+  filterAsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b){
+      var x = a.price;
+      var y = b.price;
+      if (x < y) {return -1;}
+      if (x > y) {return 1;}
+      return 0;
+    });
+    this.setState({products: filteredProducts, sortedByPrice: 'priceLow'})
+  }
+
+  filterDsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b){
+      var x = a.price;
+      var y = b.price;
+      if (x < y) {return 1;}
+      if (x > y) {return -1;}
+      return 0;
+    });
+    this.setState({products: filteredProducts, sortedByPrice: 'priceHigh'})
+  }
+
+  filterNameAsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b){
+      var x = a.title.toLowerCase();
+      var y = b.title.toLowerCase();
+      if (x < y) {return -1;}
+      if (x > y) {return 1;}
+      return 0;
+    });
+    this.setState({products: filteredProducts, sortedByName: 'ZtoA'})
+  }
+
+  filterNameDsc = () => {
+    let filteredProducts = this.state.products.sort(function(a, b){
+      var x = a.title.toLowerCase();
+      var y = b.title.toLowerCase();
+      if (x < y) {return 1;}
+      if (x > y) {return -1;}
+      return 0;
+    });
+    this.setState({products: filteredProducts, sortedByName: 'AtoZ'})
+  }
 
   async componentDidMount() {
     await this.props.getJewellery();
@@ -36,7 +71,7 @@ class Jewellery extends Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products,sortedByName, sortedByPrice } = this.state;
     if (products.length === 0) {
       return (
         <div className={styles.jewellery}>
@@ -96,6 +131,13 @@ class Jewellery extends Component {
         <img className={styles.jewelimg} src={jewelleryimg} alt="jewellery"/>
         <h1 className={styles.heading}>Jewellery</h1>
         <div className={styles.container}>
+        <div className={styles.filter}>
+        <div style={{color: 'black', fontWeight: '700', paddingRight: '5px', gridColumn:'1/span3', justifySelf:'center', paddingBottom:'15px'}}>Sort By</div>
+            <Button  active={sortedByPrice==='lowestPrice'} onClick={this.filterAsc}>Lowest Price</Button>
+            <Button active={sortedByPrice ==='highestPrice'} onClick={this.filterDsc}>Highest Price</Button>
+            {(sortedByName === '' || sortedByName ==='ZtoA') && <Button onClick={this.filterNameDsc}>Name</Button>}
+            {(sortedByName ==='AtoZ') && <Button onClick={this.filterNameAsc}>Name</Button>}
+            </div>
           <div className={styles.inner}>
             {products &&
               products.map(product => (

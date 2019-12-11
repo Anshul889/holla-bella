@@ -4,8 +4,7 @@
   color: white;
   text-transform: uppercase;
   font-weight: 100;
-  margin-top: 0;
-  margin-bottom: 22px;
+  margin: 0;
   transform: translateY(-5px);
 }
 
@@ -16,7 +15,7 @@
   display: block;
 }
 
-.container {
+.container{
   width: 90%;
   margin: 0 auto;
   padding: 25px 0;
@@ -78,6 +77,9 @@
 @media screen and (min-width: 800px) {
   .jewelimg{
     height: 250px;
+  }
+  .filter{
+    max-width: 1080px;
   }
   .inner {
     grid-template-columns: repeat(4, 1fr);
