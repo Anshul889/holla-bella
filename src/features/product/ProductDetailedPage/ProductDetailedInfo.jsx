@@ -6,6 +6,7 @@ import SelectInput from '../../../app/common/form/SelectInput';
 import { objectToArray } from '../../../app/common/util/helpers';
 import { Link } from 'react-router-dom';
 import heart from '../../../assets/heart.svg';
+import check from '../../../assets/check.svg';
 import heartlight from '../../../assets/heartlight.svg';
 import ImageCarousel from './ImageCarousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -151,8 +152,8 @@ class ProductDetailedInfo extends React.Component {
                   placeholder='Quantity'
                 />)}
                 {authenticated && isCarter && (
-                  <div style={{color: 'green', alignSelf: 'center'}}>
-                   &#10003; Added to Cart
+                  <div className={styles.added} style={{color: 'green'}} alt=''>
+                   <img src={check} /> <span>Added to Cart</span>
                   </div>
                 )}
                 {authenticated && !isCarter && (

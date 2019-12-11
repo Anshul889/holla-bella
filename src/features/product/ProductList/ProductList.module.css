@@ -8,6 +8,26 @@
   padding: 20px 0;
 }
 
+.filter {
+  max-width: 1080px;
+  padding-bottom: 20px;
+  display: grid;
+  grid-template-columns:1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 90%;
+  grid-gap: 20px;
+}
+
+.filter a {
+  color: #c29957;
+  font-weight: 600;
+  border: 1px solid #c29957;
+  border-radius: 50px;
+  padding: 0.78571429em 1.5em 0.78571429em;
+}
+
 
 @media screen and (min-width: 800px) {
   .container{

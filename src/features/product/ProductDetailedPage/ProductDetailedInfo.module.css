@@ -52,6 +52,17 @@
   font-size: 18px;
 }
 
+.added{
+  text-align: center;
+}
+
+.added img{
+  display: inline-block;
+  text-align: center;
+  width: 20px;
+  transform: translateY(5px);
+}
+
 .rating{
   display: block;
 }
@@ -93,7 +104,7 @@
     grid-template-columns: 1fr 1fr;
     max-width: 1080px;
     padding: 50px 0;
-    grid-gap: 40px;
+    grid-gap: 80px;
   }
   .description{
     border-bottom: none;
