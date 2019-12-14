@@ -34,7 +34,7 @@ class MpesaForm extends Component {
   render() {
     const { invalid, submitting } = this.props;
     return (
-      <div style={{width: '90%', margin: '50px auto', marginTop: '10px'}}>
+      <div style={{width: '90%', margin: '50px auto', marginTop: '10px', maxWidth: '1080px;'}}>
       <Form onSubmit={this.props.handleSubmit(this.handleMpesaSubmit)}>
         <Field
           placeholder={'Mpesa Number'}

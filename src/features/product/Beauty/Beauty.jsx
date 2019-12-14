@@ -135,8 +135,8 @@ class Beauty extends Component {
             <div style={{color: '#c29957', fontWeight: '700', paddingRight: '5px', gridColumn:'1/span3', justifySelf:'center', paddingBottom:'15px', textTransform: 'uppercase'}}>Sort By</div>
             <Button  active={sortedByPrice==='lowestPrice'} onClick={this.filterAsc}>Lowest Price</Button>
             <Button active={sortedByPrice ==='highestPrice'} onClick={this.filterDsc}>Highest Price</Button>
-            {(sortedByName === '' || sortedByName ==='ZtoA') && <Button onClick={this.filterNameDsc}>Name</Button>}
-            {(sortedByName ==='AtoZ') && <Button onClick={this.filterNameAsc}>Name</Button>}
+            {(sortedByName ==='ZtoA') && <Button onClick={this.filterNameDsc}>Name</Button>}
+            {(sortedByName === '' || sortedByName ==='AtoZ') && <Button onClick={this.filterNameAsc}>Name</Button>}
           </div>
           <div className={styles.inner}>
             {products &&
