@@ -3,6 +3,7 @@ import "firebase/firestore";
 import "firebase/database";
 import "firebase/auth";
 import "firebase/storage";
+import "firebase/functions";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,6 +18,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.firestore()
+firebase.firestore();
+firebase.functions();
 
 export default firebase;
