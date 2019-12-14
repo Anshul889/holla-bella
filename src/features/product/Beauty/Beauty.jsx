@@ -130,14 +130,14 @@ class Beauty extends Component {
       <div className={styles.beauty}>
         <img className={styles.beautimg} src={beautyimg} alt="beauty" />
         <h1 className={styles.heading}>Beauty</h1>
-        <div className={styles.container}>
-          <div className={styles.filter}>
-            <div style={{color: '#c29957', fontWeight: '700', paddingRight: '5px', gridColumn:'1/span3', justifySelf:'center', paddingBottom:'15px', textTransform: 'uppercase'}}>Sort By</div>
-            <Button  active={sortedByPrice==='lowestPrice'} onClick={this.filterAsc}>Lowest Price</Button>
-            <Button active={sortedByPrice ==='highestPrice'} onClick={this.filterDsc}>Highest Price</Button>
-            {(sortedByName === '' || sortedByName ==='ZtoA') && <Button onClick={this.filterNameDsc}>Name</Button>}
-            {(sortedByName ==='AtoZ') && <Button onClick={this.filterNameAsc}>Name</Button>}
+        <div className={styles.filter}>
+            <div style={{color: '#c29957', fontWeight: '700', paddingRight: '5px', gridColumn:'1 / 4', justifySelf:'center', paddingBottom:'15px', textTransform: 'uppercase'}}>Sort By</div>
+            <div><Button  active={sortedByPrice==='lowestPrice'} onClick={this.filterAsc}>Lowest Price</Button></div>
+            <div><Button active={sortedByPrice ==='highestPrice'} onClick={this.filterDsc}>Highest Price</Button></div>
+            {(sortedByName ==='ZtoA') && <div><Button onClick={this.filterNameDsc}>Name</Button></div>}
+            {(sortedByName === '' || sortedByName ==='AtoZ') && <div><Button onClick={this.filterNameAsc}>Name</Button></div>}
           </div>
+        <div className={styles.container}>
           <div className={styles.inner}>
             {products &&
               products.map(product => (

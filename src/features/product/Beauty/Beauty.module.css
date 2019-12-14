@@ -31,6 +31,8 @@
   display: grid;
   grid-template-columns: max-content max-content max-content;
   align-items: center;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .inner {
@@ -81,6 +83,8 @@
 
   .filter{
     max-width: 1080px;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
   }
   .inner {
     grid-template-columns: repeat(4, 1fr);
