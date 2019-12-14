@@ -56,7 +56,7 @@ class NavBar extends Component {
           <ul className={styles.rightdnav}>
           {authenticated &&
             <li className={styles.dItem}>
-            <Link to='/cart'>Cart {totalQuantity > 0 &&<span>({totalQuantity})</span>}</Link>
+            <Link to='/cart'>Cart {totalQuantity > 0 &&<span>({totalQuantity}) </span>}</Link>
           </li>}
           {authenticated ? (
             <SignedInMenu profile={profile} signOut={this.handleSignOut} auth={auth}/>
