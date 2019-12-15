@@ -72,7 +72,7 @@ class ProductDetailedInfo extends React.Component {
           <div style={{ paddingLeft: '2px' }}>
             <Link to={`/${product.category}`}> {'> ' + product.category} </Link>
           </div>
-          <div style={{ paddingLeft: '2px' }}>{'> ' + product.title}</div>
+          <div style={{ paddingLeft: '2px' }}>{'> ' + product.title.split(' ').slice(0,3).join(' ')}</div>
         </div>
         <div className={styles.product}>
           {/* <div className={styles.image}>
@@ -153,7 +153,7 @@ class ProductDetailedInfo extends React.Component {
                 />)}
                 {authenticated && isCarter && (
                   <div className={styles.added} style={{color: 'green'}} alt=''>
-                   <img src={check} /> <span>Added to Cart</span>
+                   <img src={check} alt=''/> <span>Added to Cart</span>
                   </div>
                 )}
                 {authenticated && !isCarter && (
