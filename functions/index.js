@@ -170,7 +170,6 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
             },
             function (error, responseMpesa, body) {
                 // TODO: Use the body object to extract OAuth access token
-                //return response.status(200).send(responseMpesa.body);
 
                 const authTokenObj = JSON.parse(responseMpesa.body);
 
