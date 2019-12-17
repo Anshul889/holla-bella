@@ -413,7 +413,7 @@ export const addMpesaNumber = values => {
         const user = firebase.auth().currentUser;
         try {
             await firestore.update(`users/${user.uid}`, {
-                [`mpesanumber`]: parseInt(values.mpesa)
+                [`mpesanumber`]:values.mpesa
             });
             dispatch(asyncActionError());
         } catch (error) {
