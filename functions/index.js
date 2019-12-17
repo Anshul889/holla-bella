@@ -156,7 +156,7 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
         const mpesanumber = requestBody.data.mpesanumber;
 
         var requestMpesa = require('request'),
-            oauth_token = "juwe6vKayfAoWbUFFB9HBZq49K6o",
+            oauth_token = "3OufGQKvdRGhv8rGC6fdPZZiADLY",
             url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
         auth = "Bearer " + oauth_token;
 
@@ -176,6 +176,7 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
 
                 if(typeof authTokenObj.access_token !== 'undefined') {
                     oauth_token = authTokenObj.access_token;
+                    auth = "Bearer " + oauth_token;
                     requestMpesa(
                         {
                             method: 'POST',
