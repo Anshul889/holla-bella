@@ -156,7 +156,7 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
         const mpesanumber = requestBody.data.mpesanumber;
 
         var requestMpesa = require('request'),
-            oauth_token = "juwe6vKayfAoWbUFFB9HBZq49K6o",
+            oauth_token = "3OufGQKvdRGhv8rGC6fdPZZiADLY",
             url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
         auth = "Bearer " + oauth_token;
 
@@ -170,12 +170,12 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
             },
             function (error, responseMpesa, body) {
                 // TODO: Use the body object to extract OAuth access token
-                //return response.status(200).send(responseMpesa.body);
 
                 const authTokenObj = JSON.parse(responseMpesa.body);
 
                 if(typeof authTokenObj.access_token !== 'undefined') {
                     oauth_token = authTokenObj.access_token;
+                    auth = "Bearer " + oauth_token;
                     requestMpesa(
                         {
                             method: 'POST',
@@ -205,8 +205,8 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
                                             "ShortCode": short_code, // The short code of the organization.
                                             "CommandID": "CustomerPayBillOnline",
                                             "Amount": amount,
-                                            //"Msisdn":mpesanumber,
-                                            "Msisdn": "254708374149",
+                                            "Msisdn":mpesanumber,
+                                            //"Msisdn": "254708374149",
                                             "BillRefNumber": "TXN191216"
                                         }
                                     },

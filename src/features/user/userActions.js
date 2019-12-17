@@ -300,7 +300,7 @@ export const confirmOrder = (totalAmount, cartob, address, mpesanumber) => async
                  * @type {firebase.functions.HttpsCallable}
                  */
                 var payMpesa = firebase.functions().httpsCallable('payMpesa');
-                payMpesa({amount: totalAmount, mpesanumber: mpesanumber}).then(function (result) {
+                payMpesa({amount: totalAmount, mpesanumber: '254' + parseInt(mpesanumber)}).then(function (result) {
                     // Read result of the Cloud Function.
                     //console.log("Mpesa response: " + JSON.stringify(result));
 
