@@ -7,6 +7,7 @@ const cors = require('cors')({origin: true});
 
 const consumer_key = "nQw3v67bCD9o6jAGImnvA9idgiOXFPLz";
 const consumer_secret = "AmNO8SRyQRdWNUGb";
+const short_code = "600375";
 
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
@@ -14,40 +15,26 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 });
 
 exports.mpesaAuth = functions.https.onRequest((request, response) => {
-    var requestMpesa = require('request'),
-        url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
-    auth = "Basic " + new Buffer(consumer_key + ":" + consumer_secret).toString("base64");
+    cors(request, response, () => {
+        var requestMpesa = require('request'),
+            url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
+        auth = "Basic " + new Buffer(consumer_key + ":" + consumer_secret).toString("base64");
 
-    requestMpesa(
-        {
-            url : url,
-            headers : {
-                "Authorization" : auth,
-                "Access-Control-Allow-Origin": "*"
-            }
-        },
-        function (error, responseMpesa, body) {
-            // TODO: Use the body object to extract OAuth access token
-            console.log("sd");
-            response.send(responseMpesa.body);
-        }
-    )
-    /*return cors(request, response, () => {
-        requestMy(
+        requestMpesa(
             {
-                url : url,
-                headers : {
-                    "Authorization" : auth,
+                url: url,
+                headers: {
+                    "Authorization": auth,
                     "Access-Control-Allow-Origin": "*"
                 }
             },
-            function (error, responseMy, body) {
+            function (error, responseMpesa, body) {
                 // TODO: Use the body object to extract OAuth access token
-                console.log("sd");
-                response.send(responseMy.body);
+                //console.log("sd");
+                return response.status(200).send(responseMpesa.body);
             }
-        )
-    });*/
+        );
+    });
 });
 
 exports.CustomerPayBillOnline = functions.https.onRequest((request, response) => {
@@ -59,11 +46,11 @@ exports.CustomerPayBillOnline = functions.https.onRequest((request, response) =>
     requestMpesa(
         {
             method: 'POST',
-            url : url,
-            headers : {
-                "Authorization" : auth
+            url: url,
+            headers: {
+                "Authorization": auth
             },
-            json : {
+            json: {
                 "BusinessShortCode": "174379",
                 "Password": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMTgwODE0MDg1NjIw",
                 "Timestamp": "20180814085620",
@@ -94,19 +81,19 @@ exports.AccountBalance = functions.https.onRequest((request, response) => {
     requestMpesa(
         {
             method: 'POST',
-            url : url,
-            headers : {
-                "Authorization" : auth
+            url: url,
+            headers: {
+                "Authorization": auth
             },
-            json : {
-                "Initiator":"Sanjay",
-                "SecurityCredential":"MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMTgwODE0MDg1NjIw",
-                "CommandID":"AccountBalance",
-                "PartyA":"174379",
-                "IdentifierType":"4",
-                "Remarks":"Check Account Balance",
-                "QueueTimeOutURL":"https://agizapap.com/rideNeibaResponse",
-                "ResultURL":"https://agizapap.com/rideNeibaResponse"
+            json: {
+                "Initiator": "Sanjay",
+                "SecurityCredential": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMTgwODE0MDg1NjIw",
+                "CommandID": "AccountBalance",
+                "PartyA": "174379",
+                "IdentifierType": "4",
+                "Remarks": "Check Account Balance",
+                "QueueTimeOutURL": "https://agizapap.com/rideNeibaResponse",
+                "ResultURL": "https://agizapap.com/rideNeibaResponse"
             }
         },
         function (error, responseMpesa, body) {
@@ -130,12 +117,12 @@ exports.C2BPay = functions.https.onRequest((request, response) => {
     requestMpesa(
         {
             method: 'POST',
-            url : url,
-            headers : {
-                "Authorization" : auth
+            url: url,
+            headers: {
+                "Authorization": auth
             },
-            json : {
-                "ShortCode": "174379",
+            json: {
+                "ShortCode": short_code,
                 "ResponseType": "Completed",
                 "ConfirmationURL": "https://agizapap.com/rideNeibaResponse",
                 "ValidationURL": "https://agizapap.com/rideNeibaResponse"
@@ -150,40 +137,98 @@ exports.C2BPay = functions.https.onRequest((request, response) => {
     )
 });
 
+exports.ConfirmationURL = functions.https.onRequest((request, response) => {
+    cors(request, response, () => {
+        response.json(response.body);
+    });
+});
+
+exports.ValidationURL = functions.https.onRequest((request, response) => {
+    cors(request, response, () => {
+        response.json(response.body);
+    });
+});
+
 exports.payMpesa = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
-        //console.log("Request Data: " + request);
-        response.status(200).send({test: 'Testing payMpesa: ' + request});
-    })
+        const requestBody = request.body;
+        const amount = requestBody.data.amount;
+        const mpesanumber = requestBody.data.mpesanumber;
 
-    var requestMpesa = require('request'),
-        oauth_token = "JtJg30Zf594S2071NIHIPj2gjLF6",
-        url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
-    auth = "Bearer " + oauth_token;
+        var requestMpesa = require('request'),
+            oauth_token = "juwe6vKayfAoWbUFFB9HBZq49K6o",
+            url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
+        auth = "Bearer " + oauth_token;
 
-    /**
-     *
-     */
-
-    requestMpesa(
-        {
-            method: 'POST',
-            url : url,
-            headers : {
-                "Authorization" : auth
+        requestMpesa(
+            {
+                url: "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+                headers: {
+                    "Authorization": "Basic " + new Buffer(consumer_key + ":" + consumer_secret).toString("base64"),
+                    "Access-Control-Allow-Origin": "*"
+                }
             },
-            json : {
-                "ShortCode":"174379", // The short code of the organization.
-                "CommandID":"CustomerPayBillOnline",
-                "Amount":"100",
-                "Msisdn":"+919584264871",
-                "BillRefNumber":"B5F66H"
+            function (error, responseMpesa, body) {
+                // TODO: Use the body object to extract OAuth access token
+                //return response.status(200).send(responseMpesa.body);
+
+                const authTokenObj = JSON.parse(responseMpesa.body);
+
+                if(typeof authTokenObj.access_token !== 'undefined') {
+                    oauth_token = authTokenObj.access_token;
+                    requestMpesa(
+                        {
+                            method: 'POST',
+                            url: url,
+                            headers: {
+                                "Authorization": auth
+                            },
+                            json: {
+                                "ShortCode": short_code,
+                                "ResponseType": "json",
+                                "ConfirmationURL": "https://hola-bella-adbaa.firebaseapp.com/ConfirmationURL",
+                                "ValidationURL": "https://hola-bella-adbaa.firebaseapp.com/ValidationURL"
+                            }
+                        },
+                        function (error, responseMpesa, body) {
+                            // TODO: Use the body object to extract the
+                            responseRegisterUrl = responseMpesa.body;
+                            if (responseRegisterUrl.ResponseDescription === "success") {
+                                requestMpesa(
+                                    {
+                                        method: 'POST',
+                                        url: "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/simulate",
+                                        headers: {
+                                            "Authorization": auth
+                                        },
+                                        json: {
+                                            "ShortCode": short_code, // The short code of the organization.
+                                            "CommandID": "CustomerPayBillOnline",
+                                            "Amount": amount,
+                                            //"Msisdn":mpesanumber,
+                                            "Msisdn": "254708374149",
+                                            "BillRefNumber": "TXN191216"
+                                        }
+                                    },
+                                    function (error, responseMpesa, body) {
+                                        // TODO: Use the body object to extract the response
+                                        response.json({
+                                            success: true,
+                                            data: responseMpesa.body
+                                        });
+                                    }
+                                )
+                            } else {
+                                response.json({
+                                    success: false
+                                });
+                            }
+                        }
+                    )
+                } else {
+                    return response.status(200).send({success: falsej});
+                }
             }
-        },
-        function (error, responseMpesa, body) {
-            // TODO: Use the body object to extract the response
-            console.log(body)
-            response.send(responseMpesa.body);
-        }
-    )
+        );
+    });
 });

@@ -290,6 +290,7 @@ export const confirmOrder = (totalAmount, cartob, address, mpesanumber) => async
                 date: firestore.FieldValue.serverTimestamp()
             }
         );
+
         await firestore.update(`users/${user.uid}`, {
             [`cart`]: {}
         })
@@ -301,22 +302,61 @@ export const confirmOrder = (totalAmount, cartob, address, mpesanumber) => async
                 var payMpesa = firebase.functions().httpsCallable('payMpesa');
                 payMpesa({amount: totalAmount, mpesanumber: mpesanumber}).then(function (result) {
                     // Read result of the Cloud Function.
+                    //console.log("Mpesa response: " + JSON.stringify(result));
+
+                    const payResponse = result.data;
+
+                    if (typeof payResponse.ConversationID !== 'undefined') {
+                        // The unique identifier of the transaction request, the purpose of this identifier is to track the transaction request.
+                        const conversationID = payResponse.ConversationID;
+                        // For every unique request made to M-Pesa, a new ConversationID is generated and returned in the response. This ConversationID carries the response from M-Pesa.
+                        const originatorCoversationID = payResponse.OriginatorCoversationID;
+                        // This is a response describing the status of the transaction. A string with the message "Transaction is accepted successfully or transaction has failed"
+                        const responseDescription = payResponse.ResponseDescription;
+
+                        const firestoreObj = firebase.firestore();
+                        for (var cartKey in cartob) {
+                            const originalCartKey = cartKey;
+                            cartKey = cartKey.split("_").join(" ");
+                            var cartProductQuantity = cartob[originalCartKey].quantity;
+                            cartProductQuantity = -cartProductQuantity;
+
+                            firestoreObj
+                                .collection('products').where("title", "==", cartKey)
+                                .get()
+                                .then(function(querySnapshot) {
+                                    querySnapshot.forEach(function(doc) {
+                                        const productDataObj = doc.data();
+                                        //console.log(doc.id, " => ", productDataObj);
+                                        // Build doc ref from doc.id
+                                        firestore.update(`products/${doc.id}`, {
+                                            [`remainingQuantity`]: firebase.firestore.FieldValue.increment(cartProductQuantity)
+                                        });
+                                    });
+                                })
+                        }
+                        toastr.success('', 'Your order is complete!');
+                    } else {
+                        toastr.error('', 'Oops! some error occured, please try again');
+                    }
+
                     var sanitizedMessage = result.data.text;
                 }).catch(function (error) {
-                    // Getting the Error details.
                     var code = error.code;
                     var message = error.message;
                     var details = error.details;
-                    // ...
+
+                    toastr.error('', 'Oops! some error occured, please try again');
                 });
             })
             .catch(function (error) {
                 console.error("Error: ", error);
+                toastr.error('', 'Oops! some error occured, please try again');
             });
         dispatch(asyncActionFinish());
 
 
-        toastr.success('', 'Your order is complete!');
+        //toastr.success('', 'Your order is complete!');
     } catch (error) {
         console.log(error);
     }
