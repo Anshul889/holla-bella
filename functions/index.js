@@ -205,8 +205,8 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
                                             "ShortCode": short_code, // The short code of the organization.
                                             "CommandID": "CustomerPayBillOnline",
                                             "Amount": amount,
-                                            //"Msisdn":mpesanumber,
-                                            "Msisdn": "254708374149",
+                                            "Msisdn":mpesanumber,
+                                            //"Msisdn": "254708374149",
                                             "BillRefNumber": "TXN191216"
                                         }
                                     },
