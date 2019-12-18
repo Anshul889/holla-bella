@@ -6,6 +6,7 @@ import SelectInput from '../../../app/common/form/SelectInput';
 import { objectToArray } from '../../../app/common/util/helpers';
 import { Link } from 'react-router-dom';
 import heart from '../../../assets/heart.svg';
+import share from '../../../assets/share-alt-light.svg';
 import check from '../../../assets/check.svg';
 import heartlight from '../../../assets/heartlight.svg';
 import ImageCarousel from './ImageCarousel';
@@ -29,6 +30,20 @@ class ProductDetailedInfo extends React.Component {
     const { addToCart, product } = this.props;
     addToCart(product, values);
   };
+
+  onShare = () => {
+    if (navigator.share) {
+     navigator.share({
+        title: this.props.product.title,
+        text: 'Get the best prices on Hola Bella',
+        url: `${this.props.product.id}`,
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    } else {
+      console.log('method is working')
+    }
+  }
 
   render() {
     const {
@@ -197,6 +212,7 @@ class ProductDetailedInfo extends React.Component {
                   />
                 </div>
               )}
+              <div><img src={share} alt="" style={{cursor: 'pointer'}} onClick={() => this.onShare()}/></div>
             </div>
             <div>
               <div className={styles.shippingdetails}>
