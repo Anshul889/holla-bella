@@ -5,9 +5,10 @@ const Mpesa = require("mpesa-node");
 
 const cors = require('cors')({origin: true});
 
-const consumer_key = "nQw3v67bCD9o6jAGImnvA9idgiOXFPLz";
-const consumer_secret = "AmNO8SRyQRdWNUGb";
-const short_code = "600375";
+const consumer_key = "rvqYNmIQlsYeUIApNgnBDxulXbHYEJD8";
+const consumer_secret = "81LiLzGgiQTy4Kln";
+const short_code = "685742";
+
 
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
@@ -157,12 +158,12 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
 
         var requestMpesa = require('request'),
             oauth_token = "3OufGQKvdRGhv8rGC6fdPZZiADLY",
-            url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
+            url = "https://api.safaricom.co.ke/mpesa/c2b/v1/registerurl"
         auth = "Bearer " + oauth_token;
 
         requestMpesa(
             {
-                url: "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+                url: "https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
                 headers: {
                     "Authorization": "Basic " + new Buffer(consumer_key + ":" + consumer_secret).toString("base64"),
                     "Access-Control-Allow-Origin": "*"
@@ -197,7 +198,7 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
                                 requestMpesa(
                                     {
                                         method: 'POST',
-                                        url: "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/simulate",
+                                        url: "https://api.safaricom.co.ke/mpesa/c2b/v1/simulate",
                                         headers: {
                                             "Authorization": auth
                                         },
