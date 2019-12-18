@@ -296,7 +296,7 @@ class Cart extends Component {
         {cart.length !==0 && mpesanumber && address && (
           <div className={styles.addressc}>
           <div className={styles.addtitle}>Mpesa Number</div>
-          <span>+{mpesanumber} </span>
+          <span>{mpesanumber} </span>
           <span style={{color: '#c29957', fontWeight: '100', cursor: 'pointer', textDecoration: 'underline'}} onClick={() => this.setState({
             isMpesaFormOpen: !this.state.isMpesaFormOpen
           })}> edit </span>
