@@ -1,4 +1,4 @@
-import { CarouselProvider, Image, Slide, Slider, ButtonNext, ButtonBack} from "pure-react-carousel";
+import { CarouselProvider, Image, Slide, Slider, ButtonNext, ButtonBack, DotGroup} from "pure-react-carousel";
 import React from "react";
 
 const ImageCarousel = ({photoURL, photoURL2, photoURL3}) => (
@@ -24,6 +24,7 @@ const ImageCarousel = ({photoURL, photoURL2, photoURL3}) => (
     <ButtonBack style={{position: 'absolute', top: '45%', left: '-20px', background: 'transparent', border: 'none'}} children='<'/>
     <ButtonNext style={{position: 'absolute',  top: '45%', right: '-20px', background: 'transparent', border: 'none'}} children='>'/>
     </div>
+    <DotGroup/>
   </CarouselProvider>
 );
 

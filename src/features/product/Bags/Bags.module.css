@@ -11,7 +11,8 @@
 .container{
   width: 90%;
   margin: 0 auto;
-  padding: 25px 0;
+  padding-bottom: 25px;
+  padding-top: 10px;
   max-width: 1080px;
 }
 
@@ -25,8 +26,9 @@
   display: grid;
   grid-template-columns: max-content max-content max-content;
   align-items: center;
+  width: 90%;
+  margin: 0 auto;
 }
-
 .inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -76,6 +78,8 @@
 
   .filter{
     max-width: 1080px;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
   }
 
   .inner {
