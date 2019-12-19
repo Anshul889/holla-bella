@@ -304,8 +304,8 @@ export const confirmOrder = (
                 var payMpesa = firebase.functions().httpsCallable("payMpesa");
                 payMpesa({
                     amount: totalAmount,
-                    //mpesanumber: parseInt("254" + mpesanumber)
-                    mpesanumber: parseInt(2540712293999)
+                    mpesanumber: parseInt("254" + mpesanumber)
+                    //mpesanumber: parseInt(2540712293999)
                 })
                     .then(function (result) {
                         // Read result of the Cloud Function.
