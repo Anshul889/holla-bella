@@ -5,10 +5,14 @@ const Mpesa = require("mpesa-node");
 
 const cors = require('cors')({origin: true});
 
-const consumer_key = "rvqYNmIQlsYeUIApNgnBDxulXbHYEJD8";
-const consumer_secret = "81LiLzGgiQTy4Kln";
-const short_code = "685742";
-
+/*const consumer_key = "nQw3v67bCD9o6jAGImnvA9idgiOXFPLz";
+const consumer_secret = "AmNO8SRyQRdWNUGb";
+const short_code = "600375";*/
+const consumer_key = "b12TFeabs0o9rlGbp51TA0S0yWIaDpvE";
+const consumer_secret = "NZnXX3tZYDRCv8vl";
+const short_code = "698246";
+//const mpesa_api_url = "https://sandbox.safaricom.co.ke/";
+const mpesa_api_url = "https://api.safaricom.co.ke/";
 
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
@@ -18,7 +22,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 exports.mpesaAuth = functions.https.onRequest((request, response) => {
     cors(request, response, () => {
         var requestMpesa = require('request'),
-            url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
+            url = mpesa_api_url + "oauth/v1/generate?grant_type=client_credentials"
         auth = "Basic " + new Buffer(consumer_key + ":" + consumer_secret).toString("base64");
 
         requestMpesa(
@@ -41,7 +45,7 @@ exports.mpesaAuth = functions.https.onRequest((request, response) => {
 exports.CustomerPayBillOnline = functions.https.onRequest((request, response) => {
     var requestMpesa = require('request'),
         oauth_token = "xO0aAe9rAicUQuTJsvhjSiEVA2R7",
-        url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
+        url = mpesa_api_url + "mpesa/stkpush/v1/processrequest"
     auth = "Bearer " + oauth_token;
 
     requestMpesa(
@@ -76,7 +80,7 @@ exports.CustomerPayBillOnline = functions.https.onRequest((request, response) =>
 exports.AccountBalance = functions.https.onRequest((request, response) => {
     var requestMpesa = require('request'),
         oauth_token = "HDx94wGFpFAd9Er9kUDK7fgRgYhT",
-        url = "https://sandbox.safaricom.co.ke/mpesa/accountbalance/v1/query"
+        url = mpesa_api_url + "mpesa/accountbalance/v1/query"
     auth = "Bearer " + oauth_token;
 
     requestMpesa(
@@ -112,7 +116,7 @@ exports.C2BPay = functions.https.onRequest((request, response) => {
 
     var requestMpesa = require('request'),
         oauth_token = "JtJg30Zf594S2071NIHIPj2gjLF6",
-        url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
+        url = mpesa_api_url + "mpesa/c2b/v1/registerurl"
     auth = "Bearer " + oauth_token;
 
     requestMpesa(
@@ -158,12 +162,12 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
 
         var requestMpesa = require('request'),
             oauth_token = "3OufGQKvdRGhv8rGC6fdPZZiADLY",
-            url = "https://api.safaricom.co.ke/mpesa/c2b/v1/registerurl"
+            url = mpesa_api_url + "mpesa/c2b/v1/registerurl"
         auth = "Bearer " + oauth_token;
 
         requestMpesa(
             {
-                url: "https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+                url: mpesa_api_url + "oauth/v1/generate?grant_type=client_credentials",
                 headers: {
                     "Authorization": "Basic " + new Buffer(consumer_key + ":" + consumer_secret).toString("base64"),
                     "Access-Control-Allow-Origin": "*"
@@ -194,11 +198,11 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
                         function (error, responseMpesa, body) {
                             // TODO: Use the body object to extract the
                             responseRegisterUrl = responseMpesa.body;
-                            if (responseRegisterUrl.ResponseDescription === "success") {
+                            if (responseRegisterUrl.ResponseDescription === "success" || responseRegisterUrl.ResponseDescription === "Validation and Confirmation URLs are already registered") {
                                 requestMpesa(
                                     {
                                         method: 'POST',
-                                        url: "https://api.safaricom.co.ke/mpesa/c2b/v1/simulate",
+                                        url: mpesa_api_url + "mpesa/c2b/v1/simulate",
                                         headers: {
                                             "Authorization": auth
                                         },
@@ -221,13 +225,23 @@ exports.payMpesa = functions.https.onRequest((request, response) => {
                                 )
                             } else {
                                 response.json({
-                                    success: false
+                                    success: false,
+                                    response: responseMpesa,
+                                    error: error,
+                                    body: body,
+                                    message: "Register url response"
                                 });
                             }
                         }
                     )
                 } else {
-                    return response.status(200).send({success: falsej});
+                    return response.status(200).send({
+                        success: false,
+                        response: responseMpesa,
+                        error: error,
+                        body: body,
+                        message: "Create access token response"
+                    });
                 }
             }
         );
