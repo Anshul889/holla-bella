@@ -37,7 +37,7 @@
 }
 
 .content {
-  padding-top: 25px;
+  padding-top: 10px;
 }
 
 .title {
@@ -108,5 +108,11 @@
   }
   .description{
     border-bottom: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .heading{
+    display: none;
   }
 }

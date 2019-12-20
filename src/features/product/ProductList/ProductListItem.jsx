@@ -29,8 +29,8 @@ class ProductListItem extends Component {
                         </span>
                       )}
                       <Link to={`/product/${product.id}`}>
-                        {product.price -
-                          (product.price * product.discount) / 100}{" "}
+                        {Math.round(product.price -
+                          (product.price * product.discount) / 100)}{" "}
                         KSH
                       </Link>
                       <br />
