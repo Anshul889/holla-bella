@@ -341,7 +341,8 @@ export const confirmOrder = (
                   email: address.email,
                   status: 'approved',
                   mpesanumber: parseInt(mpesanumber),
-                  date: firestore.FieldValue.serverTimestamp()
+                  date: firestore.FieldValue.serverTimestamp(),
+                  userid: user.uid
                 }
               );
               toastr.success("", "Your order is complete!");
