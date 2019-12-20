@@ -339,6 +339,7 @@ export const confirmOrder = (
                   postcode: address.postcode,
                   phone: address.phone,
                   email: address.email,
+                  status: 'approved',
                   mpesanumber: parseInt(mpesanumber),
                   date: firestore.FieldValue.serverTimestamp()
                 }
