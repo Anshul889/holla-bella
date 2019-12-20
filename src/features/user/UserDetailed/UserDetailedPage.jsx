@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { withFirebase } from 'react-redux-firebase';
-import { connect } from 'react-redux';
-import { Button } from 'semantic-ui-react';
-import styles from './UserDetailedPage.module.css';
-import format from 'date-fns/format';
-import UserAddressForm from './UserAddressForm';
-import UserAddressFormTwo from './UserAddressFormTwo';
-import { removeNewAddress, removeNewAddressTwo } from '../userActions';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { withFirebase } from "react-redux-firebase";
+import { connect } from "react-redux";
+import { Button } from "semantic-ui-react";
+import styles from "./UserDetailedPage.module.css";
+import format from "date-fns/format";
+import UserAddressForm from "./UserAddressForm";
+import UserAddressFormTwo from "./UserAddressFormTwo";
+import { removeNewAddress, removeNewAddressTwo } from "../userActions";
 
 const mapState = (state, ownProps) => ({
   profile: state.firebase.profile
@@ -26,7 +26,7 @@ class UserDetailedPage extends Component {
 
   handleSignOut = () => {
     this.props.firebase.logout();
-    this.props.history.push('/');
+    this.props.history.push("/");
   };
 
   closeFormOne = () => {
@@ -41,14 +41,14 @@ class UserDetailedPage extends Component {
     const { profile, removeNewAddressTwo, removeNewAddress } = this.props;
     let createdAt;
     if (profile.createdAt) {
-      createdAt = format(profile.createdAt.toDate(), 'do LLL yyyy');
+      createdAt = format(profile.createdAt.toDate(), "do LLL yyyy");
     }
     return (
       <React.Fragment>
         <h1 className={styles.heading}>Your Profile</h1>
         <div className={styles.container}>
           <div className={styles.profileimage}>
-            <img src={profile.photoURL} alt='profile' />
+            <img src={profile.photoURL} alt="profile" />
             <div className={styles.displayname}>{profile.displayName}</div>
             <div className={styles.membersince}>
               Member Since: <strong>{createdAt}</strong>
@@ -59,34 +59,54 @@ class UserDetailedPage extends Component {
         {profile.newAddress && (
           <div className={styles.address1}>
             <h3>Address:</h3>
-            <div className={styles.editbutton} onClick={() =>
+            <div
+              className={styles.editbutton}
+              onClick={() =>
                 this.setState({
                   isAddressOneOpen: !this.state.isAddressOneOpen,
                   isAddressTwoOpen: false
                 })
-              }>edit</div>
+              }
+            >
+              edit
+            </div>
             <div className={styles.addressshow}>
               <div>Street: {profile.newAddress.Address}</div>
               <div>City :{profile.newAddress.City}</div>
               <div>Postal Code:{profile.newAddress.postcode}</div>
             </div>
-            <div className={styles.deletebutton} onClick={removeNewAddress}>delete</div>
+            <div className={styles.deletebutton} onClick={removeNewAddress}>
+              delete
+            </div>
           </div>
         )}
 
         {profile.newAddressTwo && (
-          <div>
-            <p>Address 2</p>
-            <span>{profile.newAddressTwo.Address}</span>
-            <span>{profile.newAddressTwo.City + ', '}</span>
-            <span>{profile.newAddressTwo.postcode}</span>
-            <Button icon='trash' onClick={removeNewAddressTwo}></Button>
+          <div className={styles.address1}>
+            <h3>Address 2:</h3>
+            <div
+              className={styles.editbutton}
+              onClick={() =>
+                this.setState({
+                  isAddressOneOpen: false,
+                  isAddressTwoOpen: !this.state.isAddressTwoOpen,
+                })
+              }
+            >
+              edit
+            </div>
+            <div className={styles.addressshow}>
+              <div>Street: {profile.newAddressTwo.Address}</div>
+              <div>City :{profile.newAddressTwo.City}</div>
+              <div>Postal Code:{profile.newAddressTwo.postcode}</div>
+            </div>
+            <div className={styles.deletebutton} onClick={removeNewAddressTwo}>
+              delete
+            </div>
           </div>
         )}
-        <div style={{ width: '90%', margin: '20px auto', maxWidth: '1080px' }}>
-          {profile.newAddress ? (
-            null
-          ) : (
+        <div style={{ width: "90%", margin: "20px auto", maxWidth: "1080px" }}>
+          {profile.newAddress ? null : (
             <Button
               onClick={() =>
                 this.setState({
@@ -94,23 +114,13 @@ class UserDetailedPage extends Component {
                   isAddressTwoOpen: false
                 })
               }
-              size='tiny'
-              content={'Add Address 1'}
+              size="tiny"
+              content={"Add Address 1"}
             />
           )}
 
           {profile.newAddressTwo ? (
-            <Button
-              onClick={() =>
-                this.setState({
-                  isAddressTwoOpen: !this.state.isAddressTwoOpen,
-                  isAddressOneOpen: false
-                })
-              }
-              color='teal'
-              size='tiny'
-              content={'Edit Address 2'}
-            />
+            null
           ) : (
             <Button
               onClick={() =>
@@ -119,8 +129,8 @@ class UserDetailedPage extends Component {
                   isAddressOneOpen: false
                 })
               }
-              size='tiny'
-              content={'Add Address 2'}
+              size="tiny"
+              content={"Add Address 2"}
             />
           )}
         </div>
