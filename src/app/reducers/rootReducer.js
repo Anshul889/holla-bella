@@ -15,6 +15,7 @@ import BeautyReducer from '../../features/product/Beauty/BeautyReducer';
 import JewelleryReducer from '../../features/product/Jewellery/JewelleryReducer';
 import BagsReducer from '../../features/product/Bags/BagsReducer';
 import ordersReducer from '../../features/orders/ordersReducer';
+import userReducer from '../../features/user/userReducer';
 
 const rootReducer = combineReducers({
   wishlist: wishlistReducer,
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   relatedItems: relatedItemReducers,
   jewellery: JewelleryReducer,
   bags: BagsReducer,
-  orders: ordersReducer
+  orders: ordersReducer,
+  user: userReducer
 })
 
 export default rootReducer

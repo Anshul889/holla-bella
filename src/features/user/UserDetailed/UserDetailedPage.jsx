@@ -7,15 +7,21 @@ import styles from "./UserDetailedPage.module.css";
 import format from "date-fns/format";
 import UserAddressForm from "./UserAddressForm";
 import UserAddressFormTwo from "./UserAddressFormTwo";
-import { removeNewAddress, removeNewAddressTwo } from "../userActions";
+import {
+  removeNewAddress,
+  removeNewAddressTwo,
+  getOrderHistory
+} from "../userActions";
 
 const mapState = (state, ownProps) => ({
-  profile: state.firebase.profile
+  profile: state.firebase.profile,
+  orders: state.user
 });
 
 const actions = {
   removeNewAddress,
-  removeNewAddressTwo
+  removeNewAddressTwo,
+  getOrderHistory
 };
 
 class UserDetailedPage extends Component {
@@ -37,8 +43,18 @@ class UserDetailedPage extends Component {
     this.setState({ isAddressTwoOpen: false });
   };
 
+  componentDidMount() {
+    this.props.getOrderHistory();
+    console.log("hello");
+  }
+
   render() {
-    const { profile, removeNewAddressTwo, removeNewAddress } = this.props;
+    const {
+      profile,
+      removeNewAddressTwo,
+      removeNewAddress,
+      orders
+    } = this.props;
     let createdAt;
     if (profile.createdAt) {
       createdAt = format(profile.createdAt.toDate(), "do LLL yyyy");
@@ -89,7 +105,7 @@ class UserDetailedPage extends Component {
               onClick={() =>
                 this.setState({
                   isAddressOneOpen: false,
-                  isAddressTwoOpen: !this.state.isAddressTwoOpen,
+                  isAddressTwoOpen: !this.state.isAddressTwoOpen
                 })
               }
             >
@@ -119,9 +135,7 @@ class UserDetailedPage extends Component {
             />
           )}
 
-          {profile.newAddressTwo ? (
-            null
-          ) : (
+          {profile.newAddressTwo ? null : (
             <Button
               onClick={() =>
                 this.setState({
@@ -140,6 +154,15 @@ class UserDetailedPage extends Component {
         {this.state.isAddressTwoOpen && (
           <UserAddressFormTwo closeForm={this.closeFormTwo} />
         )}
+        {orders &&
+          orders.map(order => (
+            <div className={styles.order} key={order.id}>
+              <div>{order.amount}KSH</div>
+              <div>{format(order.date.toDate(), "do LLL yyyy")}</div>
+              <div>status :{order.status}</div>
+              {/* <div>{Object.Keys(order.products)}</div> */}
+            </div>
+          ))}
       </React.Fragment>
     );
   }

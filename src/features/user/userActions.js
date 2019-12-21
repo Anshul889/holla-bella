@@ -10,6 +10,7 @@ import {
   FETCH_WISHLIST,
   DELETE_TO_WISHLIST
 } from "../wishlist/wishlistConstants";
+import { FETCH_USER_ORDERS } from "./userConstants";
 
 export const addToCart = (product, values) => async (
   dispatch,
@@ -325,7 +326,7 @@ export const confirmOrder = (
                     Math.abs(cartob[cartKey].quantity)
                   )
                 });
-              };
+              }
               firestore.add(
                 {
                   collection: "orders"
@@ -339,7 +340,7 @@ export const confirmOrder = (
                   postcode: address.postcode,
                   phone: address.phone,
                   email: address.email,
-                  status: 'approved',
+                  status: "approved",
                   mpesanumber: parseInt(mpesanumber),
                   date: firestore.FieldValue.serverTimestamp(),
                   userid: user.uid
@@ -436,6 +437,29 @@ export const removeMpesaNumber = () => {
       await firestore.update(`users/${user.uid}`, {
         [`mpesanumber`]: firestore.FieldValue.delete()
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getOrderHistory = () => {
+  return async (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = firebase.firestore();
+    const user = firebase.auth().currentUser;
+    try {
+      dispatch(asyncActionStart());
+      let orderQuery = await firestore
+        .collection("orders")
+        .where("userid", "==", user.uid)
+        .get();
+      let orders = [];
+
+      for (let i = 0; i < orderQuery.docs.length; i++) {
+        let order = { ...orderQuery.docs[i].data(), id: orderQuery.docs[i].id };
+        orders.push(order);
+      }
+      dispatch({ type: FETCH_USER_ORDERS, payload: { orders } });
     } catch (error) {
       console.log(error);
     }
