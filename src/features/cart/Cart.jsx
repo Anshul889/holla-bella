@@ -281,7 +281,7 @@ class Cart extends Component {
         {this.state.isAddressOneOpen && (
           <UserAddressForm closeForm={this.closeForm} />
         )}
-        {cart.length !== 0 && !mpesanumber && address && (
+        {cart.length !== 0 && !verificationCode && address && (
           <div className={styles.addaddress}>
           <button
             className={styles.addbutton}
@@ -295,7 +295,7 @@ class Cart extends Component {
           </button>
         </div>
         )}
-        {cart.length !==0 && mpesanumber && address && (
+        {cart.length !==0 && mpesanumber && verificationCode && address && (
           <div className={styles.addressc}>
           <div className={styles.addtitle}>Mpesa Number</div>
           <span>+254{mpesanumber} </span>

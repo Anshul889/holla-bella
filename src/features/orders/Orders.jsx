@@ -31,7 +31,7 @@ class Orders extends Component {
             <div>{format(order.date.toDate(), 'do LLL yyyy')}</div>
             <div>status :{order.status}</div>
             <div>0{order.mpesanumber}</div>
-            <div>{order.verificationCode}</div>
+            <div>{order.verification}</div>
             <Button onClick={() => setDelivered(order)}>Delivered</Button>
             <Button onClick={() => setApproved(order)}>Approved</Button>
           </div>

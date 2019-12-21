@@ -397,7 +397,7 @@ export const confirmOrder = (
         mpesanumber: parseInt(mpesanumber),
         date: firestore.FieldValue.serverTimestamp(),
         userid: user.uid,
-        verificationCode: verificationCode
+        verification: verificationCode
       }
     );
     for (let cartKey in cartob) {
@@ -414,7 +414,8 @@ export const confirmOrder = (
     }
     await firestore
       .update(`users/${user.uid}`, {
-        [`cart`]: {}
+        [`cart`]: {},
+        [`verification`]: firestore.FieldValue.delete()
       })
     toastr.success("", "Your order is complete!");
     dispatch(asyncActionFinish());

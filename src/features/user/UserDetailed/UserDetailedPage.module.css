@@ -63,6 +63,14 @@
   text-decoration: underline;
 }
 
+.orderhistory{
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
 .order{
   display: grid;
   width: 90%;

@@ -154,6 +154,7 @@ class UserDetailedPage extends Component {
         {this.state.isAddressTwoOpen && (
           <UserAddressFormTwo closeForm={this.closeFormTwo} />
         )}
+        <div className={styles.orderhistory}>Order History</div>
         {orders &&
           orders.map(order => (
             <div className={styles.order} key={order.id}>
