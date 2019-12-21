@@ -23,6 +23,10 @@ const validate = combineValidators({
     isNumeric({ message: 'enter a valid phone' }),
     hasLengthBetween(10, 10)({ message: 'enter a valid phone number' })
   )(),
+  Verificaton: composeValidators(
+    isRequired({message: 'Please enter your verification code' }),
+    hasLengthBetween(10, 10)({ message: 'enter a valid phone number' })
+  )
   });
 
 class MpesaForm extends Component {
@@ -34,26 +38,26 @@ class MpesaForm extends Component {
   render() {
     const { invalid, submitting } = this.props;
     return (
-      <div style={{width: '90%', margin: '50px auto', marginTop: '10px', maxWidth: '1080px;'}}>
-      <div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div style={{width: '90%', margin: '50px auto', marginTop: '10px', maxWidth: '1080px'}}>
+      <div style={{marginBottom: '10px'}}>
+        <div>1. Go to Safaricom Menu</div>
+        <div>2. Select M-PESA</div>
+        <div>3. Select Lipa na MPESA</div>
+        <div>4. Select Buy Goods and Services</div>
+        <div>5. Enter Till number: 697787</div>
+        <div>6. Enter Amount</div>
       </div>
       <Form onSubmit={this.props.handleSubmit(this.handleMpesaSubmit)}>
         <Field
-          placeholder={'Mpesa Number'}
+          placeholder={'Type Your Mpesa Number'}
           name='mpesa'
           type='text'
           component={TextInput}
           rows={1}
         />
         <Field
-          placeholder={'Mpesa Verification Code'}
-          name='Verification Code'
+          placeholder={'Type the Mpesa Verification Code'}
+          name='Verification'
           type='text'
           component={TextInput}
           rows={1}

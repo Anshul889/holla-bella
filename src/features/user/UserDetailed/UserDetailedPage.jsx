@@ -159,7 +159,7 @@ class UserDetailedPage extends Component {
             <div className={styles.order} key={order.id}>
               <div>{order.amount}KSH</div>
               <div>{format(order.date.toDate(), "do LLL yyyy")}</div>
-              <div>status :{order.status}</div>
+              <div>status : {order.status}</div>
               {/* <div>{Object.Keys(order.products)}</div> */}
             </div>
           ))}

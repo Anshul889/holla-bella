@@ -25,12 +25,13 @@ class Orders extends Component {
     return (
       <div>
         {orders && orders.map(order => (
-          <div className={styles.order} key={order.id}>
+          <div className={styles.orderdiv} key={order.id}>
             <div>{order.name}</div>
             <div>{order.amount}KSH</div>
             <div>{format(order.date.toDate(), 'do LLL yyyy')}</div>
-            <div>{order.newAddressTwo.Name}</div>
             <div>status :{order.status}</div>
+            <div>0{order.mpesanumber}</div>
+            <div>{order.verificationCode}</div>
             <Button onClick={() => setDelivered(order)}>Delivered</Button>
             <Button onClick={() => setApproved(order)}>Approved</Button>
           </div>

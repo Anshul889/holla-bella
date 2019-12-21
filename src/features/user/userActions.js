@@ -261,11 +261,118 @@ export const removeReview = product => async (
   }
 };
 
+// export const confirmOrder = (
+//   totalAmount,
+//   cartob,
+//   address,
+//   mpesanumber
+// ) => async (dispatch, getState, { getFirestore, getFirebase }) => {
+//   dispatch(asyncActionStart());
+//   const firestore = getFirestore();
+//   const firebase = getFirebase();
+//   const user = firebase.auth().currentUser;
+//   const products = cartob;
+//   try {
+//     await firestore.add(
+//       {
+//         collection: "users",
+//         doc: user.uid,
+//         subcollections: [{ collection: "confirmed_orders" }]
+//       },
+//       {
+//         products,
+//         amount: totalAmount,
+//         street: address.Address,
+//         city: address.City,
+//         name: address.Name,
+//         postcode: address.postcode,
+//         phone: address.phone,
+//         email: address.email,
+//         mpesanumber: parseInt(mpesanumber),
+//         date: firestore.FieldValue.serverTimestamp()
+//       }
+//     );
+
+//     await firestore
+//       .update(`users/${user.uid}`, {
+//         [`cart`]: {}
+//       })
+//       .then(function() {
+//         /**
+//          * After order confirmation, we will trigger this function for mPesa payment
+//          * @type {firebase.functions.HttpsCallable}
+//          */
+//         var payMpesa = firebase.functions().httpsCallable("payMpesa");
+//         payMpesa({
+//           amount: totalAmount,
+//           mpesanumber: parseInt("254" + mpesanumber)
+//           //mpesanumber: parseInt(2540712293999)
+//         })
+//           .then(function(result) {
+//             // Read result of the Cloud Function.
+//             //console.log("Mpesa response: " + JSON.stringify(result));
+
+//             const payResponse = result.data;
+
+//             if (typeof payResponse.ConversationID !== "undefined") {
+//               for (let cartKey in cartob) {
+//                 var negativecartProductQuantity =
+//                   Math.sign(-1) * cartob[cartKey].quantity;
+//                 firestore.update(`products/${cartKey}`, {
+//                   [`remainingQuantity`]: firebase.firestore.FieldValue.increment(
+//                     negativecartProductQuantity
+//                   ),
+//                   [`sold`]: firebase.firestore.FieldValue.increment(
+//                     Math.abs(cartob[cartKey].quantity)
+//                   )
+//                 });
+//               }
+//               firestore.add(
+//                 {
+//                   collection: "orders"
+//                 },
+//                 {
+//                   products,
+//                   amount: totalAmount,
+//                   street: address.Address,
+//                   city: address.City,
+//                   name: address.Name,
+//                   postcode: address.postcode,
+//                   phone: address.phone,
+//                   email: address.email,
+//                   status: "approved",
+//                   mpesanumber: parseInt(mpesanumber),
+//                   date: firestore.FieldValue.serverTimestamp(),
+//                   userid: user.uid
+//                 }
+//               );
+//               toastr.success("", "Your order is complete!");
+//             } else {
+//               toastr.error("", "Oops! some error occured, please try again");
+//             }
+//           })
+//           .catch(function(error) {
+//             toastr.error("", "Oops! some error occured, please try again");
+//           });
+//       })
+//       .catch(function(error) {
+//         console.error("Error: ", error);
+//         toastr.error("", "Oops! some error occured, please try again");
+//       });
+//     dispatch(asyncActionFinish());
+
+//     //toastr.success('', 'Your order is complete!');
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 export const confirmOrder = (
   totalAmount,
   cartob,
   address,
-  mpesanumber
+  mpesanumber,
+  verificationCode
 ) => async (dispatch, getState, { getFirestore, getFirebase }) => {
   dispatch(asyncActionStart());
   const firestore = getFirestore();
@@ -273,11 +380,9 @@ export const confirmOrder = (
   const user = firebase.auth().currentUser;
   const products = cartob;
   try {
-    await firestore.add(
+    firestore.add(
       {
-        collection: "users",
-        doc: user.uid,
-        subcollections: [{ collection: "confirmed_orders" }]
+        collection: "orders"
       },
       {
         products,
@@ -288,82 +393,34 @@ export const confirmOrder = (
         postcode: address.postcode,
         phone: address.phone,
         email: address.email,
+        status: "approved",
         mpesanumber: parseInt(mpesanumber),
-        date: firestore.FieldValue.serverTimestamp()
+        date: firestore.FieldValue.serverTimestamp(),
+        userid: user.uid,
+        verificationCode: verificationCode
       }
     );
-
+    for (let cartKey in cartob) {
+      var negativecartProductQuantity =
+        Math.sign(-1) * cartob[cartKey].quantity;
+      await firestore.update(`products/${cartKey}`, {
+        [`remainingQuantity`]: firebase.firestore.FieldValue.increment(
+          negativecartProductQuantity
+        ),
+        [`sold`]: firebase.firestore.FieldValue.increment(
+          Math.abs(cartob[cartKey].quantity)
+        )
+      });
+    }
     await firestore
       .update(`users/${user.uid}`, {
         [`cart`]: {}
       })
-      .then(function() {
-        /**
-         * After order confirmation, we will trigger this function for mPesa payment
-         * @type {firebase.functions.HttpsCallable}
-         */
-        var payMpesa = firebase.functions().httpsCallable("payMpesa");
-        payMpesa({
-          amount: totalAmount,
-          mpesanumber: parseInt("254" + mpesanumber)
-          //mpesanumber: parseInt(2540712293999)
-        })
-          .then(function(result) {
-            // Read result of the Cloud Function.
-            //console.log("Mpesa response: " + JSON.stringify(result));
-
-            const payResponse = result.data;
-
-            if (typeof payResponse.ConversationID !== "undefined") {
-              for (let cartKey in cartob) {
-                var negativecartProductQuantity =
-                  Math.sign(-1) * cartob[cartKey].quantity;
-                firestore.update(`products/${cartKey}`, {
-                  [`remainingQuantity`]: firebase.firestore.FieldValue.increment(
-                    negativecartProductQuantity
-                  ),
-                  [`sold`]: firebase.firestore.FieldValue.increment(
-                    Math.abs(cartob[cartKey].quantity)
-                  )
-                });
-              }
-              firestore.add(
-                {
-                  collection: "orders"
-                },
-                {
-                  products,
-                  amount: totalAmount,
-                  street: address.Address,
-                  city: address.City,
-                  name: address.Name,
-                  postcode: address.postcode,
-                  phone: address.phone,
-                  email: address.email,
-                  status: "approved",
-                  mpesanumber: parseInt(mpesanumber),
-                  date: firestore.FieldValue.serverTimestamp(),
-                  userid: user.uid
-                }
-              );
-              toastr.success("", "Your order is complete!");
-            } else {
-              toastr.error("", "Oops! some error occured, please try again");
-            }
-          })
-          .catch(function(error) {
-            toastr.error("", "Oops! some error occured, please try again");
-          });
-      })
-      .catch(function(error) {
-        console.error("Error: ", error);
-        toastr.error("", "Oops! some error occured, please try again");
-      });
+    toastr.success("", "Your order is complete!");
     dispatch(asyncActionFinish());
-
-    //toastr.success('', 'Your order is complete!');
   } catch (error) {
     console.log(error);
+    dispatch(asyncActionError());
   }
 };
 
@@ -418,7 +475,8 @@ export const addMpesaNumber = values => {
     const user = firebase.auth().currentUser;
     try {
       await firestore.update(`users/${user.uid}`, {
-        [`mpesanumber`]: parseInt(values.mpesa)
+        [`mpesanumber`]: parseInt(values.mpesa),
+        [`verification`]: values.Verification
       });
       dispatch(asyncActionError());
     } catch (error) {

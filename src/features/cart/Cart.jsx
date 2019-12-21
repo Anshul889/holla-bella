@@ -21,7 +21,8 @@ const mapState = (state, ownProps) => ({
   cart: objectToArray(state.firebase.profile.cart) || [],
   cartob: state.firebase.profile.cart,
   loading: !state.async.loading,
-  mpesanumber: state.firebase.profile.mpesanumber
+  mpesanumber: state.firebase.profile.mpesanumber,
+  verificationCode: state.firebase.profile.verification
 });
 
 const actions = {
@@ -58,7 +59,8 @@ class Cart extends Component {
       addQuantity,
       subtractQuantity,
       mpesanumber,
-      removeMpesaNumber
+      removeMpesaNumber,
+      verificationCode
     } = this.props;
     let totalCartPrice =
       cart &&
@@ -82,9 +84,9 @@ class Cart extends Component {
         <div className={styles.pay}>
           <button
             className={styles.addbutton}
-            onClick={() => confirmOrder(totalAmount, cartob, address, mpesanumber)}
+            onClick={() => confirmOrder(totalAmount, cartob, address, mpesanumber, verificationCode)}
           >
-            Place Order
+            Confirm Order
           </button>
         </div>
       );
