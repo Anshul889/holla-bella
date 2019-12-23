@@ -408,7 +408,7 @@ export const confirmOrder = (
           negativecartProductQuantity
         ),
         [`sold`]: firebase.firestore.FieldValue.increment(
-          Math.abs(cartob[cartKey].quantity)
+          cartob[cartKey].quantity
         )
       });
     }

@@ -79,7 +79,7 @@ class Cart extends Component {
       cart && cart.length !== 0 && Math.round(shipping + totalCartPrice + 16*totalCartPrice/100);
 
     let payButton;
-    if (cart && address && mpesanumber && loading) {
+    if (cart && address && mpesanumber && verificationCode && loading) {
       payButton = (
         <div className={styles.pay}>
           <button

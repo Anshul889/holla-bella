@@ -56,7 +56,7 @@ class MpesaForm extends Component {
           rows={1}
         />
         <Field
-          placeholder={'Type the Mpesa Verification Code'}
+          placeholder={'Type the Mpesa Confirmation Code'}
           name='Verification'
           type='text'
           component={TextInput}
