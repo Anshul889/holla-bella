@@ -12,6 +12,8 @@ import {
   removeNewAddressTwo,
   getOrderHistory
 } from "../userActions";
+import { objectToArray } from "../../../app/common/util/helpers";
+import { Link } from "react-router-dom";
 
 const mapState = (state, ownProps) => ({
   profile: state.firebase.profile,
@@ -45,7 +47,6 @@ class UserDetailedPage extends Component {
 
   componentDidMount() {
     this.props.getOrderHistory();
-    console.log("hello");
   }
 
   render() {
@@ -88,8 +89,8 @@ class UserDetailedPage extends Component {
             </div>
             <div className={styles.addressshow}>
               <div>Street: {profile.newAddress.Address}</div>
-              <div>City :{profile.newAddress.City}</div>
-              <div>Postal Code:{profile.newAddress.postcode}</div>
+              <div>City: {profile.newAddress.City}</div>
+              <div>Postal Code: {profile.newAddress.postcode}</div>
             </div>
             <div className={styles.deletebutton} onClick={removeNewAddress}>
               delete
@@ -113,8 +114,8 @@ class UserDetailedPage extends Component {
             </div>
             <div className={styles.addressshow}>
               <div>Street: {profile.newAddressTwo.Address}</div>
-              <div>City :{profile.newAddressTwo.City}</div>
-              <div>Postal Code:{profile.newAddressTwo.postcode}</div>
+              <div>City: {profile.newAddressTwo.City}</div>
+              <div>Postal Code: {profile.newAddressTwo.postcode}</div>
             </div>
             <div className={styles.deletebutton} onClick={removeNewAddressTwo}>
               delete
@@ -158,10 +159,21 @@ class UserDetailedPage extends Component {
         {orders &&
           orders.map(order => (
             <div className={styles.order} key={order.id}>
-              <div>{order.amount}KSH</div>
-              <div>{format(order.date.toDate(), "do LLL yyyy")}</div>
-              <div>status : {order.status}</div>
-              {/* <div>{Object.Keys(order.products)}</div> */}
+              <div>
+                <div>{order.amount}KSH</div>
+                <div>status : {order.status}</div>
+                <div>{format(order.date.toDate(), "do LLL yyyy")}</div>
+              </div>
+              <div className={styles.productcolumn}>
+                {objectToArray(order.products).map(product => (
+                  <div key={product.id}>
+                    <div>
+                      <Link to={`/product/${product.id}`}>{product.title}</Link>
+                    </div>
+                    <div>quantity: {product.quantity}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
       </React.Fragment>

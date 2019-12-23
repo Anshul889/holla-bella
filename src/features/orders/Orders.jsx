@@ -4,6 +4,7 @@ import { getOrders, setDelivered, setApproved } from './orderActions.js';
 import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import format from 'date-fns/format';
+import { objectToArray } from "../../app/common/util/helpers";
 
 const mapState = state => ({
   orders: state.orders
@@ -26,12 +27,20 @@ class Orders extends Component {
       <div>
         {orders && orders.map(order => (
           <div className={styles.orderdiv} key={order.id}>
-            <div>{order.name}</div>
-            <div>{order.amount}KSH</div>
-            <div>{format(order.date.toDate(), 'do LLL yyyy')}</div>
+            <div><span>{order.name} </span><span>{order.amount}KSH </span><span>{format(order.date.toDate(), 'do LLL yyyy')}</span></div>
+            <div></div>
+            <div></div>
             <div>status :{order.status}</div>
-            <div>0{order.mpesanumber}</div>
-            <div>{order.verification}</div>
+            <div><span>mpesa number: 0{order.mpesanumber} </span><span>code :{order.verification}</span></div>
+            <div></div>
+            <div><span>{order.street} </span><span>{order.postcode}</span></div>
+            <div>{objectToArray(order.products).map(product => (
+              <div>
+              <div>item: {product.title}</div>
+              <div>quantity: {product.quantity}</div>
+              <div>model: {product.model}</div>
+              </div>
+            ))}</div>
             <Button onClick={() => setDelivered(order)}>Delivered</Button>
             <Button onClick={() => setApproved(order)}>Approved</Button>
           </div>
