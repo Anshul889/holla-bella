@@ -416,7 +416,7 @@ export const confirmOrder = (
       [`cart`]: {},
       [`verification`]: firestore.FieldValue.delete(),
       [`previousOrder`]: cartob,
-      [`previousOrder.status`]: "approved"
+      [`previousOrderStatus`]: "approved"
     });
     toastr.success("", "Your order is complete!");
     dispatch(asyncActionFinish());
@@ -527,13 +527,14 @@ export const getOrderHistory = () => {
 };
 
 export const previousOrderDelete = () => {
-  return async dispatch => {
-    const firestore = firebase.firestore();
+  return async  (dispatch, getState, { getFirebase, getFirestore })=> {
+    const firestore = getFirestore();
+    const firebase = getFirebase();
     const user = firebase.auth().currentUser;
     try {
       dispatch(asyncActionStart());
       await firestore.update(`users/${user.uid}`, {
-        [`previousOrder.status`]: firestore.FieldValue.delete()
+        [`previousOrderStatus`]: firestore.FieldValue.delete()
       });
       dispatch(asyncActionFinish());
     } catch (error){

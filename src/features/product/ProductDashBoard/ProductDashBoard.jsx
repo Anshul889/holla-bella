@@ -20,7 +20,7 @@ const actions = {
 class ProductDashBoard extends Component {
 
   componentDidMount(){
-    if(this.props.profile.previousOrder.status === 'delivered'){
+    if(this.props.profile.previousOrderStatus === 'delivered'){
       this.props.openModal('ReviewModal');
       this.props.previousOrderDelete();
     }
