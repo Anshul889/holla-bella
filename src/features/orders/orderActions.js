@@ -40,6 +40,9 @@ export const setDelivered = order => async (
     await firestore.update(`orders/${order.id}`, {
       [`status`]: "delivered"
     });
+    await firestore.update(`users/${order.userid}`, {
+      [`previousOrder.status`]: "delivered"
+    });
     dispatch({ type: SET_DELIVERED, payload: neworder });
   } catch (error) {
     console.log(error);

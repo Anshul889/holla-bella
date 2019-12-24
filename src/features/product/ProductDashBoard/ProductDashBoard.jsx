@@ -3,13 +3,28 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import ProductList from '../ProductList/ProductList';
 import { Loader } from 'semantic-ui-react';
+import {openModal} from '../../modals/modalActions.js'
+import {previousOrderDelete} from '../../user/userActions'
 
 const mapState = state => ({
   products: state.firestore.ordered.products,
-  loading: state.async.loading
+  loading: state.async.loading,
+  profile: state.firebase.profile
 });
 
+const actions = {
+  openModal,
+  previousOrderDelete,
+}
+
 class ProductDashBoard extends Component {
+
+  componentDidMount(){
+    if(this.props.profile.previousOrder.status === 'delivered'){
+      this.props.openModal('ReviewModal');
+      this.props.previousOrderDelete();
+    }
+  }
 
   render() {
     const { products, loading } = this.props;
@@ -27,5 +42,5 @@ class ProductDashBoard extends Component {
 
 export default connect(
   mapState,
-  null
+  actions
 )(firestoreConnect([{ collection: 'products' }])(ProductDashBoard));
