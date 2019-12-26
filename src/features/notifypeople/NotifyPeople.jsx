@@ -25,7 +25,7 @@ const actions = {
         {products && products.map(product => (
           <div key={product.id}>
             <div>{product.model}</div>
-            <div>{objectToArray(product.notify).map(pro => (
+            <div>{product.notify && objectToArray(product.notify).map(pro => (
               <div>{pro.email}</div>
             ))}</div>
           </div>

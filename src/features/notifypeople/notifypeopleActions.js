@@ -10,7 +10,7 @@ export const getNotify = () => async (dispatch, getState) => {
   const firestore = firebase.firestore();
   try {
     dispatch(asyncActionStart());
-    let ordersQuery = await firestore.collection("products").where("remainingQuantity", "==", 0).get();
+    let ordersQuery = await firestore.collection("products").orderBy("notify", "asc").get();
     let emails = [];
 
     for (let i = 0; i < ordersQuery.docs.length; i++) {
