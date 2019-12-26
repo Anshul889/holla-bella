@@ -74,7 +74,7 @@ export const addToWishlist = product => async (
   const wishlistAdder = {
     isWishList: true,
     addDate: firestore.FieldValue.serverTimestamp(),
-    photoURL: profile.photoURL || "/assets/user.png",
+    photoURL: profile.photoURL || "../../../assets/icons/user-circle.svg",
     displayName: profile.displayName
   };
   try {
@@ -148,7 +148,7 @@ export const addReview = (product, values) => {
       rating: values.rating,
       comment: values.comment,
       addDate: firestore.FieldValue.serverTimestamp(),
-      photoURL: profile.photoURL || "assests/user.png",
+      photoURL: profile.photoURL || "../../../assets/icons/user-circle.svg",
       displayName: profile.displayName
     };
     try {
@@ -541,4 +541,24 @@ export const previousOrderDelete = () => {
       console.log(error)
     }
 }
+}
+
+export const notify = product => {
+  return async(dispatch, getState, {getFirebase, getFirestore}) => {
+    const firestore = getFirestore();
+    const firebase = getFirebase();
+    const user = firebase.auth().currentUser;
+    const useremail = {
+      email: user.email
+    }
+    try {
+      dispatch(asyncActionStart());
+      await firestore.update(`products/${product.id}`, {
+        [`notify.${user.uid}`]: useremail
+      });
+      dispatch(asyncActionFinish());
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }

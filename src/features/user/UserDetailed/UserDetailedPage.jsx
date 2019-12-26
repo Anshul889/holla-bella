@@ -14,6 +14,7 @@ import {
 } from "../userActions";
 import { objectToArray } from "../../../app/common/util/helpers";
 import { Link } from "react-router-dom";
+import userCircle from '../../../assets/icons/user-circle.svg'
 
 const mapState = (state, ownProps) => ({
   profile: state.firebase.profile,
@@ -65,7 +66,7 @@ class UserDetailedPage extends Component {
         <h1 className={styles.heading}>Your Profile</h1>
         <div className={styles.container}>
           <div className={styles.profileimage}>
-            <img src={profile.photoURL} alt="profile" />
+            <img src={profile.photoURL || userCircle} alt="profile" />
             <div className={styles.displayname}>{profile.displayName}</div>
             <div className={styles.membersince}>
               Member Since: <strong>{createdAt}</strong>

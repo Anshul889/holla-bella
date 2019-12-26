@@ -77,7 +77,7 @@
 
 .cartwish {
   display: inline-grid;
-  grid-template-columns: 1fr 25px 22px;
+  grid-template-columns: 1fr 25px 22px max-content;
   align-items: center;
   padding: 15px 0;
   grid-gap: 10px;

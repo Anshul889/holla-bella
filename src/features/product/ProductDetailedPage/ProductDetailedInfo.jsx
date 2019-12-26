@@ -45,6 +45,11 @@ class ProductDetailedInfo extends React.Component {
     }
   }
 
+  onNotify = () => {
+    const {notify, product} = this.props;
+    notify(product);
+  }
+
   render() {
     const {
       product,
@@ -53,7 +58,8 @@ class ProductDetailedInfo extends React.Component {
       isCarter,
       authenticated,
       removeFromWishlist,
-      openModal
+      openModal,
+      isNotify
     } = this.props;
     const totalReviews = product.reviews && objectToArray(product.reviews);
     const totalRating =
@@ -90,14 +96,6 @@ class ProductDetailedInfo extends React.Component {
           <div style={{ paddingLeft: '2px' }}>{'> ' + product.title.split(' ').slice(0,3).join(' ')}</div>
         </div>
         <div className={styles.product}>
-          {/* <div className={styles.image}>
-             <img src={product.photoURL} alt={product.description} />{" "} 
-            <LazyLoadImage
-              effect='blur'
-              src={product.photoURL}
-              width={'100%'}
-            />
-          </div>*/}
           <ImageCarousel
             photoURL={product.photoURL}
             photoURL2={product.photoURL2}
@@ -213,6 +211,23 @@ class ProductDetailedInfo extends React.Component {
                 </div>
               )}
               <div><img src={share} alt="" style={{cursor: 'pointer'}} onClick={() => this.onShare()}/></div>
+              {!authenticated && product.remainingQuantity === 0 && !isNotify (
+                <Button
+                className={styles.cartbutton}
+                onClick={() => openModal('LoginModal')}>
+                  Notify me
+                </Button>
+              )}
+              {authenticated && product.remainingQuantity === 0 && !isNotify && (
+                <Button
+                className={styles.cartbutton}
+                onClick={() => this.onNotify()}>
+                  Notify me
+                </Button>
+              )}
+              {authenticated && product.remainingQuantity === 0 && isNotify && (
+                <div>You will be notified shortly!</div>
+              )}
             </div>
             <div>
               <div className={styles.shippingdetails}>

@@ -16,6 +16,7 @@ import JewelleryReducer from '../../features/product/Jewellery/JewelleryReducer'
 import BagsReducer from '../../features/product/Bags/BagsReducer';
 import ordersReducer from '../../features/orders/ordersReducer';
 import userReducer from '../../features/user/userReducer';
+import notifypeopleReducer from '../../features/notifypeople/notifypeopleReducer';
 
 const rootReducer = combineReducers({
   wishlist: wishlistReducer,
@@ -34,7 +35,8 @@ const rootReducer = combineReducers({
   jewellery: JewelleryReducer,
   bags: BagsReducer,
   orders: ordersReducer,
-  user: userReducer
+  user: userReducer,
+  notify: notifypeopleReducer
 })
 
 export default rootReducer

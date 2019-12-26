@@ -14,6 +14,7 @@ import Jewellery from '../../features/product/Jewellery/Jewellery';
 import Bags from '../../features/product/Bags/Bags';
 import Register from '../../features/auth/Login/Register';
 import Orders from '../../features/orders/Orders';
+import NotifyPeople from '../../features/notifypeople/NotifyPeople';
 
 class App extends Component {
   render() {
@@ -33,6 +34,7 @@ class App extends Component {
           <Route exact path='/bags' component={Bags}/>
           <Route exact path='/register' component={Register}/>
           <Route exact path='/ronaldoflop' component={Orders}/>
+          <Route exact path='/notifypeople' component={NotifyPeople} />
         </Switch>
         <Footer />
       </Fragment>

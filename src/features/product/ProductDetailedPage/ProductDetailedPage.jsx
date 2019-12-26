@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { objectToArray } from '../../../app/common/util/helpers';
 import { withFirestore } from 'react-redux-firebase';
 import { connect } from 'react-redux';
-import { addToCart, addToWishlist, removeFromWishlist, addReview, removeReview } from '../../user/userActions';
+import { addToCart, addToWishlist, removeFromWishlist, addReview, removeReview, notify } from '../../user/userActions';
 import ProductDetailedInfo from './ProductDetailedInfo';
 import styles from './ProductDetailedPage.module.css';
 import ProductReviews from './ProductReviews';
@@ -41,7 +41,8 @@ const actions = {
   removeFromWishlist,
   addReview,
   removeReview,
-  openModal
+  openModal,
+  notify
 };
 
 class ProductDetailedPage extends Component {
@@ -73,7 +74,8 @@ class ProductDetailedPage extends Component {
       removeFromWishlist,
       profile,
       initialValues,
-      openModal
+      openModal,
+      notify
     } = this.props;
     const wishlisters = product && product.wishlistAdders && objectToArray(product.wishlistAdders);
     const carters= profile.cart && objectToArray(profile.cart)
@@ -82,11 +84,13 @@ class ProductDetailedPage extends Component {
     const reviews = product && product.reviews && objectToArray(product.reviews);
     const isReviewer = reviews && reviews.some(a => a.id === auth.uid);
     const authenticated = auth.isLoaded && !auth.isEmpty;
+    const notified = product && product.notify && objectToArray(product.notify);
+    const isNotify = notified && notified.some(a => a.id === auth.uid);
     return (
       <div>
       {product.title &&
         <div className={styles.container}>
-        <ProductDetailedInfo initialValues={initialValues} product={product} isCarter={isCarter} isWishLister={isWishLister} addToCart={addToCart} addToWishlist={addToWishlist} openModal={openModal} authenticated={authenticated} removeFromWishlist={removeFromWishlist}/>
+        <ProductDetailedInfo notify={notify} initialValues={initialValues} product={product} isNotify={isNotify} isCarter={isCarter} isWishLister={isWishLister} addToCart={addToCart} addToWishlist={addToWishlist} openModal={openModal} authenticated={authenticated} removeFromWishlist={removeFromWishlist}/>
         <ProductRelatedItems product={product} />
         <h3>Reviews</h3>
         <ProductReviews reviews={reviews} removeReview={removeReview} isReviewer={isReviewer} product={product} auth={auth}/>
