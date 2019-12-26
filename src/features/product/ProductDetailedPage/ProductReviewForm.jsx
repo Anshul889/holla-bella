@@ -16,8 +16,8 @@ const validate = combineValidators({
     )(),
   comment: composeValidators(
     isRequired({ message: 'Please enter a review' }),
-    hasLengthGreaterThan(10)({
-      message: 'The review needs to be at least 10 characters long'
+    hasLengthGreaterThan(4)({
+      message: 'The review needs to be at least 4 characters long'
     })
   )(),
 });

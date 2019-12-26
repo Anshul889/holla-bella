@@ -4,6 +4,7 @@ import "firebase/database";
 import "firebase/auth";
 import "firebase/storage";
 import "firebase/functions";
+import 'firebase/analytics';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,5 +21,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.firestore();
 firebase.functions();
+firebase.analytics();
 
 export default firebase;
