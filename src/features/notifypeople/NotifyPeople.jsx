@@ -20,7 +20,7 @@ const actions = {
   }
 
   render() {
-    const {products, deleteNotify, loading} = this.props;
+    const {products, deleteNotify} = this.props;
     return (
       <div style={{marginBottom: '30px'}}>
         {products && products.map(product => (
