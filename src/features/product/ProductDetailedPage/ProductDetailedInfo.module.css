@@ -23,6 +23,7 @@
   font-weight: bold;
   padding-bottom: 10px;
   text-transform: capitalize;
+  max-width: 1080px;
 }
 
 .menu a {

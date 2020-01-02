@@ -91,7 +91,12 @@ class Bags extends Component {
     if (products.length === 0) {
       return (
         <div className={styles.bags}>
-          <img className={styles.banner} style={{ width: "100%" }} src={bagsimg} alt="bags" />
+          <img
+            className={styles.banner}
+            style={{ width: "100%" }}
+            src={bagsimg}
+            alt="bags"
+          />
           <h1 className={styles.heading}>Bags</h1>
           <div className={styles.container}>
             <div className={styles.inner}>
@@ -152,10 +157,9 @@ class Bags extends Component {
               style={{
                 color: "#c29957",
                 fontWeight: "700",
-                paddingRight: "5px",
-                gridColumn: "1 / 4",
+                paddingBottom: "10px",
+                gridColumn: "span 3",
                 justifySelf: "center",
-                paddingBottom: "15px",
                 textTransform: "uppercase"
               }}
             >

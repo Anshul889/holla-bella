@@ -130,7 +130,6 @@ class Jewellery extends Component {
       <div className={styles.jewellery}>
         <img className={styles.jewelimg} src={jewelleryimg} alt="jewellery"/>
         <h1 className={styles.heading}>Jewellery</h1>
-        <div className={styles.container}>
         <div className={styles.filter}>
         <div style={{color: '#c29957', fontWeight: '700', gridColumn:'1 / 4', justifySelf:'center', paddingBottom:'15px', textTransform: 'uppercase'}}>Sort By</div>
             <Button  active={sortedByPrice==='lowestPrice'} onClick={this.filterAsc}>Lowest Price</Button>
@@ -138,6 +137,8 @@ class Jewellery extends Component {
             {(sortedByName ==='ZtoA') && <Button onClick={this.filterNameDsc}>Name</Button>}
             {(sortedByName === '' || sortedByName ==='AtoZ') && <Button onClick={this.filterNameAsc}>Name</Button>}
             </div>
+        <div className={styles.container}>
+        
           <div className={styles.inner}>
             {products &&
               products.map(product => (

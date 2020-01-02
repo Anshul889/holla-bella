@@ -53,6 +53,7 @@
 
 .title a{
   color: #6c6c6c;
+  font-size: 12px;
 }
 
 @media screen and (min-width: 800px) {

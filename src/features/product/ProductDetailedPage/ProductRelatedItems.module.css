@@ -12,7 +12,7 @@
 
 .inner {
   display: grid;
-  grid-template-columns: repeat(5, 26%);
+  grid-template-columns: repeat(5, 36%);
   overflow: scroll;
   grid-gap: 20px;
 }
@@ -30,13 +30,15 @@
 
 .product {
   width: 100%;
-  transform: translateX(5%);
+  transform: translateX(10%);
   padding-top: 10px;
 }
 
 
 .content a {
-  font-size: 12px;
+  font-size: 10px;
+  color: #6c6c6c;
+  line-height: 0rem;
 }
 
 @media screen and (min-width: 800px) {

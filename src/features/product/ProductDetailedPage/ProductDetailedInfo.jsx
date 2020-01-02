@@ -211,7 +211,7 @@ class ProductDetailedInfo extends React.Component {
                 </div>
               )}
               <div><img src={share} alt="" style={{cursor: 'pointer'}} onClick={() => this.onShare()}/></div>
-              {!authenticated && product.remainingQuantity === 0 && !isNotify (
+              {!authenticated && product.remainingQuantity === 0 && !isNotify && (
                 <Button
                 className={styles.cartbutton}
                 onClick={() => openModal('LoginModal')}>
@@ -234,7 +234,7 @@ class ProductDetailedInfo extends React.Component {
                 Free shipping for orders over 1000 ksh
               </div>
               <div className={styles.shippingdetails}>
-                Same day delivery for orders before 12pm
+                Orders will be delivered on 10th Jan 2020
               </div>
             </div>
             <div className={styles.description}>
