@@ -29,11 +29,11 @@
 
 .filter {
   max-width: 1080px;
-  padding-bottom: 20px;
+  padding: 20px 0;
   display: grid;
   grid-template-columns: max-content max-content max-content;
   align-items: center;
-  width: 95%;
+  width: 90%;
   margin: 0 auto;
 }
 

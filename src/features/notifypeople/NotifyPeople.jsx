@@ -22,10 +22,10 @@ const actions = {
   render() {
     const {products, deleteNotify} = this.props;
     return (
-      <div style={{marginBottom: '30px'}}>
+      <div style={{marginBottom: '30px', width: '90%', margin: '0 auto'}}>
         {products && products.map(product => (
           <div key={product.id}>
-            <div>{product.model}</div>
+            <div>Model : {product.model}</div>
             <div>{product.notify && objectToArray(product.notify).map(pro => (
               <div key={pro.email}>{pro.email}</div>
             ))}</div>

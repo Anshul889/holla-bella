@@ -153,18 +153,6 @@ class Bags extends Component {
         <h1 className={styles.heading}>Bags</h1>
         <div className={styles.container}>
           <div className={styles.filter}>
-            <div
-              style={{
-                color: "#c29957",
-                fontWeight: "700",
-                paddingBottom: "10px",
-                gridColumn: "span 3",
-                justifySelf: "center",
-                textTransform: "uppercase"
-              }}
-            >
-              Sort By
-            </div>
             <Button
               active={sortedByPrice === "lowestPrice"}
               onClick={this.filterAsc}

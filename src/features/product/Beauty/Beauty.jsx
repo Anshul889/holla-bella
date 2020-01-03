@@ -131,7 +131,6 @@ class Beauty extends Component {
         <img className={styles.beautimg} src={beautyimg} alt="beauty" />
         <h1 className={styles.heading}>Beauty</h1>
         <div className={styles.filter}>
-            <div style={{color: '#c29957', fontWeight: '700', gridColumn:'1 / 4', justifySelf:'center', paddingBottom:'15px', textTransform: 'uppercase'}}>Sort By</div>
             <div><Button  active={sortedByPrice==='lowestPrice'} onClick={this.filterAsc}>Lowest Price</Button></div>
             <div><Button active={sortedByPrice ==='highestPrice'} onClick={this.filterDsc}>Highest Price</Button></div>
             {(sortedByName ==='ZtoA') && <div><Button onClick={this.filterNameDsc}>Name</Button></div>}
