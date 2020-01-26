@@ -12,7 +12,8 @@ export const Footer = () => {
       </div>
       <div className={styles.sec2}>
         <h3>Contact Us</h3>
-        <p>info@hola-bella.com</p>
+        <p><a href="mailto:info@hola-bella.com" style={{color:'#cbcbcb', textDecoration:'underline'}}>info@hola-bella.com</a></p>
+        <a href="https://wa.me/254712293999" style={{color:'#cbcbcb', textDecoration:'underline' }}>Whats App</a>
       </div>
       <div className={styles.info}>
         <h3>Information</h3>

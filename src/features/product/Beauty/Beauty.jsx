@@ -146,7 +146,7 @@ class Beauty extends Component {
                       <img
                         src={product.photoURL}
                         alt={product.title}
-                        loading={"lazy"}
+                        loading="lazy"
                       />
                     </Link>
                   </div>

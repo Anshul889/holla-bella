@@ -234,7 +234,7 @@ class ProductDetailedInfo extends React.Component {
                 Free shipping for orders over 1000 ksh
               </div>
               <div className={styles.shippingdetails}>
-                Orders will be delivered on 10th Jan 2020
+                Orders will be delivered on Feb 6th
               </div>
             </div>
             <div className={styles.description}>
