@@ -15,6 +15,7 @@ import Bags from '../../features/product/Bags/Bags';
 import Register from '../../features/auth/Login/Register';
 import Orders from '../../features/orders/Orders';
 import NotifyPeople from '../../features/notifypeople/NotifyPeople';
+import privacypolicy from '../../features/privacypolicy/privacypolicy';
 
 class App extends Component {
   render() {
@@ -35,6 +36,7 @@ class App extends Component {
           <Route exact path='/register' component={Register}/>
           <Route exact path='/ronaldoflop' component={Orders}/>
           <Route exact path='/notifypeople' component={NotifyPeople} />
+          <Route exact path='/privacypolicy' component={privacypolicy}/>
         </Switch>
         <Footer />
       </Fragment>
