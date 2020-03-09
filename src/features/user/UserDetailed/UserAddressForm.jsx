@@ -35,7 +35,7 @@ const validate = combineValidators({
   )(),
   postcode: composeValidators(
     isRequired({ message: 'Please enter a postcode' }),
-    hasLengthBetween(5, 5)({
+    hasLengthBetween(6, 6)({
       message: 'Postcode needs to be 5 characters'
     }),
     isNumeric({message: 'Please enter a valid postcode'})

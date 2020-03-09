@@ -370,9 +370,7 @@ export const removeReview = product => async (
 export const confirmOrder = (
   totalAmount,
   cartob,
-  address,
-  mpesanumber,
-  verificationCode
+  address
 ) => async (dispatch, getState, { getFirestore, getFirebase }) => {
   dispatch(asyncActionStart());
   const firestore = getFirestore();
@@ -394,10 +392,8 @@ export const confirmOrder = (
         phone: address.phone,
         email: address.email,
         status: "approved",
-        mpesanumber: parseInt(mpesanumber),
         date: firestore.FieldValue.serverTimestamp(),
         userid: user.uid,
-        verification: verificationCode
       }
     );
     for (let cartKey in cartob) {
@@ -414,7 +410,6 @@ export const confirmOrder = (
     }
     await firestore.update(`users/${user.uid}`, {
       [`cart`]: {},
-      [`verification`]: firestore.FieldValue.delete(),
       [`previousOrder`]: cartob,
       [`previousOrderStatus`]: "approved"
     });

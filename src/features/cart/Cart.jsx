@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { objectToArray } from "../../app/common/util/helpers";
 import UserAddressForm from "../user/UserDetailed/UserAddressForm";
 import { Loader } from "semantic-ui-react";
-import MpesaForm from "./MpesaForm";
+import StripeCheckoutButton from "../stripe/stripe-button";
 
 const mapState = (state, ownProps) => ({
   address: state.firebase.profile.newAddress,
@@ -58,9 +58,6 @@ class Cart extends Component {
       loading,
       addQuantity,
       subtractQuantity,
-      mpesanumber,
-      removeMpesaNumber,
-      verificationCode
     } = this.props;
     let totalCartPrice =
       cart &&
@@ -77,30 +74,6 @@ class Cart extends Component {
     }
     const totalAmount =
       cart && cart.length !== 0 && Math.round(shipping + totalCartPrice + 16*totalCartPrice/100);
-
-    let payButton;
-    if (cart && address && mpesanumber && verificationCode && loading) {
-      payButton = (
-        <div className={styles.pay}>
-          <button
-            className={styles.addbutton}
-            onClick={() => confirmOrder(totalAmount, cartob, address, mpesanumber, verificationCode)}
-          >
-            Confirm Order
-          </button>
-        </div>
-      );
-    } else if (cart && !address && loading) {
-      payButton = null;
-    } else if (cart && address && !loading) {
-      payButton = (
-        <div className={styles.pay}>
-          <button className={styles.loadbutton} disabled>
-            <span>Loading</span>
-          </button>
-        </div>
-      );
-    }
 
     if (cart && cart.length === 0 && loading) {
       return (
@@ -281,35 +254,15 @@ class Cart extends Component {
         {this.state.isAddressOneOpen && (
           <UserAddressForm closeForm={this.closeForm} />
         )}
-        {cart.length !== 0 && !verificationCode && address && (
+        {cart.length !== 0  && address && ( //change button 
           <div className={styles.addaddress}>
-          <button
-            className={styles.addbutton}
-            onClick={() =>
-              this.setState({
-                isMpesaFormOpen: !this.state.isMpesaFormOpen
-              })
-            }
-          >
-            Add Mpesa Number
-          </button>
+            <div style={{color: 'red'}}>Please use test card 4242 4242 4242 4242</div>
+
+          <StripeCheckoutButton price={totalAmount} confirmOrder={confirmOrder} totalAmount={totalAmount} cartob={cartob} address={address}/>
+          
         </div>
         )}
-        {cart.length !==0 && mpesanumber && verificationCode && address && (
-          <div className={styles.addressc}>
-          <div className={styles.addtitle}>Mpesa Number</div>
-          <span>+254{mpesanumber} </span>
-          <span style={{color: '#c29957', fontWeight: '100', cursor: 'pointer', textDecoration: 'underline'}} onClick={() => this.setState({
-            isMpesaFormOpen: !this.state.isMpesaFormOpen
-          })}> edit </span>
-          <span onClick={() => {removeMpesaNumber()}} style={{color: 'red', fontWeight: '100', cursor: 'pointer',  textDecoration: 'underline'}}> delete </span>
         </div>
-        )}
-        {this.state.isMpesaFormOpen && (
-          <MpesaForm closeMpesaForm={this.closeMpesaForm} />
-        )}
-        {payButton}
-      </div>
     );
   }
 }
