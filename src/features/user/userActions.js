@@ -1,16 +1,17 @@
-import { toastr } from "react-redux-toastr";
+import { toastr } from 'react-redux-toastr';
 import {
   asyncActionStart,
   asyncActionFinish,
-  asyncActionError
-} from "../async/asyncActions";
-import firebase from "../../app/config/firebase";
+  asyncActionError,
+} from '../async/asyncActions';
+import firebase from '../../app/config/firebase';
 import {
   ADD_TO_WISHLIST,
   FETCH_WISHLIST,
-  DELETE_TO_WISHLIST
-} from "../wishlist/wishlistConstants";
-import { FETCH_USER_ORDERS } from "./userConstants";
+  DELETE_TO_WISHLIST,
+} from '../wishlist/wishlistConstants';
+import { FETCH_USER_ORDERS } from './userConstants';
+import axios from 'axios';
 
 export const addToCart = (product, values) => async (
   dispatch,
@@ -28,11 +29,11 @@ export const addToCart = (product, values) => async (
     totalPrice:
       values.quantity *
       (product.price - (product.price * product.discount) / 100),
-    addDate: firestore.FieldValue.serverTimestamp()
+    addDate: firestore.FieldValue.serverTimestamp(),
   };
   try {
     await firestore.update(`users/${user.uid}`, {
-      [`cart.${product.id}`]: newProduct
+      [`cart.${product.id}`]: newProduct,
     });
     dispatch(asyncActionFinish());
   } catch (error) {
@@ -41,7 +42,7 @@ export const addToCart = (product, values) => async (
   }
 };
 
-export const removeFromCart = product => async (
+export const removeFromCart = (product) => async (
   dispatch,
   getState,
   { getFirestore, getFirebase }
@@ -52,16 +53,16 @@ export const removeFromCart = product => async (
   const user = firebase.auth().currentUser;
   try {
     await firestore.update(`users/${user.uid}`, {
-      [`cart.${product.id}`]: firestore.FieldValue.delete()
+      [`cart.${product.id}`]: firestore.FieldValue.delete(),
     });
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
-    toastr.error("Oops", "something went wrong");
+    toastr.error('Oops', 'something went wrong');
   }
 };
 
-export const addToWishlist = product => async (
+export const addToWishlist = (product) => async (
   dispatch,
   getState,
   { getFirebase, getFirestore }
@@ -74,16 +75,16 @@ export const addToWishlist = product => async (
   const wishlistAdder = {
     isWishList: true,
     addDate: firestore.FieldValue.serverTimestamp(),
-    photoURL: profile.photoURL || "../../../assets/icons/user-circle.svg",
-    displayName: profile.displayName
+    photoURL: profile.photoURL || '../../../assets/icons/user-circle.svg',
+    displayName: profile.displayName,
   };
   try {
     await firestore.update(`products/${product.id}`, {
-      [`wishlistAdders.${user.uid}`]: wishlistAdder
+      [`wishlistAdders.${user.uid}`]: wishlistAdder,
     });
     await firestore.set(`wishlist/${product.id}_${user.uid}`, {
       productId: product.id,
-      userUid: user.uid
+      userUid: user.uid,
     });
     dispatch({ type: ADD_TO_WISHLIST, payload: product });
     dispatch(asyncActionFinish());
@@ -93,17 +94,17 @@ export const addToWishlist = product => async (
   }
 };
 
-export const getUserWishlist = userUid => async (dispatch, getState) => {
+export const getUserWishlist = (userUid) => async (dispatch, getState) => {
   dispatch(asyncActionStart());
   const firestore = firebase.firestore();
-  let cartRef = firestore.collection("wishlist");
-  let query = cartRef.where("userUid", "==", userUid);
+  let cartRef = firestore.collection('wishlist');
+  let query = cartRef.where('userUid', '==', userUid);
   try {
     let querySnap = await query.get();
     let products = [];
     for (let i = 0; i < querySnap.docs.length; i++) {
       let pro = await firestore
-        .collection("products")
+        .collection('products')
         .doc(querySnap.docs[i].data().productId)
         .get();
       products.push({ ...pro.data(), id: pro.id });
@@ -118,7 +119,7 @@ export const getUserWishlist = userUid => async (dispatch, getState) => {
   }
 };
 
-export const removeFromWishlist = product => async (
+export const removeFromWishlist = (product) => async (
   dispatch,
   getState,
   { getFirestore, getFirebase }
@@ -129,7 +130,7 @@ export const removeFromWishlist = product => async (
   dispatch({ type: DELETE_TO_WISHLIST, payload: product });
   try {
     await firestore.update(`products/${product.id}`, {
-      [`wishlistAdders.${user.uid}`]: firestore.FieldValue.delete()
+      [`wishlistAdders.${user.uid}`]: firestore.FieldValue.delete(),
     });
     await firestore.delete(`wishlist/${product.id}_${user.uid}`);
   } catch (error) {
@@ -148,16 +149,16 @@ export const addReview = (product, values) => {
       rating: values.rating,
       comment: values.comment,
       addDate: firestore.FieldValue.serverTimestamp(),
-      photoURL: profile.photoURL || "../../../assets/icons/user-circle.svg",
-      displayName: profile.displayName
+      photoURL: profile.photoURL || '../../../assets/icons/user-circle.svg',
+      displayName: profile.displayName,
     };
     try {
       await firestore.update(`products/${product.id}`, {
-        [`reviews.${user.uid}`]: newReview
+        [`reviews.${user.uid}`]: newReview,
       });
       await firestore.set(`review/${product.id}_${user.uid}`, {
         productId: product.id,
-        userUid: user.uid
+        userUid: user.uid,
       });
       dispatch(asyncActionFinish());
     } catch (error) {
@@ -166,7 +167,7 @@ export const addReview = (product, values) => {
   };
 };
 
-export const addAddress = values => {
+export const addAddress = (values) => {
   return async (dispatch, getState, { getFirestore, getFirebase }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
@@ -175,7 +176,7 @@ export const addAddress = values => {
     try {
       await firestore.update(`users/${user.uid}`, {
         newAddress,
-        email: newAddress.email
+        email: newAddress.email,
       });
       dispatch(asyncActionError());
     } catch (error) {
@@ -185,7 +186,7 @@ export const addAddress = values => {
   };
 };
 
-export const addAddressTwo = values => {
+export const addAddressTwo = (values) => {
   return async (dispatch, getState, { getFirestore, getFirebase }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
@@ -193,7 +194,7 @@ export const addAddressTwo = values => {
     const newAddressTwo = values;
     try {
       await firestore.update(`users/${user.uid}`, {
-        newAddressTwo
+        newAddressTwo,
       });
       dispatch(asyncActionError());
     } catch (error) {
@@ -214,7 +215,7 @@ export const removeNewAddress = () => async (
   const user = firebase.auth().currentUser;
   try {
     await firestore.update(`users/${user.uid}`, {
-      [`newAddress`]: firestore.FieldValue.delete()
+      [`newAddress`]: firestore.FieldValue.delete(),
     });
     dispatch(asyncActionFinish());
   } catch (error) {
@@ -233,7 +234,7 @@ export const removeNewAddressTwo = () => async (
   const user = firebase.auth().currentUser;
   try {
     await firestore.update(`users/${user.uid}`, {
-      [`newAddressTwo`]: firestore.FieldValue.delete()
+      [`newAddressTwo`]: firestore.FieldValue.delete(),
     });
     dispatch(asyncActionFinish());
   } catch (error) {
@@ -241,7 +242,7 @@ export const removeNewAddressTwo = () => async (
   }
 };
 
-export const removeReview = product => async (
+export const removeReview = (product) => async (
   dispatch,
   getState,
   { getFirestore, getFirebase }
@@ -252,7 +253,7 @@ export const removeReview = product => async (
   const user = firebase.auth().currentUser;
   try {
     await firestore.update(`products/${product.id}`, {
-      [`reviews.${user.uid}`]: firestore.FieldValue.delete()
+      [`reviews.${user.uid}`]: firestore.FieldValue.delete(),
     });
     await firestore.delete(`review/${product.id}_${user.uid}`);
     dispatch(asyncActionFinish());
@@ -373,17 +374,14 @@ export const confirmOrder = (
   address,
   mpesanumber,
   verificationCode
-) => async (dispatch, getState, { getFirestore, getFirebase }) => {
+) => async (dispatch, getState, { getFirebase }) => {
   dispatch(asyncActionStart());
-  const firestore = getFirestore();
   const firebase = getFirebase();
   const user = firebase.auth().currentUser;
   const products = cartob;
   try {
-    firestore.add(
-      {
-        collection: "orders"
-      },
+    const response = await axios.post(
+      'https://us-central1-hola-bella-adbaa.cloudfunctions.net/app/api/order',
       {
         products,
         amount: totalAmount,
@@ -393,32 +391,17 @@ export const confirmOrder = (
         postcode: address.postcode,
         phone: address.phone,
         email: address.email,
-        status: "approved",
         mpesanumber: parseInt(mpesanumber),
-        date: firestore.FieldValue.serverTimestamp(),
         userid: user.uid,
-        verification: verificationCode
+        verification: verificationCode,
       }
     );
-    for (let cartKey in cartob) {
-      var negativecartProductQuantity =
-        Math.sign(-1) * cartob[cartKey].quantity;
-      await firestore.update(`products/${cartKey}`, {
-        [`remainingQuantity`]: firebase.firestore.FieldValue.increment(
-          negativecartProductQuantity
-        ),
-        [`sold`]: firebase.firestore.FieldValue.increment(
-          cartob[cartKey].quantity
-        )
-      });
+    console.log(response);
+    if (response.status === 200) {
+      toastr.success('', 'Your order is complete!');
+    } else{
+      toastr.error('', 'there was an error')
     }
-    await firestore.update(`users/${user.uid}`, {
-      [`cart`]: {},
-      [`verification`]: firestore.FieldValue.delete(),
-      [`previousOrder`]: cartob,
-      [`previousOrderStatus`]: "approved"
-    });
-    toastr.success("", "Your order is complete!");
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
@@ -426,7 +409,7 @@ export const confirmOrder = (
   }
 };
 
-export const addQuantity = product => async (
+export const addQuantity = (product) => async (
   dispatch,
   getState,
   { getFirestore, getFirebase }
@@ -440,7 +423,7 @@ export const addQuantity = product => async (
       [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(1),
       [`cart.${product.id}.totalPrice`]:
         (product.quantity + 1) *
-        (product.price - (product.price * product.discount) / 100)
+        (product.price - (product.price * product.discount) / 100),
     });
     dispatch(asyncActionFinish());
   } catch (error) {
@@ -448,7 +431,7 @@ export const addQuantity = product => async (
   }
 };
 
-export const subtractQuantity = product => async (
+export const subtractQuantity = (product) => async (
   dispatch,
   getState,
   { getFirestore, getFirebase }
@@ -462,7 +445,7 @@ export const subtractQuantity = product => async (
       [`cart.${product.id}.quantity`]: firestore.FieldValue.increment(-1),
       [`cart.${product.id}.totalPrice`]:
         (product.quantity - 1) *
-        (product.price - (product.price * product.discount) / 100)
+        (product.price - (product.price * product.discount) / 100),
     });
     dispatch(asyncActionFinish());
   } catch (error) {
@@ -470,7 +453,7 @@ export const subtractQuantity = product => async (
   }
 };
 
-export const addMpesaNumber = values => {
+export const addMpesaNumber = (values) => {
   return async (dispatch, getState, { getFirestore, getFirebase }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
@@ -478,7 +461,7 @@ export const addMpesaNumber = values => {
     try {
       await firestore.update(`users/${user.uid}`, {
         [`mpesanumber`]: parseInt(values.mpesa),
-        [`verification`]: values.Verification
+        [`verification`]: values.Verification,
       });
       dispatch(asyncActionError());
     } catch (error) {
@@ -495,7 +478,7 @@ export const removeMpesaNumber = () => {
     const user = firebase.auth().currentUser;
     try {
       await firestore.update(`users/${user.uid}`, {
-        [`mpesanumber`]: firestore.FieldValue.delete()
+        [`mpesanumber`]: firestore.FieldValue.delete(),
       });
     } catch (error) {
       console.log(error);
@@ -510,8 +493,8 @@ export const getOrderHistory = () => {
     try {
       dispatch(asyncActionStart());
       let orderQuery = await firestore
-        .collection("orders")
-        .where("userid", "==", user.uid)
+        .collection('orders')
+        .where('userid', '==', user.uid)
         .get();
       let orders = [];
 
@@ -527,38 +510,38 @@ export const getOrderHistory = () => {
 };
 
 export const previousOrderDelete = () => {
-  return async  (dispatch, getState, { getFirebase, getFirestore })=> {
+  return async (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
     const user = firebase.auth().currentUser;
     try {
       dispatch(asyncActionStart());
       await firestore.update(`users/${user.uid}`, {
-        [`previousOrderStatus`]: firestore.FieldValue.delete()
+        [`previousOrderStatus`]: firestore.FieldValue.delete(),
       });
       dispatch(asyncActionFinish());
-    } catch (error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-}
-}
+  };
+};
 
-export const notify = product => {
-  return async(dispatch, getState, {getFirebase, getFirestore}) => {
+export const notify = (product) => {
+  return async (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
     const user = firebase.auth().currentUser;
     const useremail = {
-      email: user.email
-    }
+      email: user.email,
+    };
     try {
       dispatch(asyncActionStart());
       await firestore.update(`products/${product.id}`, {
-        [`notify.${user.uid}`]: useremail
+        [`notify.${user.uid}`]: useremail,
       });
       dispatch(asyncActionFinish());
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-}
+  };
+};
